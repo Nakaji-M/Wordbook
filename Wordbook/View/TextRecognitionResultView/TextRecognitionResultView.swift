@@ -1,0 +1,202 @@
+//
+//  RecognizedWordsView.swift
+//  Wordbook
+//
+//  Created by Masanori on 2024/08/11.
+//
+
+import SwiftUI
+
+//UIImageの配列を受け取り、TextRecognitionを行い、認識結果を表示するView
+struct TextRecognitionResultView : View {
+    @Binding var path: [Path]
+    //UIImageの配列を受け取る変数
+    var uiImages: [UIImage]
+    @State private var showLoadingAlert = false
+    @ObservedObject var ocrSelectionSheetViewModel: AddWordsViewModel
+    @ObservedObject var manualProcessSelectionViewModel: ManualProcessSelectionViewModel
+    //認識結果の文字列を格納する変数
+    @State var recognitionResult: [WordStoreItem] = []
+    @State var rowID: UUID?
+    @State var alertMessage: String = ""
+    @State private var selectedTag: Tag?
+    @State var isFirstAppear: Bool = true
+    
+    var body: some View {
+        VStack {
+            List {
+                Section(header:
+                        //Tagを設定するためのページ
+                        Button(action: {
+                            path.append(.tagSelection($selectedTag))
+                        }) {
+                            HStack(spacing: 8) {
+                                Label("Tag", systemImage: "tag")
+                                Spacer()
+                                Text(selectedTag?.name ?? "未設定")
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                                    .opacity(0.5)
+                            }
+                            .padding(.vertical)
+                        }
+                )
+                {
+                    ForEach($recognitionResult) { $rowViewModel in
+                        ResultsRow(viewModel: $rowViewModel)
+                            .contentShape(Rectangle())
+                        // セルにスワイプすると編集ボタンが表示されます
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button(action: {
+                                    recognitionResult.removeAll { $0.id == rowViewModel.id }
+                                }) {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                                .tint(.red)
+                                Button(action: {
+                                    rowID = rowViewModel.id
+                                }) {
+                                    Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
+                                }
+                            }
+                            .onTapGesture(perform: {
+                                rowID = rowViewModel.id
+                            })
+                            .sheet(isPresented: Binding<Bool>(
+                                get: { rowViewModel.id == rowID },
+                                set: { _ in
+                                    rowID = nil
+                                })
+                            ) {
+                                EditSheet(viewModel: $rowViewModel)
+                                    .presentationDetents([.large])
+                            }
+                    }.onMove(perform: { indices, newOffset in
+                        self.recognitionResult.move(fromOffsets: indices, toOffset: newOffset)
+                    })
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
+            .overlay(
+                ZStack {
+                    if showLoadingAlert {
+                        Color.black.opacity(0.4)
+                            .edgesIgnoringSafeArea(.all)
+                        LoadingAlert(alertMessage: $alertMessage)
+                    }
+                }
+            )            
+            .navigationTitle("認識結果")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        alertMessage = "保存中..."
+                        showLoadingAlert = true
+                        MainTab.JSON?.inserrtWords(words_add: recognitionResult.map({
+                            let item = $0
+                            item.tag = selectedTag?.id
+                            return item
+                        })
+                        )
+                        showLoadingAlert = false
+                        path = []
+                    }) {
+                        Label("保存", systemImage: "square.and.arrow.down")
+                            .labelStyle(TitleOnlyLabelStyle())
+                    }
+                }
+            }
+            .task {
+                //タグ選択から戻ってきた時には表示しない
+                if isFirstAppear {
+                    alertMessage = "文字認識中..."
+                    showLoadingAlert = true
+                    // 画像からテキストを認識する処理を実行
+                    for uiImage in uiImages {
+                        let settingsStoreService = SettingsStoreService()
+                        let exertScanExample = settingsStoreService.loadBoolSetting(settingKey: .exertScanExample)
+                        let scanIdiom = settingsStoreService.loadBoolSetting(settingKey: .scanIdiom)
+                        let textRecognition = TextRecognition(uiImage: uiImage, addWordsViewModel: ocrSelectionSheetViewModel, manualProcessViewModel: manualProcessSelectionViewModel, exertScanExample: exertScanExample, scanIdiom: scanIdiom)
+                        let recognizedWords = await textRecognition.recognize()
+                        recognitionResult += WordToWordViewModel(word_list: recognizedWords)
+                    }
+                    if ocrSelectionSheetViewModel.isGenerateExample {
+                        alertMessage = "例文生成中..."
+                        let llm = await ExampleSentenceGeneration()
+                        for i in 0..<recognitionResult.count {
+                            recognitionResult[i].example = await llm.generateExampleSentence(word: recognitionResult[i].word)
+                        }
+                    }
+                    if ocrSelectionSheetViewModel.isMeaningFromDictionary {
+                        alertMessage = "意味生成中..."
+                        let dictionaryService = DictionaryService()
+                        for i in 0..<recognitionResult.count {
+                            if let meaning = dictionaryService.getItemFromWord_vague(word: recognitionResult[i].word){
+                                recognitionResult[i].meaning = meaning.mean
+                            } else {
+                                recognitionResult[i].meaning = "意味が見つかりませんでした"
+                            }
+                        }
+                    }
+                    isFirstAppear = false
+                    showLoadingAlert = false
+                }
+            }
+        }
+    }
+}
+    
+struct LoadingAlert: View {
+    @Binding var alertMessage: String
+        var body: some View {
+            VStack(spacing: 20) {
+                ProgressView()
+                    .scaleEffect(1.5)
+                Text(alertMessage)
+                    .font(.headline)
+            }
+            .padding(30)
+            .background(Color(UIColor.tertiarySystemBackground))
+            .cornerRadius(10)
+            .shadow(radius: 10)
+        }
+    }
+    
+struct ResultsRow: View {
+    @Binding var viewModel: WordStoreItem
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 8){
+                Text(viewModel.word)
+                    .font(.headline)
+                Label(viewModel.meaning, systemImage: "pencil")
+                Label(viewModel.example, systemImage: "text.bubble")
+            }
+            Spacer()
+        }
+        .padding(.vertical)
+
+    }
+}
+
+// 編集画面
+struct EditSheet: View {
+    @Binding var viewModel: WordStoreItem
+    @State var showLoadingAlert: Bool = false //実質使用していない
+    @State var alertMessage: String = "" //実質使用していない
+
+    var body: some View {
+        ScrollView{
+            HStack {
+                VStack(alignment: .leading, spacing: 8){
+                    Text("登録内容の編集")
+                        .font(.title)
+                        .padding(.vertical)
+                    CommonWordEditView(viewModel: $viewModel, showLoadingAlert: $showLoadingAlert, alertMessage: $alertMessage)
+                }
+            }
+            .padding()
+        }
+    }
+}
