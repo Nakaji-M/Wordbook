@@ -22,71 +22,82 @@ struct WordsListView: View {
     @State var wordsShowOption: WordsShowOption = .all
     @State private var searchText: String = ""
     @State private var sortOption: SortOption = .latest
+    @State private var showAddWordSheet: Bool = false
     
     func matchWord(word: WordStoreItem, searchText: String) -> Bool {
         return word.word.lowercased().contains(searchText.lowercased()) || word.meaning.lowercased().contains(searchText.lowercased())
     }
     
     var body: some View {
-        List {
-            Section(header:
-                        VStack{
-                //全ての意味を表示するかどうかを選択
-                Toggle(isOn: $showAllMeaning) {
-                    Text("全単語の意味を表示")
-                }
-                //全ての項目を表示するか、お気に入りのみか、暗記していない単語のみかをPickerで選択
-                HStack{
-                    Text("表示項目")
-                        .font(.body)
-                    Picker("", selection: $wordsShowOption) {
-                        Text("全て").tag(WordsShowOption.all)
-                        Text("お気に入り").tag(WordsShowOption.favorite)
-                        Text("暗記未完了").tag(WordsShowOption.memorized)
+        ZStack(alignment: .bottomTrailing){
+            List {
+                Section(header:
+                            VStack{
+                    //全ての意味を表示するかどうかを選択
+                    Toggle(isOn: $showAllMeaning) {
+                        Text("全単語の意味を表示")
                     }
-                    Spacer()
-                    Text("並び替え")
-                        .font(.body)
-                    Picker("", selection: $sortOption) {
-                        Text("追加順(新)").tag(SortOption.latest)
-                        Text("追加順(古)").tag(SortOption.oldest)
-                        Text("アルファベット順").tag(SortOption.alphabet)
+                    //全ての項目を表示するか、お気に入りのみか、暗記していない単語のみかをPickerで選択
+                    HStack{
+                        Text("表示項目")
+                            .font(.body)
+                        Picker("", selection: $wordsShowOption) {
+                            Text("全て").tag(WordsShowOption.all)
+                            Text("お気に入り").tag(WordsShowOption.favorite)
+                            Text("暗記未完了").tag(WordsShowOption.memorized)
+                        }
+                        Spacer()
+                        Text("並び替え")
+                            .font(.body)
+                        Picker("", selection: $sortOption) {
+                            Text("追加順(新)").tag(SortOption.latest)
+                            Text("追加順(古)").tag(SortOption.oldest)
+                            Text("アルファベット順").tag(SortOption.alphabet)
+                        }
                     }
-                }
-            })
-            {
-                ForEach($words) { $wordViewModel in
-                    if searchText.isEmpty || matchWord(word: wordViewModel, searchText: searchText) {
-                        WordsListRow(viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
-                            .contentShape(Rectangle())
-                            .onChange(of: wordViewModel.isFavorite) {
-                                alertMessage = "更新中..."
-                                showLoadingAlert = true
-                                //お気に入りの変更があったらJSONに保存
-                                MainTab.JSON?.updateWord(word_update: wordViewModel)
-                                showLoadingAlert = false
-                            }
-                        // セルにスワイプすると編集ボタンが表示されます
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                Button(action: {
-                                    //確認のダイアログを表示
-                                    wordViewModel_delete = wordViewModel
-                                    showDeleteAlert = true
-                                }) {
-                                    Label("Delete", systemImage: "trash")
+                })
+                {
+                    ForEach($words) { $wordViewModel in
+                        if searchText.isEmpty || matchWord(word: wordViewModel, searchText: searchText) {
+                            WordsListRow(viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
+                                .contentShape(Rectangle())
+                                .onChange(of: wordViewModel.isFavorite) {
+                                    alertMessage = "更新中..."
+                                    showLoadingAlert = true
+                                    //お気に入りの変更があったらJSONに保存
+                                    MainTab.JSON?.updateWord(word_update: wordViewModel)
+                                    showLoadingAlert = false
                                 }
-                                .tint(.red)
-                                Button(action: {
-                                    wordViewModel_edit = wordViewModel
-                                    showTagSheet = true
-                                }) {
-                                    Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
+                            // セルにスワイプすると編集ボタンが表示されます
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                    Button(action: {
+                                        //確認のダイアログを表示
+                                        wordViewModel_delete = wordViewModel
+                                        showDeleteAlert = true
+                                    }) {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                    .tint(.red)
+                                    Button(action: {
+                                        wordViewModel_edit = wordViewModel
+                                        showTagSheet = true
+                                    }) {
+                                        Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
+                                    }
                                 }
-                            }
+                        }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            Button(action: {
+                self.showAddWordSheet = true
+            }) {
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+            }
+            .padding()
         }
         .overlay(
             ZStack {
@@ -113,6 +124,13 @@ struct WordsListView: View {
             WordEditSheet(viewModel: $wordViewModel_edit)
                 .presentationDetents([.large])
         }
+        .sheet(isPresented: $showAddWordSheet)
+        {
+            AddWordFromListView(onAdd: {word in
+                addWord_sortOption(word: word)
+                
+            }, selectedTag: tag)
+        }
         .alert(isPresented: $showDeleteAlert) {
             Alert( title: Text("削除"), message: Text("本当に削除しますか？"), primaryButton: .destructive(Text("削除")) {
                 alertMessage = "削除中..."
@@ -135,6 +153,18 @@ struct WordsListView: View {
         }
         .onChange(of: sortOption){
             words = getWord_sortOption(sortOption: sortOption)
+        }
+    }
+    
+    func addWord_sortOption(word: WordStoreItem) {
+        switch sortOption {
+        case .latest:
+            words.insert(word, at: 0)
+        case .oldest:
+            words.append(word)
+        case .alphabet:
+            let index = words.firstIndex(where: { $0.word.lowercased() > word.word.lowercased() }) ?? 0
+            words.insert(word, at: index)
         }
     }
     
@@ -286,7 +316,7 @@ struct WordEditSheet: View {
                         .padding(.vertical)
                     }
 
-                    CommonWordEditView(viewModel: $viewModel, showLoadingAlert: $showLoadingAlert, alertMessage: $alertMessage)
+                    CommonWordEditView(viewModel: $viewModel)
                 }
             }
             .toolbar {
@@ -317,7 +347,55 @@ struct WordEditSheet: View {
     }
 }
 
+struct AddWordFromListView: View {
+    let onAdd: (WordStoreItem) -> Void
+    //入力された英単語
+    @State var viewModel = WordStoreItem(word: "", meaning: "", example: "", note: "", isMemorized: false, isFavorite: false)
+    //選択されたタグ
+    @State var selectedTag: Tag?
+    @Environment(\.dismiss) var dismiss
 
+    var body: some View {
+        NavigationStack{
+            ScrollView{
+                HStack{
+                    //英単語、意味、例文、メモの入力欄を表示
+                    VStack (alignment: .leading, spacing: 0){
+                        //Tagを設定するためのページ
+                        NavigationLink(destination: CommonTagSelectionView(selectedTag: $selectedTag)){
+                            HStack(spacing: 8) {
+                                Label("Tag", systemImage: "tag")
+                                Spacer()
+                                Text(selectedTag?.name ?? "未設定")
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                                    .opacity(0.5)
+                            }
+                            .padding()
+                            .padding(.vertical)
+                        }
+                        CommonWordEditView(viewModel: $viewModel)
+                    }
+                }
+                .padding()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        viewModel.tag = selectedTag?.id
+                        MainTab.JSON?.inserrtWords(words_add: [viewModel])
+                        onAdd(viewModel)
+                        dismiss()
+                    }) {
+                        Label("保存", systemImage: "square.and.arrow.down")
+                            .labelStyle(TitleOnlyLabelStyle())
+                    }
+                }
+            }
+            .navigationBarTitle("単語追加")
+        }
+    }
+}
 
 enum WordsShowOption {
     case all

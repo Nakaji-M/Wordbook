@@ -9,8 +9,6 @@ import SwiftUI
 
 struct CommonWordEditView: View {
     @Binding var viewModel: WordStoreItem
-    @Binding var showLoadingAlert: Bool
-    @Binding var alertMessage: String
     @State var meaningId = false
     @State var relatedWordsId = false
 
@@ -23,6 +21,29 @@ struct CommonWordEditView: View {
                 //英単語の入力欄
                 Text("英単語")
                 TextField("単語を入力してください", text: $viewModel.word)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .padding(.bottom)
+                
+                //意味の入力欄
+                HStack{
+                    Text("意味")
+                    //自動入力ボタン
+                    Spacer()
+                    Button(action:  {
+                        if let meaning = DictionaryService().getItemFromWord_vague(word: viewModel.word){
+                            self.viewModel.meaning = meaning.mean
+                        } else {
+                                self.viewModel.meaning = "意味が見つかりませんでした"
+                        }
+                        meaningId.toggle() //意味の入力欄を更新(再描画)
+                    }) {
+                        Text("自動入力")
+                            .foregroundColor(.accentColor)
+                    }
+                }
+                TextField("意味を入力してください", text: $viewModel.meaning, axis: .vertical)
+                    .id(meaningId)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .padding(.bottom)
@@ -63,32 +84,6 @@ struct CommonWordEditView: View {
                 .padding(.bottom)
                 .id(relatedWordsId)
 
-                //意味の入力欄
-                HStack{
-                    Text("意味")
-                    //自動入力ボタン
-                    Spacer()
-                    Button(action:  {
-                        alertMessage = "自動入力中..."
-                        showLoadingAlert = true
-                        if let meaning = DictionaryService().getItemFromWord_vague(word: viewModel.word){
-                            self.viewModel.meaning = meaning.mean
-                        } else {
-                                self.viewModel.meaning = "意味が見つかりませんでした"
-                        }
-                        meaningId.toggle() //意味の入力欄を更新(再描画)
-                        showLoadingAlert = false
-                    }) {
-                        Text("自動入力")
-                            .foregroundColor(.accentColor)
-                    }
-                }
-                TextField("意味を入力してください", text: $viewModel.meaning, axis: .vertical)
-                    .id(meaningId)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .padding(.bottom)
-                
                 //例文の入力欄
                 Text("例文")
                 TextField("例文を入力してください", text: $viewModel.example, axis: .vertical)

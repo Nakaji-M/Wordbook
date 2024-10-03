@@ -12,7 +12,7 @@ struct MainTab: View {
     static var JSON: WordStoreService?
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
-    @Environment (\.scenePhase) private var scenePhase
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         TabView(selection: $tabType) {

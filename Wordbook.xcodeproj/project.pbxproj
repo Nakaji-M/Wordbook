@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BDD1896A4DC0A0E5C6AB5C6 /* Pods_Wordbook_WordbookUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C333EBBEC645A34EFFF81F7 /* Pods_Wordbook_WordbookUITests.framework */; };
-		0C9E9320666247C43AF63AA0 /* Pods_Wordbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FC2EADB95BBF802263188D /* Pods_Wordbook.framework */; };
+		386ADCB325F24D75962B43B4 /* Pods_Wordbook_WordbookUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779097398D7EAC26D43AE2AF /* Pods_Wordbook_WordbookUITests.framework */; };
+		50107065F09BE87C23C2AE0D /* Pods_WordbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7275FE7EDACFD22AEE33F8E3 /* Pods_WordbookTests.framework */; };
 		8C0E03472C686B34004BB413 /* ManualProcessSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E03462C686B34004BB413 /* ManualProcessSelectionViewModel.swift */; };
 		8C0E034D2C688C0B004BB413 /* TextRecognitionResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034C2C688C0B004BB413 /* TextRecognitionResultView.swift */; };
 		8C0E034F2C688DB2004BB413 /* WordStoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */; };
@@ -83,7 +83,7 @@
 		8CE8F2D82C71BA0000321943 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE8F2D72C71BA0000321943 /* Statistics.swift */; };
 		8CEB97972C784A950002896B /* CheckBoxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEB97962C784A950002896B /* CheckBoxToggleStyle.swift */; };
 		8CED1F2B2C6FAA7300327F0E /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CED1F2A2C6FAA7300327F0E /* CameraView.swift */; };
-		A154DD3F42DC817FB8C5BDBA /* Pods_WordbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4785D5A375867258B4FDA6DB /* Pods_WordbookTests.framework */; };
+		D312883590BF19F2CDB18E87 /* Pods_Wordbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1EFBF24150538C082D59670 /* Pods_Wordbook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,12 +135,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1876EA57478EB46AD46687E3 /* Pods-WordbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordbookTests.release.xcconfig"; path = "Target Support Files/Pods-WordbookTests/Pods-WordbookTests.release.xcconfig"; sourceTree = "<group>"; };
-		40C9A2A77555D7227D2E57C6 /* Pods-WordbookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordbookTests.debug.xcconfig"; path = "Target Support Files/Pods-WordbookTests/Pods-WordbookTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4785D5A375867258B4FDA6DB /* Pods_WordbookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WordbookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		620CB640FFA27251DE10045A /* Pods-Wordbook-WordbookUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wordbook-WordbookUITests.release.xcconfig"; path = "Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests.release.xcconfig"; sourceTree = "<group>"; };
-		7C333EBBEC645A34EFFF81F7 /* Pods_Wordbook_WordbookUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wordbook_WordbookUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		80E554553C1E7DD30F339E5F /* Pods-Wordbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wordbook.debug.xcconfig"; path = "Target Support Files/Pods-Wordbook/Pods-Wordbook.debug.xcconfig"; sourceTree = "<group>"; };
+		1192A96B2EDD067653631F88 /* Pods-WordbookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordbookTests.debug.xcconfig"; path = "Target Support Files/Pods-WordbookTests/Pods-WordbookTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7275FE7EDACFD22AEE33F8E3 /* Pods_WordbookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WordbookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		779097398D7EAC26D43AE2AF /* Pods_Wordbook_WordbookUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wordbook_WordbookUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0E03462C686B34004BB413 /* ManualProcessSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualProcessSelectionViewModel.swift; sourceTree = "<group>"; };
 		8C0E034C2C688C0B004BB413 /* TextRecognitionResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognitionResultView.swift; sourceTree = "<group>"; };
 		8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordStoreItem.swift; sourceTree = "<group>"; };
@@ -206,9 +203,12 @@
 		8CE8F2D72C71BA0000321943 /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		8CEB97962C784A950002896B /* CheckBoxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxToggleStyle.swift; sourceTree = "<group>"; };
 		8CED1F2A2C6FAA7300327F0E /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		B84D31A2EF4752E6AD2856AF /* Pods-Wordbook-WordbookUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wordbook-WordbookUITests.debug.xcconfig"; path = "Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		C96962F1D2CB9FFB59AC6F67 /* Pods-Wordbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wordbook.release.xcconfig"; path = "Target Support Files/Pods-Wordbook/Pods-Wordbook.release.xcconfig"; sourceTree = "<group>"; };
-		E4FC2EADB95BBF802263188D /* Pods_Wordbook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wordbook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		960CA38B43964BE5E4174650 /* Pods-Wordbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wordbook.debug.xcconfig"; path = "Target Support Files/Pods-Wordbook/Pods-Wordbook.debug.xcconfig"; sourceTree = "<group>"; };
+		B1EFBF24150538C082D59670 /* Pods_Wordbook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wordbook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B854AFEEEF70067068C2E551 /* Pods-Wordbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wordbook.release.xcconfig"; path = "Target Support Files/Pods-Wordbook/Pods-Wordbook.release.xcconfig"; sourceTree = "<group>"; };
+		C246D060DB7480AB43DD5EAD /* Pods-Wordbook-WordbookUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wordbook-WordbookUITests.release.xcconfig"; path = "Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CB8AFD321436A06BBF62FCCA /* Pods-WordbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordbookTests.release.xcconfig"; path = "Target Support Files/Pods-WordbookTests/Pods-WordbookTests.release.xcconfig"; sourceTree = "<group>"; };
+		ED988E882CD96E80A30CDD41 /* Pods-Wordbook-WordbookUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wordbook-WordbookUITests.debug.xcconfig"; path = "Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,7 +230,7 @@
 				8C3590ED2C68F58F00292565 /* MLX in Frameworks */,
 				8C3590EF2C68F58F00292565 /* MLXRandom in Frameworks */,
 				8CC1394D2C7CA67600700DF9 /* GRDB in Frameworks */,
-				0C9E9320666247C43AF63AA0 /* Pods_Wordbook.framework in Frameworks */,
+				D312883590BF19F2CDB18E87 /* Pods_Wordbook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A154DD3F42DC817FB8C5BDBA /* Pods_WordbookTests.framework in Frameworks */,
+				50107065F09BE87C23C2AE0D /* Pods_WordbookTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,34 +246,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BDD1896A4DC0A0E5C6AB5C6 /* Pods_Wordbook_WordbookUITests.framework in Frameworks */,
+				386ADCB325F24D75962B43B4 /* Pods_Wordbook_WordbookUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4338BB4226C8099B04961DFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B1EFBF24150538C082D59670 /* Pods_Wordbook.framework */,
+				779097398D7EAC26D43AE2AF /* Pods_Wordbook_WordbookUITests.framework */,
+				7275FE7EDACFD22AEE33F8E3 /* Pods_WordbookTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		48E7C4999E91CA5DB95ADDE9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				80E554553C1E7DD30F339E5F /* Pods-Wordbook.debug.xcconfig */,
-				C96962F1D2CB9FFB59AC6F67 /* Pods-Wordbook.release.xcconfig */,
-				B84D31A2EF4752E6AD2856AF /* Pods-Wordbook-WordbookUITests.debug.xcconfig */,
-				620CB640FFA27251DE10045A /* Pods-Wordbook-WordbookUITests.release.xcconfig */,
-				40C9A2A77555D7227D2E57C6 /* Pods-WordbookTests.debug.xcconfig */,
-				1876EA57478EB46AD46687E3 /* Pods-WordbookTests.release.xcconfig */,
+				960CA38B43964BE5E4174650 /* Pods-Wordbook.debug.xcconfig */,
+				B854AFEEEF70067068C2E551 /* Pods-Wordbook.release.xcconfig */,
+				ED988E882CD96E80A30CDD41 /* Pods-Wordbook-WordbookUITests.debug.xcconfig */,
+				C246D060DB7480AB43DD5EAD /* Pods-Wordbook-WordbookUITests.release.xcconfig */,
+				1192A96B2EDD067653631F88 /* Pods-WordbookTests.debug.xcconfig */,
+				CB8AFD321436A06BBF62FCCA /* Pods-WordbookTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		6728D4B273E6122F278E8D6A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E4FC2EADB95BBF802263188D /* Pods_Wordbook.framework */,
-				7C333EBBEC645A34EFFF81F7 /* Pods_Wordbook_WordbookUITests.framework */,
-				4785D5A375867258B4FDA6DB /* Pods_WordbookTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8C0E034B2C688BDD004BB413 /* TextRecognitionResultView */ = {
@@ -361,7 +361,7 @@
 				8C973DCE2C843B0A001198F9 /* WordbookCommon */,
 				8C93DC732C63B84D00B60239 /* Products */,
 				48E7C4999E91CA5DB95ADDE9 /* Pods */,
-				6728D4B273E6122F278E8D6A /* Frameworks */,
+				4338BB4226C8099B04961DFA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -696,14 +696,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C93DC982C63B84F00B60239 /* Build configuration list for PBXNativeTarget "Wordbook" */;
 			buildPhases = (
-				0EF6AB952A702C060F785168 /* [CP] Check Pods Manifest.lock */,
+				443E45A50FCE85361B19B686 /* [CP] Check Pods Manifest.lock */,
 				8C93DC6E2C63B84D00B60239 /* Sources */,
 				8C93DC6F2C63B84D00B60239 /* Frameworks */,
 				8C93DC702C63B84D00B60239 /* Resources */,
-				A0D0D9CED0BB17713BC06612 /* [CP] Embed Pods Frameworks */,
-				5363197BD650AA178BCE1014 /* [CP] Copy Pods Resources */,
 				8C4CB4342C81AF8300B70244 /* Embed Foundation Extensions */,
 				8C973DE72C843B0B001198F9 /* Embed Frameworks */,
+				B50B27E7573087D506ACF27D /* [CP] Embed Pods Frameworks */,
+				239BF8685166830A4A51DE6B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -727,7 +727,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C93DC9B2C63B84F00B60239 /* Build configuration list for PBXNativeTarget "WordbookTests" */;
 			buildPhases = (
-				02F7F73C92ADC76C513A9F99 /* [CP] Check Pods Manifest.lock */,
+				9BAB880BE99D7BEE72C1AEB5 /* [CP] Check Pods Manifest.lock */,
 				8C93DC802C63B84F00B60239 /* Sources */,
 				8C93DC812C63B84F00B60239 /* Frameworks */,
 				8C93DC822C63B84F00B60239 /* Resources */,
@@ -746,12 +746,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C93DC9E2C63B84F00B60239 /* Build configuration list for PBXNativeTarget "WordbookUITests" */;
 			buildPhases = (
-				F8D665248EBE23F59F59FE9F /* [CP] Check Pods Manifest.lock */,
+				F905FB6DD088B65B23C401DE /* [CP] Check Pods Manifest.lock */,
 				8C93DC8A2C63B84F00B60239 /* Sources */,
 				8C93DC8B2C63B84F00B60239 /* Frameworks */,
 				8C93DC8C2C63B84F00B60239 /* Resources */,
-				4DE4D0E93AEB306932D07923 /* [CP] Embed Pods Frameworks */,
-				732FA4D55342B1960C65CDF4 /* [CP] Copy Pods Resources */,
+				227638709B108AD1AAB02AEC /* [CP] Embed Pods Frameworks */,
+				0C3F384A16345C8B6B98572B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -853,29 +853,58 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02F7F73C92ADC76C513A9F99 /* [CP] Check Pods Manifest.lock */ = {
+		0C3F384A16345C8B6B98572B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WordbookTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0EF6AB952A702C060F785168 /* [CP] Check Pods Manifest.lock */ = {
+		227638709B108AD1AAB02AEC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		239BF8685166830A4A51DE6B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wordbook/Pods-Wordbook-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wordbook/Pods-Wordbook-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wordbook/Pods-Wordbook-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		443E45A50FCE85361B19B686 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -897,58 +926,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4DE4D0E93AEB306932D07923 /* [CP] Embed Pods Frameworks */ = {
+		9BAB880BE99D7BEE72C1AEB5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WordbookTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5363197BD650AA178BCE1014 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Wordbook/Pods-Wordbook-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Wordbook/Pods-Wordbook-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wordbook/Pods-Wordbook-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		732FA4D55342B1960C65CDF4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wordbook-WordbookUITests/Pods-Wordbook-WordbookUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A0D0D9CED0BB17713BC06612 /* [CP] Embed Pods Frameworks */ = {
+		B50B27E7573087D506ACF27D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -965,7 +965,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wordbook/Pods-Wordbook-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F8D665248EBE23F59F59FE9F /* [CP] Check Pods Manifest.lock */ = {
+		F905FB6DD088B65B23C401DE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1275,7 +1275,7 @@
 		};
 		8C93DC992C63B84F00B60239 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80E554553C1E7DD30F339E5F /* Pods-Wordbook.debug.xcconfig */;
+			baseConfigurationReference = 960CA38B43964BE5E4174650 /* Pods-Wordbook.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1311,7 +1311,7 @@
 		};
 		8C93DC9A2C63B84F00B60239 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C96962F1D2CB9FFB59AC6F67 /* Pods-Wordbook.release.xcconfig */;
+			baseConfigurationReference = B854AFEEEF70067068C2E551 /* Pods-Wordbook.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1347,7 +1347,7 @@
 		};
 		8C93DC9C2C63B84F00B60239 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40C9A2A77555D7227D2E57C6 /* Pods-WordbookTests.debug.xcconfig */;
+			baseConfigurationReference = 1192A96B2EDD067653631F88 /* Pods-WordbookTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1367,7 +1367,7 @@
 		};
 		8C93DC9D2C63B84F00B60239 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1876EA57478EB46AD46687E3 /* Pods-WordbookTests.release.xcconfig */;
+			baseConfigurationReference = CB8AFD321436A06BBF62FCCA /* Pods-WordbookTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1387,7 +1387,7 @@
 		};
 		8C93DC9F2C63B84F00B60239 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B84D31A2EF4752E6AD2856AF /* Pods-Wordbook-WordbookUITests.debug.xcconfig */;
+			baseConfigurationReference = ED988E882CD96E80A30CDD41 /* Pods-Wordbook-WordbookUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1405,7 +1405,7 @@
 		};
 		8C93DCA02C63B84F00B60239 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 620CB640FFA27251DE10045A /* Pods-Wordbook-WordbookUITests.release.xcconfig */;
+			baseConfigurationReference = C246D060DB7480AB43DD5EAD /* Pods-Wordbook-WordbookUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

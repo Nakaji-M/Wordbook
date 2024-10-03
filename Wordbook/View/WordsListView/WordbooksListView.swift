@@ -15,55 +15,17 @@ struct WordbooksListView: View {
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
     @State private var showDeleteAlert = false
+    @State private var showAddWordSheet: Bool = false
     @Environment (\.modelContext) private var context
 
     var body: some View {
         NavigationStack {
-            List {
-                NavigationLink(destination: WordsListView(isAllWords: true)){
-                    HStack {
-                        VStack(alignment: .leading, spacing: 8){
-                            Text("全ての単語")
-                                .contentShape(Rectangle())
-                        }
-                    }.padding(.all)
-                }
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button(action: {
-                        //確認のダイアログを表示
-                        tag_delete = nil
-                        isAllWords_delete = true
-                        showDeleteAlert = true
-                    }) {
-                        Label("Delete", systemImage: "trash")
-                    }
-                    .tint(.red)
-                }
-                NavigationLink(destination: WordsListView(isAllWords: false, tag: nil)){
-                    HStack {
-                        VStack(alignment: .leading, spacing: 8){
-                            Text("タグ未設定")
-                                .contentShape(Rectangle())
-                        }
-                    }.padding(.all)
-                }
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button(action: {
-                        //確認のダイアログを表示
-                        tag_delete = nil
-                        isAllWords_delete = false
-                        showDeleteAlert = true
-                    }) {
-                        Label("Delete", systemImage: "trash")
-                    }
-                    .tint(.red)
-                }
-
-                ForEach(tags) { tag in
-                    NavigationLink(destination: WordsListView(isAllWords: false, tag: tag)){
+            ZStack(alignment: .bottomTrailing){
+                List {
+                    NavigationLink(destination: WordsListView(isAllWords: true)){
                         HStack {
                             VStack(alignment: .leading, spacing: 8){
-                                Text(tag.name)
+                                Text("全ての単語")
                                     .contentShape(Rectangle())
                             }
                         }.padding(.all)
@@ -71,7 +33,26 @@ struct WordbooksListView: View {
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button(action: {
                             //確認のダイアログを表示
-                            tag_delete = tag
+                            tag_delete = nil
+                            isAllWords_delete = true
+                            showDeleteAlert = true
+                        }) {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(.red)
+                    }
+                    NavigationLink(destination: WordsListView(isAllWords: false, tag: nil)){
+                        HStack {
+                            VStack(alignment: .leading, spacing: 8){
+                                Text("タグ未設定")
+                                    .contentShape(Rectangle())
+                            }
+                        }.padding(.all)
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button(action: {
+                            //確認のダイアログを表示
+                            tag_delete = nil
                             isAllWords_delete = false
                             showDeleteAlert = true
                         }) {
@@ -79,36 +60,70 @@ struct WordbooksListView: View {
                         }
                         .tint(.red)
                     }
-                }
-            }
-            .overlay(
-                ZStack {
-                    if showLoadingAlert {
-                        Color.black.opacity(0.4)
-                            .edgesIgnoringSafeArea(.all)
-                        LoadingAlert(alertMessage: $alertMessage)
-                    }
-                }
-            )
-            .alert(isPresented: $showDeleteAlert) {
-                Alert( title: Text("削除"), message: Text("本当に削除しますか？"), primaryButton: .destructive(Text("削除")) {
-                    alertMessage = "削除中..."
-                    showLoadingAlert = true
-                    if isAllWords_delete{
-                        //全ての単語を削除
-                        MainTab.JSON?.deleteAllWords()
-                    }
-                    else{
-                        if tag_delete != nil{
-                            //削除処理
-                            context.delete(tag_delete!)
+                    
+                    ForEach(tags) { tag in
+                        NavigationLink(destination: WordsListView(isAllWords: false, tag: tag)){
+                            HStack {
+                                VStack(alignment: .leading, spacing: 8){
+                                    Text(tag.name)
+                                        .contentShape(Rectangle())
+                                }
+                            }.padding(.all)
                         }
-                        //JSONからも削除
-                        MainTab.JSON?.deleteWordsFromTag(tag_delete: tag_delete)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            Button(action: {
+                                //確認のダイアログを表示
+                                tag_delete = tag
+                                isAllWords_delete = false
+                                showDeleteAlert = true
+                            }) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            .tint(.red)
+                        }
                     }
-                    showLoadingAlert = false
-                }, secondaryButton: .cancel()
+                }
+                .overlay(
+                    ZStack {
+                        if showLoadingAlert {
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                            LoadingAlert(alertMessage: $alertMessage)
+                        }
+                    }
                 )
+                .alert(isPresented: $showDeleteAlert) {
+                    Alert( title: Text("削除"), message: Text("本当に削除しますか？"), primaryButton: .destructive(Text("削除")) {
+                        alertMessage = "削除中..."
+                        showLoadingAlert = true
+                        if isAllWords_delete{
+                            //全ての単語を削除
+                            MainTab.JSON?.deleteAllWords()
+                        }
+                        else{
+                            if tag_delete != nil{
+                                //削除処理
+                                context.delete(tag_delete!)
+                            }
+                            //JSONからも削除
+                            MainTab.JSON?.deleteWordsFromTag(tag_delete: tag_delete)
+                        }
+                        showLoadingAlert = false
+                    }, secondaryButton: .cancel()
+                    )
+                }
+                Button(action: {
+                    self.showAddWordSheet = true
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                }
+                .padding()
+            }
+            .sheet(isPresented: $showAddWordSheet)
+            {
+                AddWordFromListView(onAdd: {_ in}, selectedTag: nil)
             }
             .navigationBarTitle("単語リスト")
         }

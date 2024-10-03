@@ -193,7 +193,7 @@ struct EditSheet: View {
                     Text("登録内容の編集")
                         .font(.title)
                         .padding(.vertical)
-                    CommonWordEditView(viewModel: $viewModel, showLoadingAlert: $showLoadingAlert, alertMessage: $alertMessage)
+                    CommonWordEditView(viewModel: $viewModel)
                 }
             }
             .padding()

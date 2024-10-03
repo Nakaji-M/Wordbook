@@ -13,7 +13,7 @@ struct CommonTagSelectionView: View {
     @Binding var selectedTag: Tag?
     @State private var newName: String = ""
     @State private var showInputModal = false
-    @Environment (\.modelContext) private var context
+    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
