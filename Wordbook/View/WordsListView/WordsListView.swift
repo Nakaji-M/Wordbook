@@ -163,7 +163,7 @@ struct WordsListView: View {
         case .oldest:
             words.append(word)
         case .alphabet:
-            let index = words.firstIndex(where: { $0.word.lowercased() > word.word.lowercased() }) ?? 0
+            let index = words.firstIndex(where: { $0.word.lowercased() > word.word.lowercased() }) ?? words.endIndex
             words.insert(word, at: index)
         }
     }
