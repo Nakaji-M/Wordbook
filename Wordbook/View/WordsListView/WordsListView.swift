@@ -262,23 +262,27 @@ struct WordsListRow: View {
                                 
                                 HStack{
                                     Label(viewModel.meaning, systemImage: "pencil")
+                                        .frame(alignment: .leading)
                                     Spacer()
                                 }
                                 if viewModel.example != "" {
                                     HStack{
                                         Label(viewModel.example, systemImage: "text.bubble")
                                             .translationPresentation(isPresented: $showExampleTranslation, text: viewModel.example)
+                                            .frame(alignment: .leading)
                                         Spacer()
                                         Button(action: {
                                             showExampleTranslation.toggle()
                                         }) {
-                                            Image(systemName: showExampleTranslation ? "xmark.circle" : "checkmark.circle")
+                                            Image(systemName: "translate")
+                                                .foregroundStyle(.blue)
                                         }
                                     }
                                 }
                                 if viewModel.note != "" {
                                     HStack{
                                         Label(viewModel.note, systemImage: "note.text")
+                                            .frame(alignment: .leading)
                                         Spacer()
                                     }
                                 }
@@ -287,7 +291,7 @@ struct WordsListRow: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .contentShape(Rectangle())
                         }
-                        .buttonStyle(.plain)
+                        .foregroundStyle(.primary)
                         .opacity(showAllMeaning || showThisMeaning ? 1 : 0)
                         .overlay{
                             if !(showAllMeaning || showThisMeaning) {
