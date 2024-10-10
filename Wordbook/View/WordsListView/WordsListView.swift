@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Translation
 
 struct WordsListView: View {
     var isAllWords: Bool
@@ -194,6 +195,8 @@ struct WordsListRow: View {
     @Binding var wordsShowOption: WordsShowOption
     @State private var showThisMeaning = false
     @State private var showWebView = false
+    @State private var showExampleTranslation = false
+    @State private var isNavigationActive = false
     
     var body: some View {
         if (wordsShowOption == .favorite && !viewModel.isFavorite) || (wordsShowOption == .memorized && viewModel.isMemorized) {
@@ -223,53 +226,77 @@ struct WordsListRow: View {
                             WebView(loardUrl: url)
                         }
                     }
-                    VStack(alignment: .leading, spacing: 8){
-                        if viewModel.relatedWords.count > 0 {
-                            HStack{
-                                Image(systemName: "link")
-                                    .font(.subheadline)
-                                NavigationLink(destination: RelatedWordsView(originalWord: viewModel)){
-                                    VStack(alignment: .leading){
-                                        ForEach(viewModel.relatedWords) { relatedWord in
-                                            HStack{
-                                                Text(relatedWord.word)
-                                                Spacer()
-                                                    .frame(maxWidth: 8)
-                                                Text(relatedWord.meaning)
-                                                Spacer()
+                        Button(action: {
+                            showThisMeaning.toggle()
+                        }){
+                            VStack(alignment: .leading, spacing: 8){
+                                if viewModel.relatedWords.count > 0 {
+                                    HStack{
+                                        Image(systemName: "link")
+                                            .font(.subheadline)
+                                        NavigationLink(isActive: $isNavigationActive) {
+                                            RelatedWordsView(originalWord: viewModel)
+                                        } label: {
+                                            Button(action: {
+                                                // 遷移を発火させたい任意のタイミングでフラグを立てる
+                                                isNavigationActive = true
+                                            })
+                                            {
+                                                VStack(alignment: .leading){
+                                                    ForEach(viewModel.relatedWords) { relatedWord in
+                                                        HStack{
+                                                            Text(relatedWord.word)
+                                                            Spacer()
+                                                                .frame(maxWidth: 8)
+                                                            Text(relatedWord.meaning)
+                                                            Spacer()
+                                                        }
+                                                    }
+                                                }
                                             }
+                                            .contentShape(Rectangle())
+                                            .buttonStyle(.plain)
                                         }
                                     }
                                 }
-                            }
-                        }
-                        HStack{
-                            VStack(alignment: .leading, spacing: 8){
-                                Label(viewModel.meaning, systemImage: "pencil")
+                                
+                                HStack{
+                                    Label(viewModel.meaning, systemImage: "pencil")
+                                    Spacer()
+                                }
                                 if viewModel.example != "" {
-                                    Label(viewModel.example, systemImage: "text.bubble")
+                                    HStack{
+                                        Label(viewModel.example, systemImage: "text.bubble")
+                                            .translationPresentation(isPresented: $showExampleTranslation, text: viewModel.example)
+                                        Spacer()
+                                        Button(action: {
+                                            showExampleTranslation.toggle()
+                                        }) {
+                                            Image(systemName: showExampleTranslation ? "xmark.circle" : "checkmark.circle")
+                                        }
+                                    }
                                 }
                                 if viewModel.note != "" {
-                                    Label(viewModel.note, systemImage: "note.text")
+                                    HStack{
+                                        Label(viewModel.note, systemImage: "note.text")
+                                        Spacer()
+                                    }
                                 }
+                                
                             }
-                            Spacer()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .contentShape(Rectangle())
                         }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            showThisMeaning.toggle()
-                        }
-                    }
-                    .opacity(showAllMeaning || showThisMeaning ? 1 : 0)
-                    .overlay{
-                        if !(showAllMeaning || showThisMeaning) {
-                            Text("タップして意味を表示")
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    showThisMeaning.toggle()
-                                }
+                        .buttonStyle(.plain)
+                        .opacity(showAllMeaning || showThisMeaning ? 1 : 0)
+                        .overlay{
+                            if !(showAllMeaning || showThisMeaning) {
+                                Text("タップして意味を表示")
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        showThisMeaning.toggle()
+                                    }
                         }
                     }
                 }
