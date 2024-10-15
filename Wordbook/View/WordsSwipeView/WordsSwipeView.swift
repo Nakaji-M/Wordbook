@@ -9,8 +9,9 @@ import SwiftUI
 
 struct WordsSwipeView: View {
     var isAllWords: Bool
-    var tag: Tag?
+    var tags: [Tag]
     var includeMemorized: Bool
+    var includeNoTags: Bool
     @State private var words: [WordStoreItem] = []
     @State private var isFront = true
     @Environment(\.dismiss) private var dismiss
@@ -100,7 +101,12 @@ struct WordsSwipeView: View {
                         words = MainTab.JSON?.getAllWords() ?? []
                     }
                     else{
-                        words = MainTab.JSON?.getWordsFromTag(tag: tag) ?? []
+                        for tag in tags{
+                            words = words + (MainTab.JSON?.getWordsFromTag(tag: tag) ?? [])
+                        }
+                        if(includeNoTags){
+                            words = words + (MainTab.JSON?.getWordsFromTag(tag: nil) ?? [])
+                        }
                     }
                     if !includeMemorized{
                         words = words.filter({ !$0.isMemorized })

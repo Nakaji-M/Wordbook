@@ -72,7 +72,12 @@ class TextRecognition {
             return
         }
         let requestHandler = VNImageRequestHandler(cgImage: cgImage)
-        let request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
+        let request = VNRecognizeTextRequest(completionHandler: {[weak self] request, error in
+            guard let results = request.results as? [VNRecognizedTextObservation] else {
+                return
+            }
+            self?.recognizedTexts = results
+        })
         request.revision = VNRecognizeTextRequestRevision3
         request.recognitionLanguages = ["ja", "en"]
         request.customWords = customWords
@@ -81,13 +86,6 @@ class TextRecognition {
         } catch {
             print("Unable to perform the requests: \(error)")
         }
-    }
-    
-    private func recognizeTextHandler(request: VNRequest, error: Error?) {
-        guard let results = request.results as? [VNRecognizedTextObservation] else {
-            return
-        }
-        self.recognizedTexts = results
     }
     
     func removeOnlyNumbers() {
@@ -504,12 +502,12 @@ class TextRecognition {
                     return
                 }
                     if translatorForDownloading == self.translator {
-                        translatorForDownloading.translate(sourceText) { result, error in
+                        translatorForDownloading.translate(sourceText) {[weak self] result, error in
                             guard error == nil else {
                                 print("Failed with error \(error!)")
                                 return
                             }
-                            if translatorForDownloading == self.translator {
+                            if translatorForDownloading == self?.translator {
                                 //print(result)
                                 completion(result!)
 
