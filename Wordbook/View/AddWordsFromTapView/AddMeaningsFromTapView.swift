@@ -47,7 +47,7 @@ struct AddMeaningsFromTapView: View {
                         .toggleStyle(.button)
                         .position(
                             x: word.boundingBox.midX * geometry.size.width,
-                            y: (1 - word.boundingBox.midY) * geometry.size.height
+                            y: word.boundingBox.midY * geometry.size.height
                         )
                     }
                 }

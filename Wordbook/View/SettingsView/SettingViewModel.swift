@@ -11,14 +11,12 @@ import MLXLLM
 @MainActor
 class SettingViewModel: ObservableObject{
     private let settingsStoreService = SettingsStoreService()
-    @Published var exertScanExample: Bool = false
     @Published var scanIdiom: Bool = false
     @Published var llmModelExist: Bool = false
     @Published var llmModelSize: Int = 0
         
     init(){
         //UserDefaultsから設定を読み込む
-        exertScanExample = settingsStoreService.loadBoolSetting(settingKey: .exertScanExample)
         scanIdiom = settingsStoreService.loadBoolSetting(settingKey: .scanIdiom)
     }
     
@@ -31,7 +29,6 @@ class SettingViewModel: ObservableObject{
     
     func saveSetting(){
         //UserDefaultsに設定を保存
-        settingsStoreService.saveBoolSetting(settingKey: .exertScanExample, value: exertScanExample)
         settingsStoreService.saveBoolSetting(settingKey: .scanIdiom, value: scanIdiom)
     }
     

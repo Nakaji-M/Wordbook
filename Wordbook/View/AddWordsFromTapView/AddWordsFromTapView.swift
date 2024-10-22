@@ -49,7 +49,7 @@ struct AddWordsFromTapView: View {
                         .toggleStyle(.button)
                         .position(
                             x: word.boundingBox.midX * geometry.size.width,
-                            y: (1 - word.boundingBox.midY) * geometry.size.height
+                            y: word.boundingBox.midY * geometry.size.height
                         )
                     }
                 }
@@ -58,13 +58,14 @@ struct AddWordsFromTapView: View {
         }
         .id(ZoomableContainerId)
         .task {
-            let textRecognition = TextRecognition(uiImage: uiImage.first!, addWordsViewModel: AddWordsViewModel(), manualProcessViewModel: nil, exertScanExample: false, scanIdiom: false)
-            try! await textRecognition.recognizeText()
-            let orientation = uiImage.first!.imageOrientation
-            let recognitionResult = textRecognition.recognizedTexts
-            for result in recognitionResult {
-                let boundingBox = textRecognition.fixBoundingBoxOrientation(bounds: result.boundingBox, orientation: orientation)
-                self.tapItem.append(TapItem(word: result.topCandidates(1).first!.string, boundingBox: boundingBox))
+            do{
+                let ocr = OCR(uiImage: uiImage.first!)
+                let recognitionResult = try await ocr.recognize()
+                for result in recognitionResult {
+                    self.tapItem.append(TapItem(word: result.text, boundingBox: result.box))
+                }
+            }catch{
+                
             }
             ZoomableContainerId.toggle()
         }

@@ -17,15 +17,6 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section {
-                    Toggle(isOn: $viewModel.exertScanExample) {
-                        Label("画像中の例文を取得する", systemImage: "photo")
-                    }
-                    .onChange(of: viewModel.exertScanExample) {
-                        Task {
-                            viewModel.saveSetting()
-                        }
-                    }
-                    
                     Toggle(isOn: $viewModel.scanIdiom) {
                         Label("熟語もスキャンする", systemImage: "doc.text")
                     }

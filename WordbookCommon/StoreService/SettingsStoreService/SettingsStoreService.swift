@@ -11,7 +11,6 @@ class SettingsStoreService {
     let appGroupId = "group.wordbook.common"
 
     enum SettingKey: String {
-        case exertScanExample = "exertScanExample"
         case scanIdiom = "scanIdiom"
         case webReplaceList = "webReplaceList"
     }
@@ -21,7 +20,12 @@ class SettingsStoreService {
         if let userDefaults = userDefaults {
             return userDefaults.bool(forKey: settingKey.rawValue)
         }
-        return false
+        //デフォルト値
+        if settingKey == .scanIdiom {
+            return true
+        }else{
+            return false
+        }
     }
     
     func saveBoolSetting(settingKey: SettingKey, value: Bool) {

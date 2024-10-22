@@ -16,5 +16,4 @@ public class AddWordsViewModel: ObservableObject {
 public enum OCRProcessSelection {
     case dismiss
     case auto
-    case manual
 }

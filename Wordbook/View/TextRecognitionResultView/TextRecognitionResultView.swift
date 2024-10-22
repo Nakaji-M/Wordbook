@@ -14,14 +14,13 @@ struct TextRecognitionResultView : View {
     var uiImages: [UIImage]
     @State private var showLoadingAlert = false
     @ObservedObject var ocrSelectionSheetViewModel: AddWordsViewModel
-    @ObservedObject var manualProcessSelectionViewModel: ManualProcessSelectionViewModel
     //認識結果の文字列を格納する変数
     @State var recognitionResult: [WordStoreItem] = []
     @State var rowID: UUID?
     @State var alertMessage: String = ""
     @State private var selectedTag: Tag?
     @State var isFirstAppear: Bool = true
-    
+        
     var body: some View {
         VStack {
             List {
@@ -114,11 +113,14 @@ struct TextRecognitionResultView : View {
                     // 画像からテキストを認識する処理を実行
                     for uiImage in uiImages {
                         let settingsStoreService = SettingsStoreService()
-                        let exertScanExample = settingsStoreService.loadBoolSetting(settingKey: .exertScanExample)
                         let scanIdiom = settingsStoreService.loadBoolSetting(settingKey: .scanIdiom)
-                        let textRecognition = TextRecognition(uiImage: uiImage, addWordsViewModel: ocrSelectionSheetViewModel, manualProcessViewModel: manualProcessSelectionViewModel, exertScanExample: exertScanExample, scanIdiom: scanIdiom)
-                        let recognizedWords = await textRecognition.recognize()
-                        recognitionResult += WordToWordViewModel(word_list: recognizedWords)
+                        let img2WordList = Img2WordList(uiImage: uiImage, scanIdiom: scanIdiom)
+                        do{
+                            let recognizedWords = try await img2WordList.recognize()
+                            recognitionResult += recognizedWords
+                        } catch{
+                            
+                        }
                     }
                     if ocrSelectionSheetViewModel.isGenerateExample {
                         alertMessage = "例文生成中..."

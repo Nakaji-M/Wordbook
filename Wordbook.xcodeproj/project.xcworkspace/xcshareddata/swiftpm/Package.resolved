@@ -1,6 +1,15 @@
 {
-  "originHash" : "4a76dabe83b4fd6993d6ea9526d9d28eb4a130352feeb35dab2fb36d0d73a556",
+  "originHash" : "e9d0f77af4a1be6c91c46339b9a22abb6bfa587e7d4894a000e9c73936d0032f",
   "pins" : [
+    {
+      "identity" : "grdb.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/groue/GRDB.swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "3ecb5c54553559217592d21a6d9841becb891b38"
+      }
+    },
     {
       "identity" : "gzipswift",
       "kind" : "remoteSourceControl",
@@ -26,6 +35,15 @@
       "state" : {
         "revision" : "fb5ee82860107a0f3bcb83be57e8a3cb67a72c6b",
         "version" : "1.16.0"
+      }
+    },
+    {
+      "identity" : "similarity-search-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ZachNagengast/similarity-search-kit.git",
+      "state" : {
+        "revision" : "9bec54706c8124bb9b20a3a06d566066a9f55712",
+        "version" : "0.0.15"
       }
     },
     {
