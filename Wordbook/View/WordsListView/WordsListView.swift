@@ -349,6 +349,7 @@ struct WordEditSheet: View {
 
                     CommonWordEditView(viewModel: $viewModel)
                 }
+                .padding(.all)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -370,7 +371,6 @@ struct WordEditSheet: View {
                 selectedTag = nil
             }
         }
-        .padding(.all)
     }
     
     func getTagfromId(id: UUID) -> Tag? {

@@ -187,18 +187,24 @@ struct EditSheet: View {
     @Binding var viewModel: WordStoreItem
     @State var showLoadingAlert: Bool = false //実質使用していない
     @State var alertMessage: String = "" //実質使用していない
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        ScrollView{
-            HStack {
+        NavigationStack{
+            ScrollView{
                 VStack(alignment: .leading, spacing: 8){
-                    Text("登録内容の編集")
-                        .font(.title)
-                        .padding(.vertical)
                     CommonWordEditView(viewModel: $viewModel)
                 }
+                .padding(.all)
             }
-            .padding()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("完了") {
+                        dismiss()
+                    }
+                }
+            }
+            .navigationBarTitle("単語の編集")
         }
     }
 }
