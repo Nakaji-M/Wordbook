@@ -86,6 +86,7 @@ struct SettingsView: View {
             .task {
                 await viewModel.loadLLMStatus()
             }
+            .navigationBarTitle("設定")
         }
     }
 }
