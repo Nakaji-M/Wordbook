@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0227BE842CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 0227BE832CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage */; };
+		0228E67A2CC89A4C00359D2A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0228E6792CC89A4C00359D2A /* Settings.bundle */; };
+		0228E67E2CC8A1AF00359D2A /* license_plist.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0228E67D2CC8A1AD00359D2A /* license_plist.yml */; };
 		027F28AB2CC56E350048F9A4 /* Img2WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F28AA2CC56E030048F9A4 /* Img2WordList.swift */; };
 		8C0E034D2C688C0B004BB413 /* TextRecognitionResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034C2C688C0B004BB413 /* TextRecognitionResultView.swift */; };
 		8C0E034F2C688DB2004BB413 /* WordStoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */; };
@@ -64,8 +66,6 @@
 		8CC1394F2C7CA9FE00700DF9 /* DictionaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1394E2C7CA9FE00700DF9 /* DictionaryModel.swift */; };
 		8CC139522C7CAD8400700DF9 /* ejdict.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CC139512C7CAD8400700DF9 /* ejdict.sqlite3 */; };
 		8CC139552C7CBA8300700DF9 /* CommonWordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC139542C7CBA8300700DF9 /* CommonWordEditView.swift */; };
-		8CD8F60E2C6C86910090BE9D /* SimilaritySearchKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD8F60D2C6C86910090BE9D /* SimilaritySearchKit */; };
-		8CD8F6102C6C86910090BE9D /* SimilaritySearchKitMiniLMAll in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD8F60F2C6C86910090BE9D /* SimilaritySearchKitMiniLMAll */; };
 		8CDF96D92C6460F800D691E7 /* AddWordsFromTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF96D82C6460F800D691E7 /* AddWordsFromTextView.swift */; };
 		8CDF96DC2C6479A900D691E7 /* OCRProcessSelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF96DB2C6479A900D691E7 /* OCRProcessSelectionSheet.swift */; };
 		8CDF96DE2C648D8400D691E7 /* AddWordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF96DD2C648D8400D691E7 /* AddWordsViewModel.swift */; };
@@ -131,6 +131,8 @@
 
 /* Begin PBXFileReference section */
 		0227BE832CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = yolov8s_custom_structure_all_best.mlpackage; sourceTree = "<group>"; };
+		0228E6792CC89A4C00359D2A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		0228E67D2CC8A1AD00359D2A /* license_plist.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = license_plist.yml; sourceTree = "<group>"; };
 		027F28AA2CC56E030048F9A4 /* Img2WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Img2WordList.swift; sourceTree = "<group>"; };
 		8C0E034C2C688C0B004BB413 /* TextRecognitionResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognitionResultView.swift; sourceTree = "<group>"; };
 		8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordStoreItem.swift; sourceTree = "<group>"; };
@@ -208,8 +210,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CD8F6102C6C86910090BE9D /* SimilaritySearchKitMiniLMAll in Frameworks */,
-				8CD8F60E2C6C86910090BE9D /* SimilaritySearchKit in Frameworks */,
 				8C3590F22C68F64300292565 /* LLM in Frameworks */,
 				8C3590ED2C68F58F00292565 /* MLX in Frameworks */,
 				8C3590EF2C68F58F00292565 /* MLXRandom in Frameworks */,
@@ -321,6 +321,8 @@
 		8C93DC692C63B84D00B60239 = {
 			isa = PBXGroup;
 			children = (
+				0228E67D2CC8A1AD00359D2A /* license_plist.yml */,
+				0228E6792CC89A4C00359D2A /* Settings.bundle */,
 				8C93DC742C63B84D00B60239 /* Wordbook */,
 				8C93DC872C63B84F00B60239 /* WordbookTests */,
 				8C93DC912C63B84F00B60239 /* WordbookUITests */,
@@ -633,6 +635,7 @@
 				8C4CB4222C81AF8300B70244 /* Sources */,
 				8C4CB4232C81AF8300B70244 /* Frameworks */,
 				8C4CB4242C81AF8300B70244 /* Resources */,
+				8C93714E2CC8A33800B60239 /* Copy Acknowledgements */,
 			);
 			buildRules = (
 			);
@@ -655,10 +658,12 @@
 				8C93DC702C63B84D00B60239 /* Resources */,
 				8C4CB4342C81AF8300B70244 /* Embed Foundation Extensions */,
 				8C973DE72C843B0B001198F9 /* Embed Frameworks */,
+				8C9322922CC8A33800B60239 /* Copy Acknowledgements */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0228E67C2CC8A19300359D2A /* PBXTargetDependency */,
 				8C4CB42F2C81AF8300B70244 /* PBXTargetDependency */,
 			);
 			name = Wordbook;
@@ -666,8 +671,6 @@
 				8C3590EC2C68F58F00292565 /* MLX */,
 				8C3590EE2C68F58F00292565 /* MLXRandom */,
 				8C3590F12C68F64300292565 /* LLM */,
-				8CD8F60D2C6C86910090BE9D /* SimilaritySearchKit */,
-				8CD8F60F2C6C86910090BE9D /* SimilaritySearchKitMiniLMAll */,
 				8CC1394C2C7CA67600700DF9 /* GRDB */,
 			);
 			productName = Wordbook;
@@ -681,6 +684,7 @@
 				8C93DC802C63B84F00B60239 /* Sources */,
 				8C93DC812C63B84F00B60239 /* Frameworks */,
 				8C93DC822C63B84F00B60239 /* Resources */,
+				8C9322AB2CC8A33800B60239 /* Copy Acknowledgements */,
 			);
 			buildRules = (
 			);
@@ -699,6 +703,7 @@
 				8C93DC8A2C63B84F00B60239 /* Sources */,
 				8C93DC8B2C63B84F00B60239 /* Frameworks */,
 				8C93DC8C2C63B84F00B60239 /* Resources */,
+				8C9305532CC8A33800B60239 /* Copy Acknowledgements */,
 			);
 			buildRules = (
 			);
@@ -748,8 +753,8 @@
 			packageReferences = (
 				8C3590EB2C68F58F00292565 /* XCRemoteSwiftPackageReference "mlx-swift" */,
 				8C3590F02C68F64300292565 /* XCRemoteSwiftPackageReference "mlx-swift-examples" */,
-				8CD8F60C2C6C86910090BE9D /* XCRemoteSwiftPackageReference "similarity-search-kit" */,
 				8CC1394B2C7CA67600700DF9 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				0228E6782CC899B200359D2A /* XCRemoteSwiftPackageReference "LicensePlist" */,
 			);
 			productRefGroup = 8C93DC732C63B84D00B60239 /* Products */;
 			projectDirPath = "";
@@ -777,7 +782,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0228E67A2CC89A4C00359D2A /* Settings.bundle in Resources */,
 				8CC139522C7CAD8400700DF9 /* ejdict.sqlite3 in Resources */,
+				0228E67E2CC8A1AF00359D2A /* license_plist.yml in Resources */,
 				8C93DC7F2C63B84F00B60239 /* Preview Assets.xcassets in Resources */,
 				8C93DC7C2C63B84F00B60239 /* Assets.xcassets in Resources */,
 			);
@@ -798,6 +805,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8C9305532CC8A33800B60239 /* Copy Acknowledgements */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Acknowledgements";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Will copy acknowledgements\"\n\nACKNOWLEDGEMENTS_DIR=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/com.mono0926.LicensePlist.Output\nDESTINATION_PATH=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Settings.bundle/\n\ncp -r \"${ACKNOWLEDGEMENTS_DIR}\"/* \"${DESTINATION_PATH}\"\nrm -rf \"${ACKNOWLEDGEMENTS_DIR}\"";
+		};
+		8C9322922CC8A33800B60239 /* Copy Acknowledgements */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Acknowledgements";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Will copy acknowledgements\"\n\nACKNOWLEDGEMENTS_DIR=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/com.mono0926.LicensePlist.Output\nDESTINATION_PATH=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Settings.bundle/\n\ncp -r \"${ACKNOWLEDGEMENTS_DIR}\"/* \"${DESTINATION_PATH}\"\nrm -rf \"${ACKNOWLEDGEMENTS_DIR}\"";
+		};
+		8C9322AB2CC8A33800B60239 /* Copy Acknowledgements */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Acknowledgements";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Will copy acknowledgements\"\n\nACKNOWLEDGEMENTS_DIR=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/com.mono0926.LicensePlist.Output\nDESTINATION_PATH=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Settings.bundle/\n\ncp -r \"${ACKNOWLEDGEMENTS_DIR}\"/* \"${DESTINATION_PATH}\"\nrm -rf \"${ACKNOWLEDGEMENTS_DIR}\"";
+		};
+		8C93714E2CC8A33800B60239 /* Copy Acknowledgements */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Acknowledgements";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Will copy acknowledgements\"\n\nACKNOWLEDGEMENTS_DIR=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/com.mono0926.LicensePlist.Output\nDESTINATION_PATH=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Settings.bundle/\n\ncp -r \"${ACKNOWLEDGEMENTS_DIR}\"/* \"${DESTINATION_PATH}\"\nrm -rf \"${ACKNOWLEDGEMENTS_DIR}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8C4CB4222C81AF8300B70244 /* Sources */ = {
@@ -890,6 +956,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0228E67C2CC8A19300359D2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 0228E67B2CC8A19300359D2A /* LicensePlistBuildTool */;
+		};
 		8C4CB42F2C81AF8300B70244 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8C4CB4252C81AF8300B70244 /* ShareToWordbook */;
@@ -1278,6 +1348,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0228E6782CC899B200359D2A /* XCRemoteSwiftPackageReference "LicensePlist" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mono0926/LicensePlist";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.25.1;
+			};
+		};
 		8C3590EB2C68F58F00292565 /* XCRemoteSwiftPackageReference "mlx-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ml-explore/mlx-swift";
@@ -1302,17 +1380,14 @@
 				kind = branch;
 			};
 		};
-		8CD8F60C2C6C86910090BE9D /* XCRemoteSwiftPackageReference "similarity-search-kit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ZachNagengast/similarity-search-kit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.15;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0228E67B2CC8A19300359D2A /* LicensePlistBuildTool */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0228E6782CC899B200359D2A /* XCRemoteSwiftPackageReference "LicensePlist" */;
+			productName = "plugin:LicensePlistBuildTool";
+		};
 		8C3590EC2C68F58F00292565 /* MLX */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8C3590EB2C68F58F00292565 /* XCRemoteSwiftPackageReference "mlx-swift" */;
@@ -1337,16 +1412,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8CC1394B2C7CA67600700DF9 /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
-		};
-		8CD8F60D2C6C86910090BE9D /* SimilaritySearchKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CD8F60C2C6C86910090BE9D /* XCRemoteSwiftPackageReference "similarity-search-kit" */;
-			productName = SimilaritySearchKit;
-		};
-		8CD8F60F2C6C86910090BE9D /* SimilaritySearchKitMiniLMAll */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CD8F60C2C6C86910090BE9D /* XCRemoteSwiftPackageReference "similarity-search-kit" */;
-			productName = SimilaritySearchKitMiniLMAll;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
