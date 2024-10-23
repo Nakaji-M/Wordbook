@@ -283,7 +283,12 @@ class WordListGenerator{
             //wordCellRowBoxの下限を決定
             var row_maxY: CGFloat = 0
             if i == self.wordListRows.count-1 {
-                row_maxY = row_list.max{ $0.box.maxY < $1.box.maxY }?.box.maxY ?? 1
+                let max_row_max = row_list.max{ $0.box.maxY < $1.box.maxY }?.box.maxY ?? 1
+                if max_row_max > wordListRows[i].word.box.maxY {
+                    row_maxY = max_row_max
+                }else { //最後の単語に対応する行が検知されなかったときの対策
+                    row_maxY = 1
+                }
             }
             else if self.wordListRows[i+1].wordCellRowBoxes_noConflictToOtherWords.isEmpty {
                 row_maxY = self.wordListRows[i+1].word.box.minY
@@ -393,7 +398,7 @@ class MeaningDetector{
                 let isInsideColumn = column_word.box.containsPartially(rect: item_jp.box, rate: 0.85) //完全に包含されている
                 return isInsideRows && isInsideColumn
             }
-            if items_inside_jp.count > 0 {
+            if items_inside_jp.count > 0 && items_inside_jp.contains(where: {$0.text.count >= 2}) {
                 wordListRows[i].meanings = items_inside_jp
             } else{
                 //column_wordと位置が重なる日本語のtextを抽出
