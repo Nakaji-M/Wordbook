@@ -67,8 +67,8 @@
 		8CC139522C7CAD8400700DF9 /* ejdict.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CC139512C7CAD8400700DF9 /* ejdict.sqlite3 */; };
 		8CC139552C7CBA8300700DF9 /* CommonWordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC139542C7CBA8300700DF9 /* CommonWordEditView.swift */; };
 		8CDF96D92C6460F800D691E7 /* AddWordsFromTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF96D82C6460F800D691E7 /* AddWordsFromTextView.swift */; };
-		8CDF96DC2C6479A900D691E7 /* OCRProcessSelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF96DB2C6479A900D691E7 /* OCRProcessSelectionSheet.swift */; };
-		8CDF96DE2C648D8400D691E7 /* AddWordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF96DD2C648D8400D691E7 /* AddWordsViewModel.swift */; };
+		8CDF96DC2C6479A900D691E7 /* OCROptionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF96DB2C6479A900D691E7 /* OCROptionSheet.swift */; };
+		8CDF96DE2C648D8400D691E7 /* OCROption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF96DD2C648D8400D691E7 /* OCROption.swift */; };
 		8CE0528B2C845DE2009A1251 /* WordStoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */; };
 		8CE0528C2C845DE5009A1251 /* WordStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC0860E2C76DCAC00AA6CB5 /* WordStoreService.swift */; };
 		8CE052922C84687F009A1251 /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE052912C84687F009A1251 /* SharedModelContainer.swift */; };
@@ -185,8 +185,8 @@
 		8CC139512C7CAD8400700DF9 /* ejdict.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ejdict.sqlite3; sourceTree = "<group>"; };
 		8CC139542C7CBA8300700DF9 /* CommonWordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWordEditView.swift; sourceTree = "<group>"; };
 		8CDF96D82C6460F800D691E7 /* AddWordsFromTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordsFromTextView.swift; sourceTree = "<group>"; };
-		8CDF96DB2C6479A900D691E7 /* OCRProcessSelectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRProcessSelectionSheet.swift; sourceTree = "<group>"; };
-		8CDF96DD2C648D8400D691E7 /* AddWordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordsViewModel.swift; sourceTree = "<group>"; };
+		8CDF96DB2C6479A900D691E7 /* OCROptionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCROptionSheet.swift; sourceTree = "<group>"; };
+		8CDF96DD2C648D8400D691E7 /* OCROption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCROption.swift; sourceTree = "<group>"; };
 		8CE0528D2C845E9E009A1251 /* Wordbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wordbook.entitlements; sourceTree = "<group>"; };
 		8CE0528E2C845EAF009A1251 /* ShareToWordbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareToWordbook.entitlements; sourceTree = "<group>"; };
 		8CE052912C84687F009A1251 /* SharedModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModelContainer.swift; sourceTree = "<group>"; };
@@ -432,8 +432,8 @@
 		8C93DCAF2C63C1FD00B60239 /* AddWordsView */ = {
 			isa = PBXGroup;
 			children = (
-				8CDF96DB2C6479A900D691E7 /* OCRProcessSelectionSheet.swift */,
-				8CDF96DD2C648D8400D691E7 /* AddWordsViewModel.swift */,
+				8CDF96DB2C6479A900D691E7 /* OCROptionSheet.swift */,
+				8CDF96DD2C648D8400D691E7 /* OCROption.swift */,
 				8C93DCB52C63C2AF00B60239 /* AddWordsView.swift */,
 				8C9F6FB52C87F080004C7315 /* RandomWordView.swift */,
 			);
@@ -913,11 +913,11 @@
 				0227BE842CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage in Sources */,
 				8C0E034D2C688C0B004BB413 /* TextRecognitionResultView.swift in Sources */,
 				8C4CB4212C81AC9D00B70244 /* ViewExtension.swift in Sources */,
-				8CDF96DC2C6479A900D691E7 /* OCRProcessSelectionSheet.swift in Sources */,
+				8CDF96DC2C6479A900D691E7 /* OCROptionSheet.swift in Sources */,
 				8C3590F42C68F6C700292565 /* DeviceStat.swift in Sources */,
 				8C967DFE2C80548700DDDF05 /* StackSwipableCardConfiguration.swift in Sources */,
 				8CDF96D92C6460F800D691E7 /* AddWordsFromTextView.swift in Sources */,
-				8CDF96DE2C648D8400D691E7 /* AddWordsViewModel.swift in Sources */,
+				8CDF96DE2C648D8400D691E7 /* OCROption.swift in Sources */,
 				8C93DCAC2C63BDDE00B60239 /* MainTabType.swift in Sources */,
 				8C9F6FBC2C8820F9004C7315 /* UIColorExtension.swift in Sources */,
 				8C93DC762C63B84D00B60239 /* WordbookApp.swift in Sources */,

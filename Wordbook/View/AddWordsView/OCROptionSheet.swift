@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct OCRProcessSelectionSheet: View {
+struct OCROptionSheet: View {
     @Binding var isPresented: Bool
-    @ObservedObject var ocrSelectionSheetViewModel: AddWordsViewModel
+    @ObservedObject var ocrSelectionSheetViewModel: OCROption
 
     var body: some View {
         NavigationStack{

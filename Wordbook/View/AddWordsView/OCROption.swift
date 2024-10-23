@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class AddWordsViewModel: ObservableObject {
+public class OCROption: ObservableObject {
     @Published var ocrProcessSelection: OCRProcessSelection = .dismiss
     @Published var isGenerateExample: Bool = false
     @Published var isMeaningFromDictionary: Bool = false

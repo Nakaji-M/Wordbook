@@ -13,7 +13,7 @@ struct TextRecognitionResultView : View {
     //UIImageの配列を受け取る変数
     var uiImages: [UIImage]
     @State private var showLoadingAlert = false
-    @ObservedObject var ocrSelectionSheetViewModel: AddWordsViewModel
+    @ObservedObject var ocrOption: OCROption
     //認識結果の文字列を格納する変数
     @State var recognitionResult: [WordStoreItem] = []
     @State var rowID: UUID?
@@ -122,14 +122,14 @@ struct TextRecognitionResultView : View {
                             
                         }
                     }
-                    if ocrSelectionSheetViewModel.isGenerateExample {
+                    if ocrOption.isGenerateExample {
                         alertMessage = "例文生成中..."
                         let llm = await ExampleSentenceGeneration()
                         for i in 0..<recognitionResult.count {
                             recognitionResult[i].example = await llm.generateExampleSentence(word: recognitionResult[i].word)
                         }
                     }
-                    if ocrSelectionSheetViewModel.isMeaningFromDictionary {
+                    if ocrOption.isMeaningFromDictionary {
                         alertMessage = "意味生成中..."
                         let dictionaryService = DictionaryService()
                         for i in 0..<recognitionResult.count {

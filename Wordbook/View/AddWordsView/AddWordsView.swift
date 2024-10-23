@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 enum Path: Hashable, Equatable {
-    case textRecognitionResult([UIImage], AddWordsViewModel)
+    case textRecognitionResult([UIImage], OCROption)
     case tagSelection(Binding<Tag?>)
     case addFromText
     case addFromTap([UIImage])
@@ -54,7 +54,7 @@ struct AddWordsView: View {
     @State var isAlbumOCRSelectionSheetPresented: Bool = false
     @State var isCameraSheetPresented: Bool = false
     @State var popoverVisible = false
-    @ObservedObject var ocrSelectionSheetViewModel: AddWordsViewModel = AddWordsViewModel()
+    @ObservedObject var ocrOption: OCROption = OCROption()
     
     var body: some View {
         NavigationStack (path: $path){
@@ -80,12 +80,12 @@ struct AddWordsView: View {
                             .background(Color(UIColor.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 10))
                     }
                     .sheet(isPresented: $isCameraSheetPresented) {
-                        OCRProcessSelectionSheet(isPresented: $isCameraSheetPresented, ocrSelectionSheetViewModel: ocrSelectionSheetViewModel)
+                        OCROptionSheet(isPresented: $isCameraSheetPresented, ocrSelectionSheetViewModel: ocrOption)
                             .presentationDragIndicator(.visible)
                             .presentationDetents([.medium])
                             .onDisappear(){
-                                print(ocrSelectionSheetViewModel.ocrProcessSelection)
-                                if(ocrSelectionSheetViewModel.ocrProcessSelection != .dismiss){
+                                print(ocrOption.ocrProcessSelection)
+                                if(ocrOption.ocrProcessSelection != .dismiss){
                                     showCamera = true
                                 }
                                 
@@ -110,12 +110,12 @@ struct AddWordsView: View {
                             .background(Color(UIColor.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 10))
                     }
                     .sheet(isPresented: $isAlbumOCRSelectionSheetPresented) {
-                        OCRProcessSelectionSheet(isPresented: $isAlbumOCRSelectionSheetPresented, ocrSelectionSheetViewModel: ocrSelectionSheetViewModel)
+                        OCROptionSheet(isPresented: $isAlbumOCRSelectionSheetPresented, ocrSelectionSheetViewModel: ocrOption)
                             .presentationDragIndicator(.visible)
                             .presentationDetents([.medium])
                             .onDisappear(){
-                                print(ocrSelectionSheetViewModel.ocrProcessSelection)
-                                if(ocrSelectionSheetViewModel.ocrProcessSelection != .dismiss){
+                                print(ocrOption.ocrProcessSelection)
+                                if(ocrOption.ocrProcessSelection != .dismiss){
                                     showPicker = true
                                 }
                             }
@@ -180,7 +180,7 @@ struct AddWordsView: View {
                     uiImages = await convertToUIImage(selectedItems: selectedItems)
                     selectedItems.removeAll()
                     if uiImages.count > 0 {
-                        path.append(Path.textRecognitionResult(uiImages, ocrSelectionSheetViewModel))
+                        path.append(Path.textRecognitionResult(uiImages, ocrOption))
                     }
                 }
             }
@@ -206,7 +206,7 @@ struct AddWordsView: View {
                     uiImages.removeAll()
                     if uiImage_camera != nil {
                         uiImages.append(uiImage_camera!)
-                        path.append(Path.textRecognitionResult(uiImages, ocrSelectionSheetViewModel))
+                        path.append(Path.textRecognitionResult(uiImages, ocrOption))
                     }
                 }
             }
@@ -217,7 +217,7 @@ struct AddWordsView: View {
                 switch $0 {
                     case .textRecognitionResult(let uiImage_, let ocrSelectionSheetViewModel_):
                         // 遷移先にpath配列の参照や必要な情報を渡す
-                        TextRecognitionResultView(path: $path, uiImages: uiImage_, ocrSelectionSheetViewModel: ocrSelectionSheetViewModel_)
+                        TextRecognitionResultView(path: $path, uiImages: uiImage_, ocrOption: ocrSelectionSheetViewModel_)
                     case .addFromText:
                         AddWordsFromTextView(path: $path)
                     case .tagSelection(let tag_):
