@@ -13,24 +13,31 @@ import NaturalLanguage
 class Img2WordList{
     private let uiImage: UIImage
     private let scanIdiom: Bool
+    private var recognizedTexts: [RecognizedTextItem] = []
+    private var tableStructures: [TableStructureItem] = []
+    
     init(uiImage: UIImage, scanIdiom: Bool){
         self.uiImage = uiImage
         self.scanIdiom = scanIdiom
     }
+    func recognizeDebug() async throws -> ([WordStoreItem], UIImage) {
+        return (try await recognize(), drawDetected(recognizedTexts: recognizedTexts, tableStructures: tableStructures))
+    }
     func recognize() async throws -> [WordStoreItem] {
         do{
             let ocr = OCR(uiImage: uiImage)
-            let recognizedTexts = try await ocr.recognize()
+            recognizedTexts = try await ocr.recognize()
             let tableStructureDetector = try TableStructureDetector(uiImage: uiImage)
-            let tableStructures = try tableStructureDetector.detect()
-            let wordListGenerator = WordListGenerator(uiImage: uiImage, recognizedTexts: recognizedTexts, tableStructures: tableStructures, scanIdiom: self.scanIdiom)
-            let (wordListRows, row_list, column_list, column_word) = try wordListGenerator.generateWordList()
+            self.tableStructures = try tableStructureDetector.detect()
+            let wordListGenerator = WordListGenerator(recognizedTexts: recognizedTexts, tableStructures: tableStructures, scanIdiom: self.scanIdiom)
+            var wordListRows: [WordListRow]
+            let row_list: [TableStructureItem], column_list: [TableStructureItem], column_word: TableStructureItem
+            (wordListRows, self.tableStructures, row_list, column_list, column_word) = try wordListGenerator.generateWordList()
             let meaningDetector = MeaningDetector(uiImage: uiImage, wordListRows: wordListRows, row_list: row_list, column_list: column_list, column_word: column_word)
-            let wordListRows2 = try meaningDetector.detect()
-            let wordStoreItemGenerator = WordListRow2WordStoreItemConverter(wordListRows: wordListRows2)
+            wordListRows = try meaningDetector.detect()
+            let wordStoreItemGenerator = WordListRow2WordStoreItemConverter(wordListRows: wordListRows)
             let wordStoreItems = wordStoreItemGenerator.GenerateWordStoreItem()
             return wordStoreItems
-            //return drawDetected(recognizedTexts: recognizedTexts, tableStructures: tableStructures)
         }
         catch let error{
             throw error
@@ -162,24 +169,23 @@ class TableStructureDetector{
 }
 
 class WordListGenerator{
-    private let uiImage: UIImage
     private let recognizedTexts: [RecognizedTextItem]
-    private let tableStructures: [TableStructureItem]
+    private var tableStructures: [TableStructureItem]
     private let scanIdiom: Bool
     private var wordListRows: [WordListRow] = []
     
-    init(uiImage: UIImage, recognizedTexts: [RecognizedTextItem], tableStructures: [TableStructureItem], scanIdiom: Bool){
-        self.uiImage = uiImage
+    init(recognizedTexts: [RecognizedTextItem], tableStructures: [TableStructureItem], scanIdiom: Bool){
         self.recognizedTexts = recognizedTexts
         self.tableStructures = tableStructures
         self.scanIdiom = scanIdiom
     }
     
-    func generateWordList() throws -> ([WordListRow], [TableStructureItem], [TableStructureItem], TableStructureItem){
+    func generateWordList() throws -> ([WordListRow], [TableStructureItem], [TableStructureItem], [TableStructureItem], TableStructureItem){
         let wordCandidates = try self.recognizeWordsFromPosition()
+        self.addColumn(wordCandidates: wordCandidates) //一部の列が検出できなかったとき用
         let (row_list, column_list, column_word) = makeWordListRow(wordCandidates: wordCandidates)
         detectJapanese()
-        return (wordListRows, row_list, column_list, column_word)
+        return (wordListRows, tableStructures, row_list, column_list, column_word)
     }
     
     //認識した各テキストの位置から単語を認識する
@@ -217,6 +223,22 @@ class WordListGenerator{
         return Array(wordCandidates)
     }
     
+    private func addColumn(wordCandidates: [RecognizedTextItem]) {
+        var column_list = self.tableStructures.filter{$0.isColumn()}
+        //column同士に囲まれた領域もcolumnの可能性がある
+        column_list.sort{ $0.box.minX < $1.box.minX }
+        var column_list_add: [TableStructureItem] = []
+        for i in 0..<column_list.count - 1 {
+            if column_list[i+1].box.minX - column_list[i].box.maxX > 0 {
+                let cgRect = CGRect(x: column_list[i].box.maxX, y: column_list[i].box.minY, width: column_list[i+1].box.minX - column_list[i].box.maxX, height: column_list[i].box.maxY - column_list[i].box.minY)
+                if recognizedTexts.filter({cgRect.contains(midPoint(bounds: $0.box))}).count > (wordCandidates.count * 2/3) {
+                    column_list_add.append(TableStructureItem(box: cgRect, confidence: 0, label: "table column"))
+                }
+            }
+        }
+        tableStructures = tableStructures + column_list_add
+    }
+    
     private func makeWordListRow(wordCandidates: [RecognizedTextItem]) -> ([TableStructureItem], [TableStructureItem], TableStructureItem) {
         func filterPointInsideBox(boxes: [CGRect], point: CGPoint) -> [CGRect]{
             let filtered = boxes.filter{
@@ -224,7 +246,7 @@ class WordListGenerator{
             }
             return filtered
         }
-        
+
         self.wordListRows = wordCandidates.map{ word in
             let boxesBelongedTo = self.tableStructures.filter{ table in
                 let mid_point = midPoint(bounds: word.box)
@@ -355,14 +377,14 @@ class MeaningDetector{
         for row in wordListRows{
             //column_wordと位置が重なる日本語のtextを抽出
             let items_inside_jp = row.items_jp.filter{ item_jp in
-                return column_word.box.contains(item_jp.box) //列方向ではは完全に包含されている必要がある(右端まで突っ切っていないことの確認)
+                return column_word.box.containsPartially(rect: item_jp.box, rate: 0.80) //列方向ではは完全に包含されている必要がある(右端まで突っ切っていないことの確認)
             }
             let isItemLength4 = items_inside_jp.contains{$0.text.count >= 4} //文字列長4文字以上
             if items_inside_jp.count > 0 && isItemLength4 && midPoint(bounds: items_inside_jp.last!.box).y > midPoint(bounds: row.word.box).y{
                 belowItemCount += 1
             }
         }
-        if belowItemCount > Int(Double(wordListRows.count) * 0.67){
+        if belowItemCount > wordListRows.count * 3/5 {
             return .below
         }else{
             return .right
@@ -395,7 +417,7 @@ class MeaningDetector{
                 let isInsideRows = rows_below.contains{ row_below in
                     row_below.box.contains(midPoint(bounds: item_jp.box))
                 }
-                let isInsideColumn = column_word.box.containsPartially(rect: item_jp.box, rate: 0.85) //完全に包含されている
+                let isInsideColumn = column_word.box.containsPartially(rect: item_jp.box, rate: 0.80) //完全に包含されている
                 return isInsideRows && isInsideColumn
             }
             if items_inside_jp.count > 0 && items_inside_jp.contains(where: {$0.text.count >= 2}) {
@@ -475,11 +497,11 @@ struct TableStructureItem: Equatable {
     }
     
     func isRow() -> Bool{
-        return label == "table row" || label == "table projected row header"
+        return label == "table row" || label == "table column header" || label == "table projected row header"
     }
     
     func isColumn() -> Bool{
-        return label == "table column" || label == "table column header"
+        return label == "table column"
     }
 }
 

@@ -20,6 +20,9 @@ struct TextRecognitionResultView : View {
     @State var alertMessage: String = ""
     @State private var selectedTag: Tag?
     @State var isFirstAppear: Bool = true
+#if DEBUG
+    @State var detectedImg: UIImage?
+#endif
         
     var body: some View {
         VStack {
@@ -41,6 +44,13 @@ struct TextRecognitionResultView : View {
                         }
                 )
                 {
+#if DEBUG
+                    if let detectedImg {
+                        Image(uiImage: detectedImg)
+                            .resizable()
+                            .scaledToFill()
+                    }
+#endif
                     ForEach($recognitionResult) { $rowViewModel in
                         ResultsRow(viewModel: $rowViewModel)
                             .contentShape(Rectangle())
@@ -116,7 +126,12 @@ struct TextRecognitionResultView : View {
                         let scanIdiom = settingsStoreService.loadBoolSetting(settingKey: .scanIdiom)
                         let img2WordList = Img2WordList(uiImage: uiImage, scanIdiom: scanIdiom)
                         do{
+#if DEBUG
+                            let (recognizedWords, img) = try await img2WordList.recognizeDebug()
+                            self.detectedImg = img
+#else
                             let recognizedWords = try await img2WordList.recognize()
+#endif
                             recognitionResult += recognizedWords
                         } catch{
                             
