@@ -8,40 +8,6 @@
 import SwiftUI
 import PhotosUI
 
-enum Path: Hashable, Equatable {
-    case textRecognitionResult([UIImage], OCROption)
-    case tagSelection(Binding<Tag?>)
-    case addFromText
-    case addFromTap([UIImage])
-    case addFromTapMeanings([TapItem], [UIImage])
-    case tapResult([TapItem])
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.rawValue)
-    }
-    
-    static func == (lhs: Path, rhs: Path) -> Bool {
-        return lhs.rawValue == rhs.rawValue
-    }
-    
-    private var rawValue: Int {
-        switch self {
-            case .textRecognitionResult:
-                return 0
-            case .tagSelection:
-                return 1
-            case .addFromText:
-                return 2
-            case .addFromTap:
-                return 3
-            case .addFromTapMeanings:
-                return 4
-            case .tapResult:
-                return 5
-        }
-    }
-}
-
 struct AddWordsView: View {
     @State private var uiImages: [UIImage] = []
     @State private var uiImage_camera: UIImage?
@@ -217,7 +183,7 @@ struct AddWordsView: View {
                 switch $0 {
                     case .textRecognitionResult(let uiImage_, let ocrSelectionSheetViewModel_):
                         // 遷移先にpath配列の参照や必要な情報を渡す
-                        TextRecognitionResultView(path: $path, uiImages: uiImage_, ocrOption: ocrSelectionSheetViewModel_)
+                        AddWordsFromAutoView(path: $path, uiImages: uiImage_, ocrOption: ocrSelectionSheetViewModel_)
                     case .addFromText:
                         AddWordsFromTextView(path: $path)
                     case .tagSelection(let tag_):

@@ -76,7 +76,7 @@ struct TextTapResultView: View {
                 if showLoadingAlert {
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
-                    LoadingAlert(alertMessage: $alertMessage)
+                    CommonLoadingAlertView(alertMessage: $alertMessage)
                 }
             }
         )

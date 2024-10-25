@@ -77,7 +77,7 @@ struct QuizView: View {
                     }
                 }.padding(.bottom)
                 
-                NavigationLink(destination: WordsSwipeView(isAllWords: pickerSelection.isAllWords, tags: pickerSelection.Tags, includeMemorized: includeMemorized, includeNoTags: pickerSelection.includeNoTags)){
+                NavigationLink(destination: WordSwipeView(isAllWords: pickerSelection.isAllWords, tags: pickerSelection.Tags, includeMemorized: includeMemorized, includeNoTags: pickerSelection.includeNoTags)){
                     HStack {
                         VStack(alignment: .leading, spacing: 8){
                             Text("START QUIZ")

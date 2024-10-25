@@ -23,7 +23,7 @@ struct MainTab: View {
                 }
                 .tag(MainTabType.quiz)
 
-            WordbooksListView()
+            WordbookListView()
                 .tabItem {
                     Label("単語リスト", systemImage: "list.dash.header.rectangle")
                 }
@@ -45,7 +45,7 @@ struct MainTab: View {
                 if showLoadingAlert {
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
-                    LoadingAlert(alertMessage: $alertMessage)
+                    CommonLoadingAlertView(alertMessage: $alertMessage)
                 }
             }
         )

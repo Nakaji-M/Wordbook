@@ -10,8 +10,16 @@
 		0227BE842CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 0227BE832CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage */; };
 		0228E67A2CC89A4C00359D2A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0228E6792CC89A4C00359D2A /* Settings.bundle */; };
 		0228E67E2CC8A1AF00359D2A /* license_plist.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0228E67D2CC8A1AD00359D2A /* license_plist.yml */; };
+		024CE1632CCB82680064201E /* CommonLoadingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1622CCB82680064201E /* CommonLoadingAlertView.swift */; };
+		024CE1652CCB82EB0064201E /* OCR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1642CCB82EB0064201E /* OCR.swift */; };
+		024CE1672CCB832B0064201E /* TableStructureDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1662CCB832B0064201E /* TableStructureDetector.swift */; };
+		024CE1692CCB83630064201E /* WordListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1682CCB83630064201E /* WordListGenerator.swift */; };
+		024CE16B2CCB83F30064201E /* MeaningDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE16A2CCB83F30064201E /* MeaningDetector.swift */; };
+		024CE16D2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE16C2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift */; };
 		027F28AB2CC56E350048F9A4 /* Img2WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F28AA2CC56E030048F9A4 /* Img2WordList.swift */; };
-		8C0E034D2C688C0B004BB413 /* TextRecognitionResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034C2C688C0B004BB413 /* TextRecognitionResultView.swift */; };
+		02FF16F92CCB7ECC00C06BA9 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF16F82CCB7EC900C06BA9 /* Path.swift */; };
+		02FF17012CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF17002CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift */; };
+		8C0E034D2C688C0B004BB413 /* AddWordsFromAutoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034C2C688C0B004BB413 /* AddWordsFromAutoView.swift */; };
 		8C0E034F2C688DB2004BB413 /* WordStoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */; };
 		8C3590EA2C68F2F000292565 /* ExampleSentenceGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3590E92C68F2F000292565 /* ExampleSentenceGeneration.swift */; };
 		8C3590ED2C68F58F00292565 /* MLX in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3590EC2C68F58F00292565 /* MLX */; };
@@ -42,12 +50,12 @@
 		8C93DCAA2C63BB0D00B60239 /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C93DCA92C63BB0D00B60239 /* MainTab.swift */; };
 		8C93DCAC2C63BDDE00B60239 /* MainTabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C93DCAB2C63BDDE00B60239 /* MainTabType.swift */; };
 		8C93DCB22C63C27300B60239 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C93DCB12C63C27300B60239 /* QuizView.swift */; };
-		8C93DCB42C63C29200B60239 /* WordbooksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C93DCB32C63C29200B60239 /* WordbooksListView.swift */; };
+		8C93DCB42C63C29200B60239 /* WordbookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C93DCB32C63C29200B60239 /* WordbookListView.swift */; };
 		8C93DCB62C63C2AF00B60239 /* AddWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C93DCB52C63C2AF00B60239 /* AddWordsView.swift */; };
 		8C93DCB82C63C2C700B60239 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C93DCB72C63C2C700B60239 /* SettingsView.swift */; };
 		8C967DF92C8053E600DDDF05 /* StackSwipableCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C967DF82C8053E600DDDF05 /* StackSwipableCardView.swift */; };
 		8C967DFE2C80548700DDDF05 /* StackSwipableCardConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C967DFD2C80548700DDDF05 /* StackSwipableCardConfiguration.swift */; };
-		8C967E012C805A1B00DDDF05 /* WordsSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C967E002C805A1B00DDDF05 /* WordsSwipeView.swift */; };
+		8C967E012C805A1B00DDDF05 /* WordSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C967E002C805A1B00DDDF05 /* WordSwipeView.swift */; };
 		8C967E032C80614A00DDDF05 /* FlipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C967E022C80614A00DDDF05 /* FlipView.swift */; };
 		8C973DBD2C82B90F001198F9 /* ShareScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 8C973DBC2C82B90F001198F9 /* ShareScript.js */; };
 		8C973DC02C841DE1001198F9 /* ExtractWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C973DBF2C841DE1001198F9 /* ExtractWord.swift */; };
@@ -57,7 +65,7 @@
 		8CA59EBC2C918F2100822895 /* RelatedWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA59EBB2C918F2100822895 /* RelatedWordsView.swift */; };
 		8CB215D42C93091D00D20775 /* ZoomableContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB215D32C93091D00D20775 /* ZoomableContainer.swift */; };
 		8CC0860F2C76DCAC00AA6CB5 /* WordStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC0860E2C76DCAC00AA6CB5 /* WordStoreService.swift */; };
-		8CC086112C76ED8A00AA6CB5 /* WordsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC086102C76ED8A00AA6CB5 /* WordsListView.swift */; };
+		8CC086112C76ED8A00AA6CB5 /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC086102C76ED8A00AA6CB5 /* WordListView.swift */; };
 		8CC086132C772EFD00AA6CB5 /* CommonTagSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC086122C772EFD00AA6CB5 /* CommonTagSelectionView.swift */; };
 		8CC086152C776E2200AA6CB5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC086142C776E2200AA6CB5 /* SettingViewModel.swift */; };
 		8CC086182C77767700AA6CB5 /* SettingsStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC086172C77767700AA6CB5 /* SettingsStoreService.swift */; };
@@ -133,8 +141,16 @@
 		0227BE832CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = yolov8s_custom_structure_all_best.mlpackage; sourceTree = "<group>"; };
 		0228E6792CC89A4C00359D2A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0228E67D2CC8A1AD00359D2A /* license_plist.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = license_plist.yml; sourceTree = "<group>"; };
+		024CE1622CCB82680064201E /* CommonLoadingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonLoadingAlertView.swift; sourceTree = "<group>"; };
+		024CE1642CCB82EB0064201E /* OCR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCR.swift; sourceTree = "<group>"; };
+		024CE1662CCB832B0064201E /* TableStructureDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableStructureDetector.swift; sourceTree = "<group>"; };
+		024CE1682CCB83630064201E /* WordListGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListGenerator.swift; sourceTree = "<group>"; };
+		024CE16A2CCB83F30064201E /* MeaningDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetector.swift; sourceTree = "<group>"; };
+		024CE16C2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListRow2WordStoreItemConverter.swift; sourceTree = "<group>"; };
 		027F28AA2CC56E030048F9A4 /* Img2WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Img2WordList.swift; sourceTree = "<group>"; };
-		8C0E034C2C688C0B004BB413 /* TextRecognitionResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognitionResultView.swift; sourceTree = "<group>"; };
+		02FF16F82CCB7EC900C06BA9 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		02FF17002CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebReplaceListSettingsView.swift; sourceTree = "<group>"; };
+		8C0E034C2C688C0B004BB413 /* AddWordsFromAutoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordsFromAutoView.swift; sourceTree = "<group>"; };
 		8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordStoreItem.swift; sourceTree = "<group>"; };
 		8C3590E92C68F2F000292565 /* ExampleSentenceGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSentenceGeneration.swift; sourceTree = "<group>"; };
 		8C3590F32C68F6C700292565 /* DeviceStat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceStat.swift; sourceTree = "<group>"; };
@@ -161,12 +177,12 @@
 		8C93DCA92C63BB0D00B60239 /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
 		8C93DCAB2C63BDDE00B60239 /* MainTabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabType.swift; sourceTree = "<group>"; };
 		8C93DCB12C63C27300B60239 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
-		8C93DCB32C63C29200B60239 /* WordbooksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbooksListView.swift; sourceTree = "<group>"; };
+		8C93DCB32C63C29200B60239 /* WordbookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookListView.swift; sourceTree = "<group>"; };
 		8C93DCB52C63C2AF00B60239 /* AddWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordsView.swift; sourceTree = "<group>"; };
 		8C93DCB72C63C2C700B60239 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8C967DF82C8053E600DDDF05 /* StackSwipableCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackSwipableCardView.swift; sourceTree = "<group>"; };
 		8C967DFD2C80548700DDDF05 /* StackSwipableCardConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackSwipableCardConfiguration.swift; sourceTree = "<group>"; };
-		8C967E002C805A1B00DDDF05 /* WordsSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSwipeView.swift; sourceTree = "<group>"; };
+		8C967E002C805A1B00DDDF05 /* WordSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSwipeView.swift; sourceTree = "<group>"; };
 		8C967E022C80614A00DDDF05 /* FlipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipView.swift; sourceTree = "<group>"; };
 		8C973DBC2C82B90F001198F9 /* ShareScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ShareScript.js; sourceTree = "<group>"; };
 		8C973DBF2C841DE1001198F9 /* ExtractWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractWord.swift; sourceTree = "<group>"; };
@@ -176,7 +192,7 @@
 		8CA59EBB2C918F2100822895 /* RelatedWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedWordsView.swift; sourceTree = "<group>"; };
 		8CB215D32C93091D00D20775 /* ZoomableContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableContainer.swift; sourceTree = "<group>"; };
 		8CC0860E2C76DCAC00AA6CB5 /* WordStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordStoreService.swift; sourceTree = "<group>"; };
-		8CC086102C76ED8A00AA6CB5 /* WordsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsListView.swift; sourceTree = "<group>"; };
+		8CC086102C76ED8A00AA6CB5 /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
 		8CC086122C772EFD00AA6CB5 /* CommonTagSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTagSelectionView.swift; sourceTree = "<group>"; };
 		8CC086142C776E2200AA6CB5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		8CC086172C77767700AA6CB5 /* SettingsStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStoreService.swift; sourceTree = "<group>"; };
@@ -234,21 +250,108 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		024CE1612CCB824A0064201E /* CommonLoadingAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				024CE1622CCB82680064201E /* CommonLoadingAlertView.swift */,
+			);
+			path = CommonLoadingAlertView;
+			sourceTree = "<group>";
+		};
 		027F28A72CC55F110048F9A4 /* Img2WordList */ = {
 			isa = PBXGroup;
 			children = (
-				0227BE832CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage */,
 				027F28AA2CC56E030048F9A4 /* Img2WordList.swift */,
+				024CE1642CCB82EB0064201E /* OCR.swift */,
+				024CE1662CCB832B0064201E /* TableStructureDetector.swift */,
+				024CE1682CCB83630064201E /* WordListGenerator.swift */,
+				024CE16A2CCB83F30064201E /* MeaningDetector.swift */,
+				024CE16C2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift */,
+				0227BE832CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage */,
 			);
 			path = Img2WordList;
 			sourceTree = "<group>";
 		};
-		8C0E034B2C688BDD004BB413 /* TextRecognitionResultView */ = {
+		02FF16F12CCB7CAA00C06BA9 /* AddWordsTab */ = {
 			isa = PBXGroup;
 			children = (
-				8C0E034C2C688C0B004BB413 /* TextRecognitionResultView.swift */,
+				02FF16F82CCB7EC900C06BA9 /* Path.swift */,
+				8C93DCAF2C63C1FD00B60239 /* AddWordsView */,
+				8CDF96D32C64608A00D691E7 /* AddWordsFromTextView */,
+				8C0E034B2C688BDD004BB413 /* AddWordsFromAutoView */,
+				8C8B49992C928EF50058B08F /* AddWordsFromTapView */,
 			);
-			path = TextRecognitionResultView;
+			path = AddWordsTab;
+			sourceTree = "<group>";
+		};
+		02FF16F22CCB7CC400C06BA9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				024CE1612CCB824A0064201E /* CommonLoadingAlertView */,
+				8CB3293E2C7ACCF60070FBFA /* CommonTagSelectionView */,
+				8CC139532C7CBA6B00700DF9 /* CommonWordEditView */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		02FF16F42CCB7D4E00C06BA9 /* QuizTab */ = {
+			isa = PBXGroup;
+			children = (
+				8C93DCAD2C63C1E200B60239 /* QuizView */,
+				8C967DFF2C80597000DDDF05 /* WordSwipeView */,
+			);
+			path = QuizTab;
+			sourceTree = "<group>";
+		};
+		02FF16F52CCB7D7B00C06BA9 /* WordListTab */ = {
+			isa = PBXGroup;
+			children = (
+				02FF16F62CCB7E8400C06BA9 /* WordbookListView */,
+				8C93DCAE2C63C1EB00B60239 /* WordListView */,
+				02FF17022CCB811200C06BA9 /* RelatedWordsView */,
+			);
+			path = WordListTab;
+			sourceTree = "<group>";
+		};
+		02FF16F62CCB7E8400C06BA9 /* WordbookListView */ = {
+			isa = PBXGroup;
+			children = (
+				8C93DCB32C63C29200B60239 /* WordbookListView.swift */,
+			);
+			path = WordbookListView;
+			sourceTree = "<group>";
+		};
+		02FF16FA2CCB7F1A00C06BA9 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				8C93DCB72C63C2C700B60239 /* SettingsView.swift */,
+				8CC086142C776E2200AA6CB5 /* SettingViewModel.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		02FF16FB2CCB7F2B00C06BA9 /* WebReplaceListSettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				02FF17002CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift */,
+			);
+			path = WebReplaceListSettingsView;
+			sourceTree = "<group>";
+		};
+		02FF17022CCB811200C06BA9 /* RelatedWordsView */ = {
+			isa = PBXGroup;
+			children = (
+				8CA59EBB2C918F2100822895 /* RelatedWordsView.swift */,
+			);
+			path = RelatedWordsView;
+			sourceTree = "<group>";
+		};
+		8C0E034B2C688BDD004BB413 /* AddWordsFromAutoView */ = {
+			isa = PBXGroup;
+			children = (
+				8C0E034C2C688C0B004BB413 /* AddWordsFromAutoView.swift */,
+			);
+			path = AddWordsFromAutoView;
 			sourceTree = "<group>";
 		};
 		8C3590E82C68F2C600292565 /* LLM */ = {
@@ -347,10 +450,10 @@
 			isa = PBXGroup;
 			children = (
 				8CE0528D2C845E9E009A1251 /* Wordbook.entitlements */,
-				8C4CB41F2C81AC8B00B70244 /* Extension */,
 				8C967DF72C8053C600DDDF05 /* Components */,
-				8CEB97952C784A7E0002896B /* Style */,
 				8C93DCB92C63C61300B60239 /* Core */,
+				8C4CB41F2C81AC8B00B70244 /* Extension */,
+				8CEB97952C784A7E0002896B /* Style */,
 				8C93DCA72C63BAE300B60239 /* View */,
 				8C93DC752C63B84D00B60239 /* WordbookApp.swift */,
 				8C93DC7B2C63B84F00B60239 /* Assets.xcassets */,
@@ -387,17 +490,12 @@
 		8C93DCA72C63BAE300B60239 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C8B49992C928EF50058B08F /* AddWordsFromTapView */,
-				8C967DFF2C80597000DDDF05 /* WordsSwipeView */,
-				8CC139532C7CBA6B00700DF9 /* CommonWordEditView */,
-				8CB3293E2C7ACCF60070FBFA /* CommonTagSelectionView */,
-				8C0E034B2C688BDD004BB413 /* TextRecognitionResultView */,
-				8CDF96D32C64608A00D691E7 /* AddWordsFromTextView */,
-				8C93DCB02C63C20B00B60239 /* SettingsView */,
-				8C93DCAF2C63C1FD00B60239 /* AddWordsView */,
-				8C93DCAE2C63C1EB00B60239 /* WordsListView */,
-				8C93DCAD2C63C1E200B60239 /* QuizView */,
 				8C93DCA82C63BAF000B60239 /* MainTab */,
+				02FF16F42CCB7D4E00C06BA9 /* QuizTab */,
+				02FF16F52CCB7D7B00C06BA9 /* WordListTab */,
+				02FF16F12CCB7CAA00C06BA9 /* AddWordsTab */,
+				8C93DCB02C63C20B00B60239 /* SettingsTab */,
+				02FF16F22CCB7CC400C06BA9 /* Common */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -419,34 +517,32 @@
 			path = QuizView;
 			sourceTree = "<group>";
 		};
-		8C93DCAE2C63C1EB00B60239 /* WordsListView */ = {
+		8C93DCAE2C63C1EB00B60239 /* WordListView */ = {
 			isa = PBXGroup;
 			children = (
-				8C93DCB32C63C29200B60239 /* WordbooksListView.swift */,
-				8CC086102C76ED8A00AA6CB5 /* WordsListView.swift */,
-				8CA59EBB2C918F2100822895 /* RelatedWordsView.swift */,
+				8CC086102C76ED8A00AA6CB5 /* WordListView.swift */,
 			);
-			path = WordsListView;
+			path = WordListView;
 			sourceTree = "<group>";
 		};
 		8C93DCAF2C63C1FD00B60239 /* AddWordsView */ = {
 			isa = PBXGroup;
 			children = (
+				8C93DCB52C63C2AF00B60239 /* AddWordsView.swift */,
 				8CDF96DB2C6479A900D691E7 /* OCROptionSheet.swift */,
 				8CDF96DD2C648D8400D691E7 /* OCROption.swift */,
-				8C93DCB52C63C2AF00B60239 /* AddWordsView.swift */,
 				8C9F6FB52C87F080004C7315 /* RandomWordView.swift */,
 			);
 			path = AddWordsView;
 			sourceTree = "<group>";
 		};
-		8C93DCB02C63C20B00B60239 /* SettingsView */ = {
+		8C93DCB02C63C20B00B60239 /* SettingsTab */ = {
 			isa = PBXGroup;
 			children = (
-				8C93DCB72C63C2C700B60239 /* SettingsView.swift */,
-				8CC086142C776E2200AA6CB5 /* SettingViewModel.swift */,
+				02FF16FA2CCB7F1A00C06BA9 /* SettingsView */,
+				02FF16FB2CCB7F2B00C06BA9 /* WebReplaceListSettingsView */,
 			);
-			path = SettingsView;
+			path = SettingsTab;
 			sourceTree = "<group>";
 		};
 		8C93DCB92C63C61300B60239 /* Core */ = {
@@ -472,12 +568,12 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		8C967DFF2C80597000DDDF05 /* WordsSwipeView */ = {
+		8C967DFF2C80597000DDDF05 /* WordSwipeView */ = {
 			isa = PBXGroup;
 			children = (
-				8C967E002C805A1B00DDDF05 /* WordsSwipeView.swift */,
+				8C967E002C805A1B00DDDF05 /* WordSwipeView.swift */,
 			);
-			path = WordsSwipeView;
+			path = WordSwipeView;
 			sourceTree = "<group>";
 		};
 		8C973DBE2C841D82001198F9 /* Core */ = {
@@ -888,12 +984,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				024CE1652CCB82EB0064201E /* OCR.swift in Sources */,
 				8CC086182C77767700AA6CB5 /* SettingsStoreService.swift in Sources */,
 				8C0E034F2C688DB2004BB413 /* WordStoreItem.swift in Sources */,
 				8CEB97972C784A950002896B /* CheckBoxToggleStyle.swift in Sources */,
 				8CE052922C84687F009A1251 /* SharedModelContainer.swift in Sources */,
 				8C8458B52C8858B00077567D /* PopoverContainerLayout.swift in Sources */,
 				8C93DCB62C63C2AF00B60239 /* AddWordsView.swift in Sources */,
+				024CE16D2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift in Sources */,
 				8C967DF92C8053E600DDDF05 /* StackSwipableCardView.swift in Sources */,
 				8CA59EBC2C918F2100822895 /* RelatedWordsView.swift in Sources */,
 				8C8B49A22C92FAED0058B08F /* TextTapResultView.swift in Sources */,
@@ -904,14 +1002,18 @@
 				8CC0860F2C76DCAC00AA6CB5 /* WordStoreService.swift in Sources */,
 				8CE0529D2C848FF6009A1251 /* WebView.swift in Sources */,
 				8CED1F2B2C6FAA7300327F0E /* CameraView.swift in Sources */,
+				024CE16B2CCB83F30064201E /* MeaningDetector.swift in Sources */,
 				8CB215D42C93091D00D20775 /* ZoomableContainer.swift in Sources */,
+				024CE1632CCB82680064201E /* CommonLoadingAlertView.swift in Sources */,
 				027F28AB2CC56E350048F9A4 /* Img2WordList.swift in Sources */,
-				8C967E012C805A1B00DDDF05 /* WordsSwipeView.swift in Sources */,
+				024CE1672CCB832B0064201E /* TableStructureDetector.swift in Sources */,
+				8C967E012C805A1B00DDDF05 /* WordSwipeView.swift in Sources */,
 				8C93DCB82C63C2C700B60239 /* SettingsView.swift in Sources */,
 				8C8B499B2C928F220058B08F /* AddWordsFromTapView.swift in Sources */,
-				8CC086112C76ED8A00AA6CB5 /* WordsListView.swift in Sources */,
+				8CC086112C76ED8A00AA6CB5 /* WordListView.swift in Sources */,
 				0227BE842CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage in Sources */,
-				8C0E034D2C688C0B004BB413 /* TextRecognitionResultView.swift in Sources */,
+				8C0E034D2C688C0B004BB413 /* AddWordsFromAutoView.swift in Sources */,
+				02FF16F92CCB7ECC00C06BA9 /* Path.swift in Sources */,
 				8C4CB4212C81AC9D00B70244 /* ViewExtension.swift in Sources */,
 				8CDF96DC2C6479A900D691E7 /* OCROptionSheet.swift in Sources */,
 				8C3590F42C68F6C700292565 /* DeviceStat.swift in Sources */,
@@ -923,14 +1025,16 @@
 				8C93DC762C63B84D00B60239 /* WordbookApp.swift in Sources */,
 				8C967E032C80614A00DDDF05 /* FlipView.swift in Sources */,
 				8CE052982C847C6C009A1251 /* Tag.swift in Sources */,
-				8C93DCB42C63C29200B60239 /* WordbooksListView.swift in Sources */,
+				8C93DCB42C63C29200B60239 /* WordbookListView.swift in Sources */,
 				8C93DCB22C63C27300B60239 /* QuizView.swift in Sources */,
+				024CE1692CCB83630064201E /* WordListGenerator.swift in Sources */,
 				8CA09C4B2C85E4EB00B244A1 /* ModelFileManagement.swift in Sources */,
 				8CC086132C772EFD00AA6CB5 /* CommonTagSelectionView.swift in Sources */,
 				8CC1394A2C7CA45300700DF9 /* DictionaryService.swift in Sources */,
 				8C3590EA2C68F2F000292565 /* ExampleSentenceGeneration.swift in Sources */,
 				8C8B49A02C92F51D0058B08F /* AddMeaningsFromTapView.swift in Sources */,
 				8C5830312C797617003A52A6 /* FavoriteToggleStyle.swift in Sources */,
+				02FF17012CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift in Sources */,
 				8C4CB41E2C81A72A00B70244 /* SpeechUtteranceButton.swift in Sources */,
 				8C9F6FB62C87F080004C7315 /* RandomWordView.swift in Sources */,
 			);

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import Translation
 
-struct WordsListView: View {
+struct WordListView: View {
     var isAllWords: Bool
     var tag: Tag?
     @State var words: [WordStoreItem] = []
@@ -105,7 +105,7 @@ struct WordsListView: View {
                 if showLoadingAlert {
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
-                    LoadingAlert(alertMessage: $alertMessage)
+                    CommonLoadingAlertView(alertMessage: $alertMessage)
                 }
             }
         )

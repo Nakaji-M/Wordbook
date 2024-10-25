@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WordsSwipeView: View {
+struct WordSwipeView: View {
     var isAllWords: Bool
     var tags: [Tag]
     var includeMemorized: Bool

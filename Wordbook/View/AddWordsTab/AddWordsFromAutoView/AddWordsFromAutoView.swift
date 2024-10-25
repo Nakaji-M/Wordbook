@@ -8,7 +8,7 @@
 import SwiftUI
 
 //UIImageの配列を受け取り、TextRecognitionを行い、認識結果を表示するView
-struct TextRecognitionResultView : View {
+struct AddWordsFromAutoView : View {
     @Binding var path: [Path]
     //UIImageの配列を受け取る変数
     var uiImages: [UIImage]
@@ -91,7 +91,7 @@ struct TextRecognitionResultView : View {
                     if showLoadingAlert {
                         Color.black.opacity(0.4)
                             .edgesIgnoringSafeArea(.all)
-                        LoadingAlert(alertMessage: $alertMessage)
+                        CommonLoadingAlertView(alertMessage: $alertMessage)
                     }
                 }
             )            
@@ -162,23 +162,7 @@ struct TextRecognitionResultView : View {
         }
     }
 }
-    
-struct LoadingAlert: View {
-    @Binding var alertMessage: String
-        var body: some View {
-            VStack(spacing: 20) {
-                ProgressView()
-                    .scaleEffect(1.5)
-                Text(alertMessage)
-                    .font(.headline)
-            }
-            .padding(30)
-            .background(Color(UIColor.tertiarySystemBackground))
-            .cornerRadius(10)
-            .shadow(radius: 10)
-        }
-    }
-    
+
 struct ResultsRow: View {
     @Binding var viewModel: WordStoreItem
     

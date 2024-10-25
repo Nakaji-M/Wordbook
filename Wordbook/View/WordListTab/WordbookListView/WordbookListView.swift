@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct WordbooksListView: View {
+struct WordbookListView: View {
     @Query(sort: \Tag.name) var tags: [Tag] = []
     @State var tag_delete: Tag?
     @State var isAllWords_delete = false
@@ -22,7 +22,7 @@ struct WordbooksListView: View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing){
                 List {
-                    NavigationLink(destination: WordsListView(isAllWords: true)){
+                    NavigationLink(destination: WordListView(isAllWords: true)){
                         HStack {
                             VStack(alignment: .leading, spacing: 8){
                                 Text("全ての単語")
@@ -41,7 +41,7 @@ struct WordbooksListView: View {
                         }
                         .tint(.red)
                     }
-                    NavigationLink(destination: WordsListView(isAllWords: false, tag: nil)){
+                    NavigationLink(destination: WordListView(isAllWords: false, tag: nil)){
                         HStack {
                             VStack(alignment: .leading, spacing: 8){
                                 Text("タグ未設定")
@@ -62,7 +62,7 @@ struct WordbooksListView: View {
                     }
                     
                     ForEach(tags) { tag in
-                        NavigationLink(destination: WordsListView(isAllWords: false, tag: tag)){
+                        NavigationLink(destination: WordListView(isAllWords: false, tag: tag)){
                             HStack {
                                 VStack(alignment: .leading, spacing: 8){
                                     Text(tag.name)
@@ -88,7 +88,7 @@ struct WordbooksListView: View {
                         if showLoadingAlert {
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
-                            LoadingAlert(alertMessage: $alertMessage)
+                            CommonLoadingAlertView(alertMessage: $alertMessage)
                         }
                     }
                 )
