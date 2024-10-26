@@ -10,13 +10,17 @@ import NaturalLanguage
 class WordListGenerator{
     private let recognizedTexts: [RecognizedTextItem]
     private var tableStructures: [TableStructureItem]
-    private let scanIdiom: Bool
     private var wordListRows: [WordListRow] = []
+    private let wordRegex: Regex<Substring>
     
     init(recognizedTexts: [RecognizedTextItem], tableStructures: [TableStructureItem], scanIdiom: Bool){
         self.recognizedTexts = recognizedTexts
         self.tableStructures = tableStructures
-        self.scanIdiom = scanIdiom
+        if scanIdiom {
+            wordRegex = /^[a-zA-Z\s-]+$/
+        }else{
+            wordRegex = /^[a-zA-Z]+$/
+        }
     }
     
     func generateWordList() throws -> ([WordListRow], [TableStructureItem], [TableStructureItem], [TableStructureItem], TableStructureItem){
@@ -40,11 +44,7 @@ class WordListGenerator{
         }[0 ..< (recognizedTexts.count - 1) * 4/5]
         
         //見出し語は英語
-        if self.scanIdiom {
-            wordCandidates = wordCandidates.filter { $0.text.matches( of: /^[a-zA-Z\s-]+$/).count != 0 }
-        }else{
-            wordCandidates = wordCandidates.filter { $0.text.matches( of: /^[a-zA-Z]+$/).count != 0 }
-        }
+        wordCandidates = wordCandidates.filter { $0.text.matches( of: wordRegex).count != 0 }
         
         if wordCandidates.count == 0 {
             throw Img2WordListError.WordListGeneratorError
@@ -55,7 +55,7 @@ class WordListGenerator{
         }
         //x座標の第一四分位数を求める
         let X_1stQuater = wordCandidates[(wordCandidates.count - 1) / 4].box.minX
-            wordCandidates = wordCandidates.filter {
+        wordCandidates = wordCandidates.filter {
                 let this_X = $0.box.minX
                 return (X_1stQuater - 0.05 < this_X) && (this_X < X_1stQuater + 0.05)
             }
@@ -76,6 +76,32 @@ class WordListGenerator{
             }
         }
         tableStructures = tableStructures + column_list_add
+    }
+    
+    private func addWord(column_word: TableStructureItem, row_list: [TableStructureItem], wordListRows: [WordListRow]) -> [WordListRow] {
+        if wordListRows.count > 0{
+            let row_noWordCandidates = row_list.filter{ row in
+                !wordListRows.contains{ wordrow in
+                    wordrow.wordCellRowBoxes.contains(row)
+                }
+            }
+            let font_width_list = wordListRows.map({ $0.word.box.width / CGFloat($0.word.text.count)}).sorted()
+            let font_width_1stQuarter = font_width_list[(font_width_list.count - 1)/4]
+            let word_add = recognizedTexts.filter{ recText in
+                column_word.box.containsPartially(rect: recText.box, rate: 0.80) && row_noWordCandidates.contains{ row in
+                    row.box.containsPartially(rect: recText.box, rate: 0.80)} && (recText.box.width / CGFloat(recText.text.count) > font_width_1stQuarter) && recText.text.matches( of: wordRegex).count != 0
+            }
+            let wordListRows_add = word_add.map{ word in
+                let boxesBelongedTo = self.tableStructures.filter{ table in
+                    let mid_point = midPoint(bounds: word.box)
+                    return table.box.contains(mid_point)
+                }
+                return WordListRow(word: word, wordCellRowBoxes: boxesBelongedTo.filter{$0.isRow()}, wordCellRowBoxes_noConflictToOtherWords: [], wordCellColumnBoxes: boxesBelongedTo.filter{$0.isColumn()}, wordCellRowBox: CGRect.infinite, items: [], items_jp: [], meanings: [])
+            }
+            return wordListRows + wordListRows_add
+        } else {
+            return wordListRows
+        }
     }
     
     private func makeWordListRow(wordCandidates: [RecognizedTextItem]) -> ([TableStructureItem], [TableStructureItem], TableStructureItem) {
@@ -110,6 +136,7 @@ class WordListGenerator{
         }
         
         let row_list = self.tableStructures.filter{$0.isRow()}
+        self.wordListRows = addWord(column_word: column_word, row_list: row_list, wordListRows: wordListRows)
         //各行と出現回数をタプル形式で保存
         let row_count_list = row_list.map{ row in
             let count = self.wordListRows.map{ word in
