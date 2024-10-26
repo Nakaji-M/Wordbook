@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TextTapResultView: View {
-    @Binding var path: [Path]
+    @Binding var path: [AddWordsPath]
     let tapItem: [TapItem]
     @State private var showLoadingAlert = false
     @State var recognitionResult: [WordStoreItem] = []
@@ -22,7 +22,7 @@ struct TextTapResultView: View {
             Section(header:
                     //Tagを設定するためのページ
                     Button(action: {
-                        path.append(.tagSelection($selectedTag))
+                        path.append(.tagSelection(selectedTag: $selectedTag))
                     }) {
                         HStack(spacing: 8) {
                             Label("Tag", systemImage: "tag")

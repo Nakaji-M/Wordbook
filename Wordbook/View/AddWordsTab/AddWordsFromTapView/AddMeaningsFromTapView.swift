@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddMeaningsFromTapView: View {
-    @Binding var path: [Path]
+    @Binding var path: [AddWordsPath]
     @State var tapItem: [TapItem]
     let uiImage: [UIImage]
     
@@ -56,7 +56,7 @@ struct AddMeaningsFromTapView: View {
         }
         .navigationTitle("意味の選択")
         .navigationBarItems(trailing: Button("次へ") {
-            path = [.tapResult(tapItem)]
+            path = [.tapResult(tapItem: tapItem)]
         })
     }
 }

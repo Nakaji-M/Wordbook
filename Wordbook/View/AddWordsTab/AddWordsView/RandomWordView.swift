@@ -10,7 +10,7 @@ import SwiftUI
 struct RandomWordView: View {
     let dictionaryService = DictionaryService()
     @State var dictionaryModel = DictionaryModel(item_id: 0, word: "", mean: "", level: 0)
-    @Binding var path: [Path]
+    @Binding var path: [AddWordsPath]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {

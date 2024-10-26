@@ -9,7 +9,7 @@ import SwiftUI
 
 //UIImageの配列を受け取り、TextRecognitionを行い、認識結果を表示するView
 struct AddWordsFromAutoView : View {
-    @Binding var path: [Path]
+    @Binding var path: [AddWordsPath]
     //UIImageの配列を受け取る変数
     var uiImages: [UIImage]
     @State private var showLoadingAlert = false
@@ -30,7 +30,7 @@ struct AddWordsFromAutoView : View {
                 Section(header:
                         //Tagを設定するためのページ
                         Button(action: {
-                            path.append(.tagSelection($selectedTag))
+                            path.append(.tagSelection(selectedTag: $selectedTag))
                         }) {
                             HStack(spacing: 8) {
                                 Label("Tag", systemImage: "tag")

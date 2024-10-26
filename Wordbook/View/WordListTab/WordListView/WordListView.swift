@@ -12,6 +12,7 @@ import Translation
 struct WordListView: View {
     var isAllWords: Bool
     var tag: Tag?
+    @Binding var path: [WordListPath]
     @State var words: [WordStoreItem] = []
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
@@ -60,7 +61,7 @@ struct WordListView: View {
                 {
                     ForEach($words) { $wordViewModel in
                         if searchText.isEmpty || matchWord(word: wordViewModel, searchText: searchText) {
-                            WordsListRow(viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
+                            WordsListRow(path: $path, viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
                                 .contentShape(Rectangle())
                                 .onChange(of: wordViewModel.isFavorite) {
                                     alertMessage = "更新中..."
@@ -190,13 +191,13 @@ struct WordListView: View {
 
 
 struct WordsListRow: View {
+    @Binding var path: [WordListPath]
     @Binding var viewModel: WordStoreItem
     @Binding var showAllMeaning: Bool
     @Binding var wordsShowOption: WordsShowOption
     @State private var showThisMeaning = false
     @State private var showWebView = false
     @State private var showExampleTranslation = false
-    @State private var isNavigationActive = false
     
     var body: some View {
         if (wordsShowOption == .favorite && !viewModel.isFavorite) || (wordsShowOption == .memorized && viewModel.isMemorized) {
@@ -234,29 +235,24 @@ struct WordsListRow: View {
                                     HStack{
                                         Image(systemName: "link")
                                             .font(.subheadline)
-                                        NavigationLink(isActive: $isNavigationActive) {
-                                            RelatedWordsView(originalWord: viewModel)
-                                        } label: {
-                                            Button(action: {
-                                                // 遷移を発火させたい任意のタイミングでフラグを立てる
-                                                isNavigationActive = true
-                                            })
-                                            {
-                                                VStack(alignment: .leading){
-                                                    ForEach(viewModel.relatedWords) { relatedWord in
-                                                        HStack{
-                                                            Text(relatedWord.word)
-                                                            Spacer()
-                                                                .frame(maxWidth: 8)
-                                                            Text(relatedWord.meaning)
-                                                            Spacer()
-                                                        }
+                                        Button(action: {
+                                            path.append(.relatedWord(originalWord: viewModel))
+                                        })
+                                        {
+                                            VStack(alignment: .leading){
+                                                ForEach(viewModel.relatedWords) { relatedWord in
+                                                    HStack{
+                                                        Text(relatedWord.word)
+                                                        Spacer()
+                                                            .frame(maxWidth: 8)
+                                                        Text(relatedWord.meaning)
+                                                        Spacer()
                                                     }
                                                 }
                                             }
-                                            .contentShape(Rectangle())
-                                            .buttonStyle(.plain)
                                         }
+                                        .contentShape(Rectangle())
+                                        .buttonStyle(.plain)
                                     }
                                 }
                                 

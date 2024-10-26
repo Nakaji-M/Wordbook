@@ -9,7 +9,7 @@ import SwiftUI
 import Vision
 
 struct AddWordsFromTapView: View {
-    @Binding var path: [Path]
+    @Binding var path: [AddWordsPath]
     @State var tapItem: [TapItem] = []
     @State var ZoomableContainerId: Bool = false
     let uiImage: [UIImage]
@@ -71,7 +71,7 @@ struct AddWordsFromTapView: View {
         }
         .navigationTitle("英単語の選択")
         .navigationBarItems(trailing: Button("次へ") {
-            path = [.addFromTapMeanings(tapItem, uiImage)]
+            path = [.addFromTapMeanings(tapItem: tapItem, uiImage: uiImage)]
         })
     }
 }

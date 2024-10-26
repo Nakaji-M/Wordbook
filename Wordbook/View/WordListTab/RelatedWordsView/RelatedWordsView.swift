@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RelatedWordsView: View {
+    @Binding var path: [WordListPath]
     @State var relatedWords: [WordStoreItem] = []
     @State var showAllMeaning: Bool = false
     @State var wordsShowOption: WordsShowOption = .all
@@ -17,7 +18,7 @@ struct RelatedWordsView: View {
         VStack {
             List {
                 ForEach($relatedWords) { $wordViewModel in
-                    WordsListRow(viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
+                    WordsListRow(path: $path, viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
                         .contentShape(Rectangle())
                         .onChange(of: wordViewModel.isFavorite) {
                             //お気に入りの変更があったらJSONに保存

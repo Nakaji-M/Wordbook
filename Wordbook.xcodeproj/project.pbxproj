@@ -16,8 +16,9 @@
 		024CE1692CCB83630064201E /* WordListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1682CCB83630064201E /* WordListGenerator.swift */; };
 		024CE16B2CCB83F30064201E /* MeaningDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE16A2CCB83F30064201E /* MeaningDetector.swift */; };
 		024CE16D2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE16C2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift */; };
+		024CE16F2CCCDAE00064201E /* WordListPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE16E2CCCDAD50064201E /* WordListPath.swift */; };
 		027F28AB2CC56E350048F9A4 /* Img2WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F28AA2CC56E030048F9A4 /* Img2WordList.swift */; };
-		02FF16F92CCB7ECC00C06BA9 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF16F82CCB7EC900C06BA9 /* Path.swift */; };
+		02FF16F92CCB7ECC00C06BA9 /* AddWordsPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF16F82CCB7EC900C06BA9 /* AddWordsPath.swift */; };
 		02FF17012CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF17002CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift */; };
 		8C0E034D2C688C0B004BB413 /* AddWordsFromAutoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034C2C688C0B004BB413 /* AddWordsFromAutoView.swift */; };
 		8C0E034F2C688DB2004BB413 /* WordStoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */; };
@@ -147,8 +148,9 @@
 		024CE1682CCB83630064201E /* WordListGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListGenerator.swift; sourceTree = "<group>"; };
 		024CE16A2CCB83F30064201E /* MeaningDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetector.swift; sourceTree = "<group>"; };
 		024CE16C2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListRow2WordStoreItemConverter.swift; sourceTree = "<group>"; };
+		024CE16E2CCCDAD50064201E /* WordListPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPath.swift; sourceTree = "<group>"; };
 		027F28AA2CC56E030048F9A4 /* Img2WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Img2WordList.swift; sourceTree = "<group>"; };
-		02FF16F82CCB7EC900C06BA9 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		02FF16F82CCB7EC900C06BA9 /* AddWordsPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordsPath.swift; sourceTree = "<group>"; };
 		02FF17002CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebReplaceListSettingsView.swift; sourceTree = "<group>"; };
 		8C0E034C2C688C0B004BB413 /* AddWordsFromAutoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordsFromAutoView.swift; sourceTree = "<group>"; };
 		8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordStoreItem.swift; sourceTree = "<group>"; };
@@ -275,7 +277,7 @@
 		02FF16F12CCB7CAA00C06BA9 /* AddWordsTab */ = {
 			isa = PBXGroup;
 			children = (
-				02FF16F82CCB7EC900C06BA9 /* Path.swift */,
+				02FF16F82CCB7EC900C06BA9 /* AddWordsPath.swift */,
 				8C93DCAF2C63C1FD00B60239 /* AddWordsView */,
 				8CDF96D32C64608A00D691E7 /* AddWordsFromTextView */,
 				8C0E034B2C688BDD004BB413 /* AddWordsFromAutoView */,
@@ -306,6 +308,7 @@
 		02FF16F52CCB7D7B00C06BA9 /* WordListTab */ = {
 			isa = PBXGroup;
 			children = (
+				024CE16E2CCCDAD50064201E /* WordListPath.swift */,
 				02FF16F62CCB7E8400C06BA9 /* WordbookListView */,
 				8C93DCAE2C63C1EB00B60239 /* WordListView */,
 				02FF17022CCB811200C06BA9 /* RelatedWordsView */,
@@ -1013,7 +1016,7 @@
 				8CC086112C76ED8A00AA6CB5 /* WordListView.swift in Sources */,
 				0227BE842CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage in Sources */,
 				8C0E034D2C688C0B004BB413 /* AddWordsFromAutoView.swift in Sources */,
-				02FF16F92CCB7ECC00C06BA9 /* Path.swift in Sources */,
+				02FF16F92CCB7ECC00C06BA9 /* AddWordsPath.swift in Sources */,
 				8C4CB4212C81AC9D00B70244 /* ViewExtension.swift in Sources */,
 				8CDF96DC2C6479A900D691E7 /* OCROptionSheet.swift in Sources */,
 				8C3590F42C68F6C700292565 /* DeviceStat.swift in Sources */,
@@ -1028,6 +1031,7 @@
 				8C93DCB42C63C29200B60239 /* WordbookListView.swift in Sources */,
 				8C93DCB22C63C27300B60239 /* QuizView.swift in Sources */,
 				024CE1692CCB83630064201E /* WordListGenerator.swift in Sources */,
+				024CE16F2CCCDAE00064201E /* WordListPath.swift in Sources */,
 				8CA09C4B2C85E4EB00B244A1 /* ModelFileManagement.swift in Sources */,
 				8CC086132C772EFD00AA6CB5 /* CommonTagSelectionView.swift in Sources */,
 				8CC1394A2C7CA45300700DF9 /* DictionaryService.swift in Sources */,

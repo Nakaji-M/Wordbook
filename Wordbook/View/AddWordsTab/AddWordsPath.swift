@@ -7,25 +7,25 @@
 
 import SwiftUI
 
-enum Path: Hashable, Equatable {
-    case textRecognitionResult([UIImage], OCROption)
-    case tagSelection(Binding<Tag?>)
+enum AddWordsPath: Hashable, Equatable {
+    case addFromAuto(uiImages: [UIImage], ocrOption: OCROption)
+    case tagSelection(selectedTag: Binding<Tag?>)
     case addFromText
-    case addFromTap([UIImage])
-    case addFromTapMeanings([TapItem], [UIImage])
-    case tapResult([TapItem])
+    case addFromTap(uiImage: [UIImage])
+    case addFromTapMeanings(tapItem: [TapItem], uiImage: [UIImage])
+    case tapResult(tapItem: [TapItem])
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.rawValue)
     }
     
-    static func == (lhs: Path, rhs: Path) -> Bool {
+    static func == (lhs: AddWordsPath, rhs: AddWordsPath) -> Bool {
         return lhs.rawValue == rhs.rawValue
     }
     
     private var rawValue: Int {
         switch self {
-            case .textRecognitionResult:
+            case .addFromAuto:
                 return 0
             case .tagSelection:
                 return 1

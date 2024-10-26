@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddWordsFromTextView: View {
-    @Binding var path: [Path]
+    @Binding var path: [AddWordsPath]
     //入力された英単語
     @State var viewModel = WordStoreItem(word: "", meaning: "", example: "", note: "", isMemorized: false, isFavorite: false)
     //選択されたタグ
@@ -21,7 +21,7 @@ struct AddWordsFromTextView: View {
                 VStack (alignment: .leading, spacing: 0){
                     //Tagを設定するためのページ
                     Button(action: {
-                        path.append(.tagSelection($selectedTag))
+                        path.append(.tagSelection(selectedTag: $selectedTag))
                     }) {
                         HStack(spacing: 8) {
                             Label("Tag", systemImage: "tag")

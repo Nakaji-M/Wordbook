@@ -11,7 +11,7 @@ import PhotosUI
 struct AddWordsView: View {
     @State private var uiImages: [UIImage] = []
     @State private var uiImage_camera: UIImage?
-    @State private var path = [Path]()
+    @State private var path = [AddWordsPath]()
     @State var showPicker: Bool = false
     @State var showSinglePicker: Bool = false
     @State private var showCamera: Bool = false
@@ -146,7 +146,7 @@ struct AddWordsView: View {
                     uiImages = await convertToUIImage(selectedItems: selectedItems)
                     selectedItems.removeAll()
                     if uiImages.count > 0 {
-                        path.append(Path.textRecognitionResult(uiImages, ocrOption))
+                        path.append(.addFromAuto(uiImages: uiImages, ocrOption: ocrOption))
                     }
                 }
             }
@@ -158,7 +158,7 @@ struct AddWordsView: View {
                         if let data = try? await selectedSingleItem.loadTransferable(type: Data.self) {
                             self.selectedSingleItem = nil
                             if let uiImage = UIImage(data: data){
-                                path.append(Path.addFromTap([uiImage]))
+                                path.append(.addFromTap(uiImage: [uiImage]))
                             }
                         }
                     }
@@ -172,27 +172,27 @@ struct AddWordsView: View {
                     uiImages.removeAll()
                     if uiImage_camera != nil {
                         uiImages.append(uiImage_camera!)
-                        path.append(Path.textRecognitionResult(uiImages, ocrOption))
+                        path.append(.addFromAuto(uiImages: uiImages, ocrOption: ocrOption))
                     }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(UIColor.listBackground))
             .navigationTitle("単語の追加")
-            .navigationDestination(for: Path.self) {
+            .navigationDestination(for: AddWordsPath.self) {
                 switch $0 {
-                    case .textRecognitionResult(let uiImage_, let ocrSelectionSheetViewModel_):
+                    case .addFromAuto(uiImages: let uiImages_, ocrOption: let ocrOption_):
                         // 遷移先にpath配列の参照や必要な情報を渡す
-                        AddWordsFromAutoView(path: $path, uiImages: uiImage_, ocrOption: ocrSelectionSheetViewModel_)
+                        AddWordsFromAutoView(path: $path, uiImages: uiImages_, ocrOption: ocrOption_)
                     case .addFromText:
                         AddWordsFromTextView(path: $path)
-                    case .tagSelection(let tag_):
+                    case .tagSelection(selectedTag: let tag_):
                         CommonTagSelectionView(selectedTag: tag_)
-                    case .addFromTap(let uiImage_):
+                    case .addFromTap(uiImage: let uiImage_):
                         AddWordsFromTapView(path: $path, uiImage: uiImage_)
-                    case .addFromTapMeanings(let tapItem_, let uiImage_):
+                    case .addFromTapMeanings(tapItem: let tapItem_, uiImage: let uiImage_):
                         AddMeaningsFromTapView(path: $path, tapItem: tapItem_, uiImage: uiImage_)
-                    case .tapResult(let tapItem_):
+                    case .tapResult(tapItem: let tapItem_):
                         TextTapResultView(path: $path, tapItem: tapItem_)
                 }
             }

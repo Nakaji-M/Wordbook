@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct WordbookListView: View {
+    @State private var path = [WordListPath]()
     @Query(sort: \Tag.name) var tags: [Tag] = []
     @State var tag_delete: Tag?
     @State var isAllWords_delete = false
@@ -16,13 +17,15 @@ struct WordbookListView: View {
     @State var alertMessage: String = ""
     @State private var showDeleteAlert = false
     @State private var showAddWordSheet: Bool = false
-    @Environment (\.modelContext) private var context
+    @Environment(\.modelContext) private var context
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ZStack(alignment: .bottomTrailing){
                 List {
-                    NavigationLink(destination: WordListView(isAllWords: true)){
+                    Button(action: {
+                        path.append(.wordList(isAllWords: true, tag: nil))
+                    }){
                         HStack {
                             VStack(alignment: .leading, spacing: 8){
                                 Text("全ての単語")
@@ -30,6 +33,7 @@ struct WordbookListView: View {
                             }
                         }.padding(.all)
                     }
+                    .buttonStyle(.plain)
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button(action: {
                             //確認のダイアログを表示
@@ -41,7 +45,9 @@ struct WordbookListView: View {
                         }
                         .tint(.red)
                     }
-                    NavigationLink(destination: WordListView(isAllWords: false, tag: nil)){
+                    Button(action: {
+                        path.append(.wordList(isAllWords: false, tag: nil))
+                    }){
                         HStack {
                             VStack(alignment: .leading, spacing: 8){
                                 Text("タグ未設定")
@@ -49,6 +55,7 @@ struct WordbookListView: View {
                             }
                         }.padding(.all)
                     }
+                    .buttonStyle(.plain)
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button(action: {
                             //確認のダイアログを表示
@@ -62,7 +69,9 @@ struct WordbookListView: View {
                     }
                     
                     ForEach(tags) { tag in
-                        NavigationLink(destination: WordListView(isAllWords: false, tag: tag)){
+                        Button(action: {
+                            path.append(.wordList(isAllWords: false, tag: tag))
+                        }){
                             HStack {
                                 VStack(alignment: .leading, spacing: 8){
                                     Text(tag.name)
@@ -70,6 +79,7 @@ struct WordbookListView: View {
                                 }
                             }.padding(.all)
                         }
+                        .buttonStyle(.plain)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(action: {
                                 //確認のダイアログを表示
@@ -126,6 +136,15 @@ struct WordbookListView: View {
                 AddWordFromListView(onAdd: {_ in}, selectedTag: nil)
             }
             .navigationBarTitle("単語リスト")
+            .navigationDestination(for: WordListPath.self) {
+                switch $0 {
+                case .wordList(isAllWords: let isAllWords_, tag: let tag_):
+                    // 遷移先にpath配列の参照や必要な情報を渡す
+                    WordListView(isAllWords: isAllWords_, tag: tag_, path: $path)
+                case .relatedWord(originalWord: let originalWord_):
+                    RelatedWordsView(path: $path, originalWord: originalWord_)
+                }
+            }
         }
     }
 }
