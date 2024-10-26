@@ -18,7 +18,7 @@ struct RelatedWordsView: View {
         VStack {
             List {
                 ForEach($relatedWords) { $wordViewModel in
-                    WordsListRow(path: $path, viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
+                    WordListRowView(path: $path, viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
                         .contentShape(Rectangle())
                         .onChange(of: wordViewModel.isFavorite) {
                             //お気に入りの変更があったらJSONに保存

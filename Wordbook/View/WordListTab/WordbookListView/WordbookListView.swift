@@ -33,7 +33,7 @@ struct WordbookListView: View {
                             }
                         }.padding(.all)
                     }
-                    .buttonStyle(.plain)
+                    .foregroundStyle(.primary)
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button(action: {
                             //確認のダイアログを表示
@@ -55,7 +55,7 @@ struct WordbookListView: View {
                             }
                         }.padding(.all)
                     }
-                    .buttonStyle(.plain)
+                    .foregroundStyle(.primary)
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button(action: {
                             //確認のダイアログを表示
@@ -79,7 +79,7 @@ struct WordbookListView: View {
                                 }
                             }.padding(.all)
                         }
-                        .buttonStyle(.plain)
+                        .foregroundStyle(.primary)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(action: {
                                 //確認のダイアログを表示

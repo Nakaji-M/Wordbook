@@ -17,6 +17,9 @@
 		024CE16B2CCB83F30064201E /* MeaningDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE16A2CCB83F30064201E /* MeaningDetector.swift */; };
 		024CE16D2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE16C2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift */; };
 		024CE16F2CCCDAE00064201E /* WordListPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE16E2CCCDAD50064201E /* WordListPath.swift */; };
+		024CE1712CCCEC040064201E /* WordListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1702CCCEC040064201E /* WordListRow.swift */; };
+		024CE1732CCCECED0064201E /* WordEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1722CCCECED0064201E /* WordEditSheet.swift */; };
+		024CE1752CCCED270064201E /* AddWordFromListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1742CCCED270064201E /* AddWordFromListView.swift */; };
 		027F28AB2CC56E350048F9A4 /* Img2WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F28AA2CC56E030048F9A4 /* Img2WordList.swift */; };
 		02FF16F92CCB7ECC00C06BA9 /* AddWordsPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF16F82CCB7EC900C06BA9 /* AddWordsPath.swift */; };
 		02FF17012CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF17002CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift */; };
@@ -149,6 +152,9 @@
 		024CE16A2CCB83F30064201E /* MeaningDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningDetector.swift; sourceTree = "<group>"; };
 		024CE16C2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListRow2WordStoreItemConverter.swift; sourceTree = "<group>"; };
 		024CE16E2CCCDAD50064201E /* WordListPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPath.swift; sourceTree = "<group>"; };
+		024CE1702CCCEC040064201E /* WordListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListRow.swift; sourceTree = "<group>"; };
+		024CE1722CCCECED0064201E /* WordEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordEditSheet.swift; sourceTree = "<group>"; };
+		024CE1742CCCED270064201E /* AddWordFromListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordFromListView.swift; sourceTree = "<group>"; };
 		027F28AA2CC56E030048F9A4 /* Img2WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Img2WordList.swift; sourceTree = "<group>"; };
 		02FF16F82CCB7EC900C06BA9 /* AddWordsPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordsPath.swift; sourceTree = "<group>"; };
 		02FF17002CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebReplaceListSettingsView.swift; sourceTree = "<group>"; };
@@ -524,6 +530,9 @@
 			isa = PBXGroup;
 			children = (
 				8CC086102C76ED8A00AA6CB5 /* WordListView.swift */,
+				024CE1742CCCED270064201E /* AddWordFromListView.swift */,
+				024CE1722CCCECED0064201E /* WordEditSheet.swift */,
+				024CE1702CCCEC040064201E /* WordListRow.swift */,
 			);
 			path = WordListView;
 			sourceTree = "<group>";
@@ -996,6 +1005,7 @@
 				8C93DCB62C63C2AF00B60239 /* AddWordsView.swift in Sources */,
 				024CE16D2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift in Sources */,
 				8C967DF92C8053E600DDDF05 /* StackSwipableCardView.swift in Sources */,
+				024CE1732CCCECED0064201E /* WordEditSheet.swift in Sources */,
 				8CA59EBC2C918F2100822895 /* RelatedWordsView.swift in Sources */,
 				8C8B49A22C92FAED0058B08F /* TextTapResultView.swift in Sources */,
 				8C93DCAA2C63BB0D00B60239 /* MainTab.swift in Sources */,
@@ -1024,6 +1034,7 @@
 				8CDF96D92C6460F800D691E7 /* AddWordsFromTextView.swift in Sources */,
 				8CDF96DE2C648D8400D691E7 /* OCROption.swift in Sources */,
 				8C93DCAC2C63BDDE00B60239 /* MainTabType.swift in Sources */,
+				024CE1752CCCED270064201E /* AddWordFromListView.swift in Sources */,
 				8C9F6FBC2C8820F9004C7315 /* UIColorExtension.swift in Sources */,
 				8C93DC762C63B84D00B60239 /* WordbookApp.swift in Sources */,
 				8C967E032C80614A00DDDF05 /* FlipView.swift in Sources */,
@@ -1035,6 +1046,7 @@
 				8CA09C4B2C85E4EB00B244A1 /* ModelFileManagement.swift in Sources */,
 				8CC086132C772EFD00AA6CB5 /* CommonTagSelectionView.swift in Sources */,
 				8CC1394A2C7CA45300700DF9 /* DictionaryService.swift in Sources */,
+				024CE1712CCCEC040064201E /* WordListRow.swift in Sources */,
 				8C3590EA2C68F2F000292565 /* ExampleSentenceGeneration.swift in Sources */,
 				8C8B49A02C92F51D0058B08F /* AddMeaningsFromTapView.swift in Sources */,
 				8C5830312C797617003A52A6 /* FavoriteToggleStyle.swift in Sources */,
