@@ -122,7 +122,7 @@ class WordListGenerator{
         
         //単語の列を特定し、その列に含まれない単語を除外する
         let column_list = self.tableStructures.filter{$0.isColumn()}
-        let column_word = column_list.max{ (col1, col2) in
+        var column_word = column_list.max{ (col1, col2) in
             let count1 = self.wordListRows.map{ word in
                 word.wordCellColumnBoxes.contains(col1) ? 1 : 0
             }.reduce(0, +)
@@ -131,8 +131,19 @@ class WordListGenerator{
             }.reduce(0, +)
             return count1 < count2
         } ?? TableStructureItem(box: .infinite, confidence: 0, label: nil)
+        
+        var column_similarY = column_list.filter{
+            min($0.box.maxY, column_word.box.maxY) - max($0.box.minY, column_word.box.minY) > column_word.box.height * 0.5
+        }
+        column_similarY.append(column_word) //column_word自身も含まれるように
+        let column_maxY = column_similarY.max{ $0.box.maxY < $1.box.maxY }!
+        let column_minY = column_similarY.min{ $0.box.minY < $1.box.minY }!
+        
+        column_word = TableStructureItem(box: CGRect(x: column_word.box.minX, y: column_minY.box.minY, width: column_word.box.maxX - column_word.box.minX, height: column_maxY.box.maxY - column_minY.box.minY), confidence: column_word.confidence, label: column_word.label)
+        //column_wordの設定が完了
+
         self.wordListRows = self.wordListRows.filter{ word in
-            word.wordCellColumnBoxes.contains(column_word)
+            column_word.box.contains(midPoint(bounds: word.word.box))
         }
         
         let row_list = self.tableStructures.filter{$0.isRow()}
