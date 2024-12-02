@@ -67,11 +67,13 @@ class WordListGenerator{
         //column同士に囲まれた領域もcolumnの可能性がある
         column_list.sort{ $0.box.minX < $1.box.minX }
         var column_list_add: [TableStructureItem] = []
-        for i in 0..<column_list.count - 1 {
-            if column_list[i+1].box.minX - column_list[i].box.maxX > 0 {
-                let cgRect = CGRect(x: column_list[i].box.maxX, y: column_list[i].box.minY, width: column_list[i+1].box.minX - column_list[i].box.maxX, height: column_list[i].box.maxY - column_list[i].box.minY)
-                if recognizedTexts.filter({cgRect.contains(midPoint(bounds: $0.box))}).count > (wordCandidates.count * 2/3) {
-                    column_list_add.append(TableStructureItem(box: cgRect, confidence: 0, label: "table column"))
+        if column_list.count > 0 {
+            for i in 0..<column_list.count - 1 {
+                if column_list[i+1].box.minX - column_list[i].box.maxX > 0 {
+                    let cgRect = CGRect(x: column_list[i].box.maxX, y: column_list[i].box.minY, width: column_list[i+1].box.minX - column_list[i].box.maxX, height: column_list[i].box.maxY - column_list[i].box.minY)
+                    if recognizedTexts.filter({cgRect.contains(midPoint(bounds: $0.box))}).count > (wordCandidates.count * 2/3) {
+                        column_list_add.append(TableStructureItem(box: cgRect, confidence: 0, label: "table column"))
+                    }
                 }
             }
         }
