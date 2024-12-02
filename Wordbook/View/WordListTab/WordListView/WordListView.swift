@@ -126,7 +126,7 @@ struct WordListView: View {
                         if sortOption == .custom {
                             //順番を入れ替える
                             for index in indices {
-                                words[index].order = newOffset
+                                filteredWords[index].order = index
                             }
                             try! context.save()
                         }
