@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0210B0DD2CFDAF1A00CCE8AD /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210B0DC2CFDAF1800CCE8AD /* Word.swift */; };
+		0210B0DE2CFDAF1A00CCE8AD /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210B0DC2CFDAF1800CCE8AD /* Word.swift */; };
 		0227BE842CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 0227BE832CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage */; };
 		0228E67A2CC89A4C00359D2A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0228E6792CC89A4C00359D2A /* Settings.bundle */; };
 		0228E67E2CC8A1AF00359D2A /* license_plist.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0228E67D2CC8A1AD00359D2A /* license_plist.yml */; };
@@ -142,6 +144,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0210B0DC2CFDAF1800CCE8AD /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		0227BE832CC5EC7100641642 /* yolov8s_custom_structure_all_best.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = yolov8s_custom_structure_all_best.mlpackage; sourceTree = "<group>"; };
 		0228E6792CC89A4C00359D2A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0228E67D2CC8A1AD00359D2A /* license_plist.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = license_plist.yml; sourceTree = "<group>"; };
@@ -632,6 +635,7 @@
 		8CC086162C77761200AA6CB5 /* WordStoreService */ = {
 			isa = PBXGroup;
 			children = (
+				0210B0DC2CFDAF1800CCE8AD /* Word.swift */,
 				8C0E034E2C688DB2004BB413 /* WordStoreItem.swift */,
 				8CC0860E2C76DCAC00AA6CB5 /* WordStoreService.swift */,
 			);
@@ -983,6 +987,7 @@
 				8C4CB4372C81B51E00B70244 /* ShareExtensionView.swift in Sources */,
 				8C8945A52C8723CD0008A79D /* SettingsStoreService.swift in Sources */,
 				8C91A2892C8768D100EFD5B2 /* DictionaryModel.swift in Sources */,
+				0210B0DE2CFDAF1A00CCE8AD /* Word.swift in Sources */,
 				8CE052932C846896009A1251 /* SharedModelContainer.swift in Sources */,
 				8C973DC02C841DE1001198F9 /* ExtractWord.swift in Sources */,
 				8CE052952C8469DB009A1251 /* TagSelectionView.swift in Sources */,
@@ -1015,6 +1020,7 @@
 				8CC0860F2C76DCAC00AA6CB5 /* WordStoreService.swift in Sources */,
 				8CE0529D2C848FF6009A1251 /* WebView.swift in Sources */,
 				8CED1F2B2C6FAA7300327F0E /* CameraView.swift in Sources */,
+				0210B0DD2CFDAF1A00CCE8AD /* Word.swift in Sources */,
 				024CE16B2CCB83F30064201E /* MeaningDetector.swift in Sources */,
 				8CB215D42C93091D00D20775 /* ZoomableContainer.swift in Sources */,
 				024CE1632CCB82680064201E /* CommonLoadingAlertView.swift in Sources */,

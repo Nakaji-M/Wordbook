@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddWordsFromTextView: View {
     @Binding var path: [AddWordsPath]
     //入力された英単語
-    @State var viewModel = WordStoreItem(word: "", meaning: "", example: "", note: "", isMemorized: false, isFavorite: false)
+    @State var word = Word(word: "", meaning: "", example: "", note: "", isMemorized: false, isFavorite: false)
     //選択されたタグ
     @State private var selectedTag: Tag?
+    @Environment(\.modelContext) private var context
 
     var body: some View {
         ScrollView{
@@ -34,7 +36,7 @@ struct AddWordsFromTextView: View {
                         .padding()
                         .padding(.vertical)
                     }
-                    CommonWordEditView(viewModel: $viewModel)
+                    CommonWordEditView(word: $word)
                 }
             }
             .padding()
@@ -42,8 +44,8 @@ struct AddWordsFromTextView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    viewModel.tag = selectedTag?.id
-                    MainTab.JSON?.inserrtWords(words_add: [viewModel])
+                    word.tag = selectedTag?.id                    
+                    context.insert(word)
                     path = []
                 }) {
                     Label("保存", systemImage: "square.and.arrow.down")

@@ -15,11 +15,12 @@ struct AddWordsFromAutoView : View {
     @State private var showLoadingAlert = false
     @ObservedObject var ocrOption: OCROption
     //認識結果の文字列を格納する変数
-    @State var recognitionResult: [WordStoreItem] = []
+    @State var recognitionResult: [Word] = []
     @State var rowID: UUID?
     @State var alertMessage: String = ""
     @State private var selectedTag: Tag?
     @State var isFirstAppear: Bool = true
+    @Environment(\.modelContext) private var context
 #if DEBUG
     @State var detectedImg: UIImage?
 #endif
@@ -52,7 +53,7 @@ struct AddWordsFromAutoView : View {
                     }
 #endif
                     ForEach($recognitionResult) { $rowViewModel in
-                        ResultsRow(viewModel: $rowViewModel)
+                        ResultsRow(word: $rowViewModel)
                             .contentShape(Rectangle())
                         // セルにスワイプすると編集ボタンが表示されます
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -77,7 +78,7 @@ struct AddWordsFromAutoView : View {
                                     rowID = nil
                                 })
                             ) {
-                                EditSheet(viewModel: $rowViewModel)
+                                EditSheet(word: $rowViewModel)
                                     .presentationDetents([.large])
                             }
                     }.onMove(perform: { indices, newOffset in
@@ -94,19 +95,17 @@ struct AddWordsFromAutoView : View {
                         CommonLoadingAlertView(alertMessage: $alertMessage)
                     }
                 }
-            )            
+            )
             .navigationTitle("認識結果")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         alertMessage = "保存中..."
                         showLoadingAlert = true
-                        MainTab.JSON?.inserrtWords(words_add: recognitionResult.map({
-                            let item = $0
-                            item.tag = selectedTag?.id
-                            return item
-                        })
-                        )
+                        for word in recognitionResult{
+                            word.tag = selectedTag?.id
+                            context.insert(word)
+                        }
                         showLoadingAlert = false
                         path = []
                     }) {
@@ -164,15 +163,15 @@ struct AddWordsFromAutoView : View {
 }
 
 struct ResultsRow: View {
-    @Binding var viewModel: WordStoreItem
+    @Binding var word: Word
     
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8){
-                Text(viewModel.word)
+                Text(word.word)
                     .font(.headline)
-                Label(viewModel.meaning, systemImage: "pencil")
-                Label(viewModel.example, systemImage: "text.bubble")
+                Label(word.meaning, systemImage: "pencil")
+                Label(word.example, systemImage: "text.bubble")
             }
             Spacer()
         }
@@ -183,7 +182,7 @@ struct ResultsRow: View {
 
 // 編集画面
 struct EditSheet: View {
-    @Binding var viewModel: WordStoreItem
+    @Binding var word: Word
     @State var showLoadingAlert: Bool = false //実質使用していない
     @State var alertMessage: String = "" //実質使用していない
     @Environment(\.dismiss) var dismiss
@@ -192,7 +191,7 @@ struct EditSheet: View {
         NavigationStack{
             ScrollView{
                 VStack(alignment: .leading, spacing: 8){
-                    CommonWordEditView(viewModel: $viewModel)
+                    CommonWordEditView(word: $word)
                 }
                 .padding(.all)
             }

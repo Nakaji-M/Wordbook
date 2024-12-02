@@ -11,7 +11,7 @@ import SwiftData
 // 編集画面
 struct WordEditSheet: View {
     @Query var tags: [Tag] = []
-    @Binding var viewModel: WordStoreItem
+    @Binding var word: Word
     @State var selectedTag: Tag?
     @State var showLoadingAlert: Bool = false //実質使用していない
     @State var alertMessage: String = "" //実質使用していない
@@ -43,7 +43,7 @@ struct WordEditSheet: View {
                         .padding(.vertical)
                     }
 
-                    CommonWordEditView(viewModel: $viewModel)
+                    CommonWordEditView(word: $word)
                 }
                 .padding(.all)
             }
@@ -57,10 +57,10 @@ struct WordEditSheet: View {
             .navigationBarTitle("単語の編集")
         }
         .onChange(of: selectedTag) {
-            viewModel.tag = selectedTag?.id
+            word.tag = selectedTag?.id
         }
         .onAppear {
-            if let id = viewModel.tag {
+            if let id = word.tag {
                 selectedTag = getTagfromId(id: id)
             }
             else {

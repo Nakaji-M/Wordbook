@@ -11,11 +11,12 @@ struct TextTapResultView: View {
     @Binding var path: [AddWordsPath]
     let tapItem: [TapItem]
     @State private var showLoadingAlert = false
-    @State var recognitionResult: [WordStoreItem] = []
+    @State var recognitionResult: [Word] = []
     @State var rowID: UUID?
     @State var alertMessage: String = ""
     @State private var selectedTag: Tag?
     @State var isFirstAppear: Bool = true
+    @Environment(\.modelContext) private var context
 
     var body: some View {
         List {
@@ -37,7 +38,7 @@ struct TextTapResultView: View {
             )
             {
                 ForEach($recognitionResult) { $rowViewModel in
-                    ResultsRow(viewModel: $rowViewModel)
+                    ResultsRow(word: $rowViewModel)
                         .contentShape(Rectangle())
                     // セルにスワイプすると編集ボタンが表示されます
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -62,7 +63,7 @@ struct TextTapResultView: View {
                                 rowID = nil
                             })
                         ) {
-                            EditSheet(viewModel: $rowViewModel)
+                            EditSheet(word: $rowViewModel)
                                 .presentationDetents([.large])
                         }
                 }.onMove(perform: { indices, newOffset in
@@ -86,12 +87,10 @@ struct TextTapResultView: View {
                 Button(action: {
                     alertMessage = "保存中..."
                     showLoadingAlert = true
-                    MainTab.JSON?.inserrtWords(words_add: recognitionResult.map({
-                        let item = $0
-                        item.tag = selectedTag?.id
-                        return item
-                    })
-                    )
+                    for word in recognitionResult{
+                        word.tag = selectedTag?.id
+                        context.insert(word)
+                    }
                     showLoadingAlert = false
                     path = []
                 }) {
@@ -129,7 +128,7 @@ struct TextTapResultView: View {
                             }
                         }
                     }
-                    recognitionResult.append(WordStoreItem(word: word.word, meaning: wordMeanings.map({ $0.word }).joined(separator: "\n")))
+                    recognitionResult.append(Word(word: word.word, meaning: wordMeanings.map({ $0.word }).joined(separator: "\n")))
                 }
                 isFirstAppear = false
                 showLoadingAlert = false

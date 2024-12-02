@@ -6,29 +6,38 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct RelatedWordsView: View {
     @Binding var path: [WordListPath]
-    @State var relatedWords: [WordStoreItem] = []
+    @Environment(\.modelContext) private var context
+    @Query var words: [Word]
     @State var showAllMeaning: Bool = false
     @State var wordsShowOption: WordsShowOption = .all
-    let originalWord: WordStoreItem
+    let originalWord: Word
+    
+    var relatedWords: [Word] {
+        let filteredItems = words.compactMap { item in
+            let wordContainsQuery = originalWord.relatedWords.contains{
+                $0.word.lowercased() == item.word.lowercased()
+            }
+            return wordContainsQuery ? item : nil
+        }
+        return filteredItems
+    }
     
     var body: some View {
         VStack {
             List {
-                ForEach($relatedWords) { $wordViewModel in
-                    WordListRowView(path: $path, viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
+                ForEach(relatedWords) { wordViewModel in
+                    WordListRowView(path: $path, word: Binding(get: { wordViewModel }, set: { _ in }), showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
                         .contentShape(Rectangle())
                         .onChange(of: wordViewModel.isFavorite) {
                             //お気に入りの変更があったらJSONに保存
-                            MainTab.JSON?.updateWord(word_update: wordViewModel)
+                            try! context.save()
                         }
                 }
             }
-        }
-        .onAppear {
-            relatedWords = MainTab.JSON!.searchWords(words: originalWord.relatedWords.map { $0.word })
         }
         .navigationTitle("\(originalWord.word)の関連語")
     }

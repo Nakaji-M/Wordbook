@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WordListRowView: View {
     @Binding var path: [WordListPath]
-    @Binding var viewModel: WordStoreItem
+    @Binding var word: Word
     @Binding var showAllMeaning: Bool
     @Binding var wordsShowOption: WordsShowOption
     @State private var showThisMeaning = false
@@ -17,22 +17,22 @@ struct WordListRowView: View {
     @State private var showExampleTranslation = false
     
     var body: some View {
-        if (wordsShowOption == .favorite && !viewModel.isFavorite) || (wordsShowOption == .memorized && viewModel.isMemorized) {
+        if (wordsShowOption == .favorite && !word.isFavorite) || (wordsShowOption == .memorized && word.isMemorized) {
             return AnyView(EmptyView())
         }
         else{
             return AnyView(
                 VStack(alignment: .leading, spacing: 8){
                     HStack{
-                        Toggle(isOn: $viewModel.isFavorite){
+                        Toggle(isOn: $word.isFavorite){
                         }
                         .toggleStyle(FavoriteToggleStyle())
-                        Text(viewModel.word)
+                        Text(word.word)
                             .font(.headline)
                         Spacer()
-                        SpeechUtteranceButton(text: $viewModel.word, rate: 0.5)
+                        SpeechUtteranceButton(text: $word.word, rate: 0.5)
                     }
-                    if !viewModel.url.isEmpty, let url = URL(string: viewModel.url) {
+                    if !word.url.isEmpty, let url = URL(string: word.url) {
                         Button(action: {
                             showWebView.toggle()
                         }) {
@@ -48,16 +48,16 @@ struct WordListRowView: View {
                             showThisMeaning.toggle()
                         }){
                             VStack(alignment: .leading, spacing: 8){
-                                if viewModel.relatedWords.count > 0 {
+                                if word.relatedWords.count > 0 {
                                     HStack{
                                         Image(systemName: "link")
                                             .font(.subheadline)
                                         Button(action: {
-                                            path.append(.relatedWord(originalWord: viewModel))
+                                            path.append(.relatedWord(originalWord: word))
                                         })
                                         {
                                             VStack(alignment: .leading){
-                                                ForEach(viewModel.relatedWords) { relatedWord in
+                                                ForEach(word.relatedWords) { relatedWord in
                                                     HStack{
                                                         Text(relatedWord.word)
                                                         Spacer()
@@ -74,14 +74,14 @@ struct WordListRowView: View {
                                 }
                                 
                                 HStack{
-                                    Label(viewModel.meaning, systemImage: "pencil")
+                                    Label(word.meaning, systemImage: "pencil")
                                         .frame(alignment: .leading)
                                     Spacer()
                                 }
-                                if viewModel.example != "" {
+                                if word.example != "" {
                                     HStack{
-                                        Label(viewModel.example, systemImage: "text.bubble")
-                                            .translationPresentation(isPresented: $showExampleTranslation, text: viewModel.example)
+                                        Label(word.example, systemImage: "text.bubble")
+                                            .translationPresentation(isPresented: $showExampleTranslation, text: word.example)
                                             .frame(alignment: .leading)
                                         Spacer()
                                         Button(action: {
@@ -92,9 +92,9 @@ struct WordListRowView: View {
                                         }
                                     }
                                 }
-                                if viewModel.note != "" {
+                                if word.note != "" {
                                     HStack{
-                                        Label(viewModel.note, systemImage: "note.text")
+                                        Label(word.note, systemImage: "note.text")
                                             .frame(alignment: .leading)
                                         Spacer()
                                     }
@@ -119,7 +119,7 @@ struct WordListRowView: View {
                 }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.vertical)
-                    .sensoryFeedback(.selection, trigger: viewModel.isFavorite)
+                    .sensoryFeedback(.selection, trigger: word.isFavorite)
             )
         }
     }

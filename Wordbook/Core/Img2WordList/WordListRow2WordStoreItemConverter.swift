@@ -7,21 +7,21 @@
 
 import Foundation
 
-class WordListRow2WordStoreItemConverter{
+class WordListRow2WordConverter{
     let wordListRows: [WordListRow]
     
     init(wordListRows: [WordListRow]) {
         self.wordListRows = wordListRows
     }
     
-    func GenerateWordStoreItem() -> [WordStoreItem] {
+    func GenerateWord() -> [Word] {
         func intersectY(rect1: CGRect, rect2: CGRect) -> Bool {
             let bool1 = rect1.minY < midPoint(bounds: rect2).y && midPoint(bounds: rect2).y < rect1.maxY
             let bool2 = rect2.minY < midPoint(bounds: rect1).y && midPoint(bounds: rect1).y < rect2.maxY
             return bool1 && bool2
         }
         
-        var wordStoreItems: [WordStoreItem] = []
+        var words: [Word] = []
         for word in wordListRows {
             var word = word
             var meaningString = ""
@@ -33,10 +33,10 @@ class WordListRow2WordStoreItemConverter{
                 }
                 meaningString = meaningString + "\n" + word.meanings[i].text
             }
-            let wordStoreItem = WordStoreItem(word: word.word.text, meaning: meaningString, example: "", note: "", isMemorized: false, isFavorite: false)
-            wordStoreItems.append(wordStoreItem)
+            let word_append = Word(word: word.word.text, meaning: meaningString, example: "", note: "", isMemorized: false, isFavorite: false)
+            words.append(word_append)
         }
-        return wordStoreItems
+        return words
     }
 }
 

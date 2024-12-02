@@ -7,28 +7,63 @@
 
 import SwiftUI
 import Translation
+import SwiftData
 
 struct WordListView: View {
     var isAllWords: Bool
     var tag: Tag?
     @Binding var path: [WordListPath]
-    @State var words: [WordStoreItem] = []
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
     @State private var showDeleteAlert = false
-    @State var wordViewModel_delete: WordStoreItem?
+    @State var wordViewModel_delete: Word?
     @State private var showTagSheet = false
-    @State var wordViewModel_edit: WordStoreItem = WordStoreItem()
+    @State var wordViewModel_edit: Word = Word()
     @State var showAllMeaning: Bool = false
     @State var wordsShowOption: WordsShowOption = .all
     @State private var searchText: String = ""
     @State private var sortOption: SortOption = .latest
     @State private var showAddWordSheet: Bool = false
+    @Query var words: [Word]
+    @Environment(\.modelContext) private var context
     
-    func matchWord(word: WordStoreItem, searchText: String) -> Bool {
-        return word.word.lowercased().contains(searchText.lowercased()) || word.meaning.lowercased().contains(searchText.lowercased())
+    var filteredWords: [Word] {
+        let filteredItems = words.compactMap { item in
+            let wordContainsQuery = item.word.range(of: searchText,
+                                                       options: .caseInsensitive) != nil
+            let meaningContainsQuery = item.meaning.range(of: searchText,
+                                                                        options: .caseInsensitive) != nil
+            return (searchText.isEmpty || (wordContainsQuery || meaningContainsQuery)) && (wordsShowOption == .all || (wordsShowOption == .favorite && item.isFavorite) || (wordsShowOption == .memorized && !item.isMemorized)) ? item : nil
+        }.sorted(by: { word1, word2 in
+            switch sortOption {
+            case .latest:
+                return word1.added > word2.added
+            case .oldest:
+                return word1.added < word2.added
+            case .alphabet:
+                return word1.word < word2.word
+            case .custom:
+                return word1.order < word2.order
+            }
+        })
+        return filteredItems
     }
+
     
+    init(isAllWords: Bool, tag: Tag?, path: Binding<[WordListPath]>) {
+        self.isAllWords = isAllWords
+        self.tag = tag
+        self._path = path
+        let tagId = self.tag?.id
+        var predicate = #Predicate<Word> { _ in true }
+        if !isAllWords {
+          predicate = #Predicate<Word> { word in
+              word.tag == tagId
+          }
+        }
+        _words = Query<Word, [Word]>(filter: predicate, sort: \.word, order: .forward)
+    }
+
     var body: some View {
         ZStack(alignment: .bottomTrailing){
             List {
@@ -58,15 +93,14 @@ struct WordListView: View {
                     }
                 })
                 {
-                    ForEach($words) { $wordViewModel in
-                        if searchText.isEmpty || matchWord(word: wordViewModel, searchText: searchText) {
-                            WordListRowView(path: $path, viewModel: $wordViewModel, showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
+                    ForEach(filteredWords) { wordViewModel in
+                            WordListRowView(path: $path, word: Binding(get: { wordViewModel }, set: { _ in }), showAllMeaning: $showAllMeaning, wordsShowOption: $wordsShowOption)
                                 .contentShape(Rectangle())
                                 .onChange(of: wordViewModel.isFavorite) {
                                     alertMessage = "更新中..."
                                     showLoadingAlert = true
-                                    //お気に入りの変更があったらJSONに保存
-                                    MainTab.JSON?.updateWord(word_update: wordViewModel)
+                                    //お気に入りの変更があったら保存
+                                    try! context.save()
                                     showLoadingAlert = false
                                 }
                             // セルにスワイプすると編集ボタンが表示されます
@@ -86,7 +120,6 @@ struct WordListView: View {
                                         Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
                                     }
                                 }
-                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -113,78 +146,39 @@ struct WordListView: View {
                onDismiss: {
             alertMessage = "更新中..."
             showLoadingAlert = true
-            //編集が終わったらJSONに保存
-            MainTab.JSON?.updateWord(word_update: wordViewModel_edit)
-            if !isAllWords {
-                words = words.filter { $0.tag == tag?.id }
-            }
+            //編集が終わったら保存
+            try! context.save()
             showLoadingAlert = false
             
         }
         ) {
-            WordEditSheet(viewModel: $wordViewModel_edit)
+            WordEditSheet(word: $wordViewModel_edit)
                 .presentationDetents([.large])
         }
         .sheet(isPresented: $showAddWordSheet)
         {
-            AddWordFromListView(onAdd: {word in
-                addWord_sortOption(word: word)
-                
-            }, selectedTag: tag)
+            AddWordFromListView(selectedTag: tag)
         }
         .alert(isPresented: $showDeleteAlert) {
             Alert( title: Text("削除"), message: Text("本当に削除しますか？"), primaryButton: .destructive(Text("削除")) {
                 alertMessage = "削除中..."
                 showLoadingAlert = true
+                let delete_order = wordViewModel_delete?.order
                 //削除処理
-                words.removeAll { $0.id == wordViewModel_delete!.id }
-                //JSONからも削除
-                MainTab.JSON?.deleteWord(word_delete: wordViewModel_delete!)
+                context.delete(wordViewModel_delete!)
+                //削除後のorderを更新
+                for word in words{
+                    if word.order > delete_order!{
+                        word.order -= 1
+                    }
+                }
+                try! context.save()
                 showLoadingAlert = false
             }, secondaryButton: .cancel()
             )
         }
         .navigationBarTitle(isAllWords ? "全ての単語": (tag?.name ?? "タグ未設定"))
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "検索")
-        .task{
-            alertMessage = "読み込み中..."
-            showLoadingAlert = true
-            words = getWord_sortOption(sortOption: sortOption)
-            showLoadingAlert = false
-        }
-        .onChange(of: sortOption){
-            words = getWord_sortOption(sortOption: sortOption)
-        }
-    }
-    
-    func addWord_sortOption(word: WordStoreItem) {
-        switch sortOption {
-        case .latest:
-            words.insert(word, at: 0)
-        case .oldest:
-            words.append(word)
-        case .alphabet:
-            let index = words.firstIndex(where: { $0.word.lowercased() > word.word.lowercased() }) ?? words.endIndex
-            words.insert(word, at: index)
-        }
-    }
-    
-    func getWord_sortOption(sortOption: SortOption) -> [WordStoreItem] {
-        var words: [WordStoreItem] = []
-        if isAllWords {
-            words = MainTab.JSON?.getAllWords() ?? []
-        }
-        else{
-            words = MainTab.JSON?.getWordsFromTag(tag: tag) ?? []
-        }
-        switch sortOption {
-        case .latest:
-            return words.reversed()
-        case .oldest:
-            return words
-        case .alphabet:
-            return words.sorted(by: { $0.word.lowercased() < $1.word.lowercased() })
-        }
     }
 }
 
@@ -198,4 +192,5 @@ enum SortOption {
     case latest
     case oldest
     case alphabet
+    case custom
 }

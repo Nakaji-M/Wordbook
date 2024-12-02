@@ -20,10 +20,10 @@ class Img2WordList{
         self.uiImage = uiImage
         self.scanIdiom = scanIdiom
     }
-    func recognizeDebug() async throws -> ([WordStoreItem], UIImage) {
+    func recognizeDebug() async throws -> ([Word], UIImage) {
         return (try await recognize(), drawDetected(recognizedTexts: recognizedTexts, tableStructures: tableStructures))
     }
-    func recognize() async throws -> [WordStoreItem] {
+    func recognize() async throws -> [Word] {
         do{
             let ocr = OCR(uiImage: uiImage)
             recognizedTexts = try await ocr.recognize()
@@ -35,9 +35,9 @@ class Img2WordList{
             (wordListRows, self.tableStructures, row_list, column_list, column_word) = try wordListGenerator.generateWordList()
             let meaningDetector = MeaningDetector(wordListRows: wordListRows, row_list: row_list, column_list: column_list, column_word: column_word)
             wordListRows = try meaningDetector.detect()
-            let wordStoreItemGenerator = WordListRow2WordStoreItemConverter(wordListRows: wordListRows)
-            let wordStoreItems = wordStoreItemGenerator.GenerateWordStoreItem()
-            return wordStoreItems
+            let wordGenerator = WordListRow2WordConverter(wordListRows: wordListRows)
+            let word = wordGenerator.GenerateWord()
+            return word
         }
         catch let error{
             throw error

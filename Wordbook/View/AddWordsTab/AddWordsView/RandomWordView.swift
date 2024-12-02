@@ -17,7 +17,7 @@ struct RandomWordView: View {
             HStack{
                 Text("今日の英単語")
                 Spacer()
-                NavigationLink(destination: AddWordsFromTextView(path: $path, viewModel: WordStoreItem(word: dictionaryModel.word, meaning: dictionaryModel.mean, example: "", note: "", isMemorized: false, isFavorite: false))){
+                NavigationLink(destination: AddWordsFromTextView(path: $path, word: Word(word: dictionaryModel.word, meaning: dictionaryModel.mean, example: "", note: "", isMemorized: false, isFavorite: false))){
                     Label("追加", systemImage: "plus")
                 }
             }

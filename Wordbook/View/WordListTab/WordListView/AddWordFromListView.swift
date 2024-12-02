@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddWordFromListView: View {
-    let onAdd: (WordStoreItem) -> Void
     //入力された英単語
-    @State var viewModel = WordStoreItem(word: "", meaning: "", example: "", note: "", isMemorized: false, isFavorite: false)
+    @State var word = Word(word: "", meaning: "", example: "", note: "", isMemorized: false, isFavorite: false)
     //選択されたタグ
     @State var selectedTag: Tag?
     @Environment(\.dismiss) var dismiss
-
+    @Environment(\.modelContext) private var context
+    
     var body: some View {
         NavigationStack{
             ScrollView{
@@ -34,7 +35,7 @@ struct AddWordFromListView: View {
                             .padding()
                             .padding(.vertical)
                         }
-                        CommonWordEditView(viewModel: $viewModel)
+                        CommonWordEditView(word: $word)
                     }
                 }
                 .padding()
@@ -42,9 +43,23 @@ struct AddWordFromListView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.tag = selectedTag?.id
-                        MainTab.JSON?.inserrtWords(words_add: [viewModel])
-                        onAdd(viewModel)
+                        word.tag = selectedTag?.id
+                        //orderの最大値を取得
+                        var fetchDescriptor = FetchDescriptor<Word>(
+                            predicate: #Predicate {
+                                $0.tag == word.tag
+                            }
+                          )
+                        fetchDescriptor.propertiesToFetch = [\.order]
+                        var maxorder = -1
+                        do {
+                            let orders = try context.fetch<Word>(fetchDescriptor)
+                            maxorder = orders.map({ $0.order }).max() ?? -1
+                        } catch let error {
+                            maxorder = -1
+                        }
+                        word.order = maxorder + 1
+                        context.insert(word)
                         dismiss()
                     }) {
                         Label("保存", systemImage: "square.and.arrow.down")

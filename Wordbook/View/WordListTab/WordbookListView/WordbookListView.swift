@@ -133,7 +133,7 @@ struct WordbookListView: View {
             }
             .sheet(isPresented: $showAddWordSheet)
             {
-                AddWordFromListView(onAdd: {_ in}, selectedTag: nil)
+                AddWordFromListView(selectedTag: nil)
             }
             .navigationBarTitle("単語リスト")
             .navigationDestination(for: WordListPath.self) {

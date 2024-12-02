@@ -11,6 +11,7 @@ import SwiftData
 var sharedModelContainer: ModelContainer = {
     let schema = Schema([
         Tag.self,
+        Word.self,
     ])
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

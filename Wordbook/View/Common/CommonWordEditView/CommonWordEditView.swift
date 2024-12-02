@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct CommonWordEditView: View {
-    @Binding var viewModel: WordStoreItem
+    @Binding var word: Word
     @State var meaningId = false
     @State var relatedWordsId = false
+    @Environment(\.modelContext) private var context
 
     //選択されたタグ
     @State private var selectedTag: Tag?
@@ -20,7 +21,7 @@ struct CommonWordEditView: View {
             VStack (alignment: .leading, spacing: 0){
                 //英単語の入力欄
                 Text("英単語")
-                TextField("単語を入力してください", text: $viewModel.word)
+                TextField("単語を入力してください", text: $word.word)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .padding(.bottom)
@@ -31,10 +32,10 @@ struct CommonWordEditView: View {
                     //自動入力ボタン
                     Spacer()
                     Button(action:  {
-                        if let meaning = DictionaryService().getItemFromWord_vague(word: viewModel.word){
-                            self.viewModel.meaning = meaning.mean
+                        if let meaning = DictionaryService().getItemFromWord_vague(word: word.word){
+                            self.word.meaning = meaning.mean
                         } else {
-                                self.viewModel.meaning = "意味が見つかりませんでした"
+                                self.word.meaning = "意味が見つかりませんでした"
                         }
                         meaningId.toggle() //意味の入力欄を更新(再描画)
                     }) {
@@ -42,7 +43,7 @@ struct CommonWordEditView: View {
                             .foregroundColor(.accentColor)
                     }
                 }
-                TextField("意味を入力してください", text: $viewModel.meaning, axis: .vertical)
+                TextField("意味を入力してください", text: $word.meaning, axis: .vertical)
                     .id(meaningId)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -51,15 +52,16 @@ struct CommonWordEditView: View {
                 //関連語の入力フォーム
                 Text("関連語")
                 VStack{
-                    ForEach(viewModel.relatedWords.indices, id: \.self) { index in
+                    ForEach(word.relatedWords.indices, id: \.self) { index in
                         HStack {
-                            TextField("単語", text: $viewModel.relatedWords[index].word)
+                            TextField("単語", text: $word.relatedWords[index].word)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                            TextField("意味", text: $viewModel.relatedWords[index].meaning)
+                            TextField("意味", text: $word.relatedWords[index].meaning)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                             Button(role: .destructive) {
-                                viewModel.relatedWords.remove(at: index)
-                                relatedWordsId.toggle()
+                                word.relatedWords.remove(at: index)
+                                try! context.save()
+//                                relatedWordsId.toggle()
                             } label: {
                                 Image(systemName: "trash")
                                     .foregroundColor(.red)
@@ -69,7 +71,7 @@ struct CommonWordEditView: View {
                         .padding(.horizontal, 12)
                     }
                     Button(action: {
-                        viewModel.relatedWords.append(RelatedWordItem(word: "", meaning: ""))
+                        word.relatedWords.append(RelatedWord(word: "", meaning: ""))
                         relatedWordsId.toggle()
                     }) {
                         Label("追加", systemImage: "plus")
@@ -86,26 +88,26 @@ struct CommonWordEditView: View {
 
                 //例文の入力欄
                 Text("例文")
-                TextField("例文を入力してください", text: $viewModel.example, axis: .vertical)
+                TextField("例文を入力してください", text: $word.example, axis: .vertical)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .padding(.bottom)
                 
                 //メモの入力欄
                 Text("メモ")
-                TextField("メモを入力してください", text: $viewModel.note, axis: .vertical)
+                TextField("メモを入力してください", text: $word.note, axis: .vertical)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .padding(.bottom)
                 
                 //URLの入力欄
                 Text("URL")
-                TextField("URLを入力してください", text: $viewModel.url, axis: .vertical)
+                TextField("URLを入力してください", text: $word.url, axis: .vertical)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .padding(.bottom)
                 
-                Toggle(isOn: $viewModel.isMemorized){
+                Toggle(isOn: $word.isMemorized){
                     Text("覚えた")
                 }
             }
