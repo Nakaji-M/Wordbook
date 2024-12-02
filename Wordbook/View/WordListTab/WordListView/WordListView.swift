@@ -89,6 +89,7 @@ struct WordListView: View {
                             Text("追加順(新)").tag(SortOption.latest)
                             Text("追加順(古)").tag(SortOption.oldest)
                             Text("アルファベット順").tag(SortOption.alphabet)
+                            Text("カスタム").tag(SortOption.custom)
                         }
                     }
                 })
@@ -120,6 +121,15 @@ struct WordListView: View {
                                         Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
                                     }
                                 }
+                    }
+                    .onMove { indices, newOffset in
+                        if sortOption == .custom {
+                            //順番を入れ替える
+                            for index in indices {
+                                words[index].order = newOffset
+                            }
+                            try! context.save()
+                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -154,6 +164,17 @@ struct WordListView: View {
         ) {
             WordEditSheet(word: $wordViewModel_edit)
                 .presentationDetents([.large])
+                .onDisappear{
+                    if wordViewModel_edit.tag != tag?.id{
+                        //タグが変更されたらorderを更新
+                        for word in words{
+                            if word.order > wordViewModel_edit.order{
+                                word.order -= 1
+                            }
+                        }
+                    }
+                    try! context.save()
+                }
         }
         .sheet(isPresented: $showAddWordSheet)
         {
@@ -193,4 +214,21 @@ enum SortOption {
     case oldest
     case alphabet
     case custom
+}
+
+func getMaxOrder(tag: UUID?, context: ModelContext) -> Int {
+    var fetchDescriptor = FetchDescriptor<Word>(
+        predicate: #Predicate {
+            $0.tag == tag
+        }
+      )
+    fetchDescriptor.propertiesToFetch = [\.order]
+    var maxorder = -1
+    do {
+        let orders = try context.fetch<Word>(fetchDescriptor)
+        maxorder = orders.map({ $0.order }).max() ?? -1
+    } catch let error {
+        maxorder = -1
+    }
+    return maxorder
 }

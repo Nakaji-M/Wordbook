@@ -102,8 +102,12 @@ struct AddWordsFromAutoView : View {
                     Button(action: {
                         alertMessage = "保存中..."
                         showLoadingAlert = true
+                        //orderの最大値を取得
+                        var maxorder = getMaxOrder(tag: selectedTag?.id, context: context)
                         for word in recognitionResult{
                             word.tag = selectedTag?.id
+                            word.order = maxorder + 1
+                            maxorder += 1
                             context.insert(word)
                         }
                         showLoadingAlert = false

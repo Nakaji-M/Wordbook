@@ -99,6 +99,9 @@ struct WordListRowView: View {
                                         Spacer()
                                     }
                                 }
+#if DEBUG
+                                Text("order: \(word.order)")
+#endif
                                 
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)

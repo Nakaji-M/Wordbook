@@ -45,19 +45,7 @@ struct AddWordFromListView: View {
                     Button(action: {
                         word.tag = selectedTag?.id
                         //orderの最大値を取得
-                        var fetchDescriptor = FetchDescriptor<Word>(
-                            predicate: #Predicate {
-                                $0.tag == word.tag
-                            }
-                          )
-                        fetchDescriptor.propertiesToFetch = [\.order]
-                        var maxorder = -1
-                        do {
-                            let orders = try context.fetch<Word>(fetchDescriptor)
-                            maxorder = orders.map({ $0.order }).max() ?? -1
-                        } catch let error {
-                            maxorder = -1
-                        }
+                        let maxorder = getMaxOrder(tag: word.tag, context: context)
                         word.order = maxorder + 1
                         context.insert(word)
                         dismiss()

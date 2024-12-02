@@ -16,6 +16,7 @@ struct WordEditSheet: View {
     @State var showLoadingAlert: Bool = false //実質使用していない
     @State var alertMessage: String = "" //実質使用していない
     @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) private var context
 
     var body: some View {
         NavigationStack{
@@ -42,7 +43,6 @@ struct WordEditSheet: View {
                         }
                         .padding(.vertical)
                     }
-
                     CommonWordEditView(word: $word)
                 }
                 .padding(.all)
@@ -57,6 +57,7 @@ struct WordEditSheet: View {
             .navigationBarTitle("単語の編集")
         }
         .onChange(of: selectedTag) {
+            word.order = getMaxOrder(tag: selectedTag?.id, context: context) + 1
             word.tag = selectedTag?.id
         }
         .onAppear {
