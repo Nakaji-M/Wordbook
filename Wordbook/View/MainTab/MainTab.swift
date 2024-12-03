@@ -10,7 +10,6 @@ import SwiftData
 
 struct MainTab: View {
     @State var tabType: MainTabType = .quiz
-    static var JSON: WordStoreService?
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
     @Environment(\.scenePhase) private var scenePhase
@@ -51,37 +50,6 @@ struct MainTab: View {
                 }
             }
         )
-        .onAppear{
-            alertMessage = "読み込み中"
-            showLoadingAlert = true
-            MainTab.JSON = WordStoreService()
-            for word in try! context.fetch(FetchDescriptor<Word>()){
-                context.delete(word)
-            }
-            for word in MainTab.JSON!.getAllWords(){
-                //swiftdata に保存
-                let wordModel = Word(word: word.word, meaning: word.meaning)
-                wordModel.id = word.id
-                wordModel.isFavorite = word.isFavorite
-                wordModel.isMemorized = word.isMemorized
-                wordModel.example = word.example
-                wordModel.note = word.note
-                wordModel.tag = word.tag
-                context.insert(wordModel)
-            }
-                
-            showLoadingAlert = false
-        }
-        .onChange(of: scenePhase) { oldScenePhase, newScenePhase in
-            if newScenePhase == .active {
-                if let json = MainTab.JSON{
-                    alertMessage = "読み込み中"
-                    showLoadingAlert = true
-                    json.loadJSON()
-                    showLoadingAlert = false
-                }
-            }
-        }
 
     }
 }

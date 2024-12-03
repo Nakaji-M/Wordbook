@@ -119,8 +119,9 @@ struct WordbookListView: View {
                                 //削除処理
                                 context.delete(tag_delete!)
                             }
+                            let deleteTagId = tag_delete?.id
                             let words = try! context.fetch(FetchDescriptor<Word>(predicate: #Predicate { word in
-                                word.tag == tag_delete
+                                word.tag == deleteTagId
                             })
                             )
                             for word in words{

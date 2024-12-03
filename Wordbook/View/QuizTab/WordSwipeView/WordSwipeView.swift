@@ -6,19 +6,29 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WordSwipeView: View {
     var isAllWords: Bool
     var tags: [Tag]
     var includeMemorized: Bool
     var includeNoTags: Bool
-    @State private var words: [WordStoreItem] = []
+    var filteredWords: [Word] {
+        let filteredItems = words.compactMap { item in
+            return (includeMemorized || item.isMemorized) && (tags.contains{$0.id == item.tag} || includeNoTags && item.tag == nil || isAllWords) && !doneWords.contains(item) ? item : nil
+        }
+        return filteredItems
+
+    }
+    @Query var words: [Word]
+    @State private var doneWords: [Word] = []
     @State private var isFront = true
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
     
     var body: some View {
         VStack{
-            Text("残り\(words.count)単語")
+            Text("残り\(filteredWords.count)単語")
             ZStack{
                 VStack{
                     Text("お疲れ様でした！  🎉🎉🎉")
@@ -30,9 +40,9 @@ struct WordSwipeView: View {
                     .font(.title3)
                 }
                 GeometryReader { (proxy: GeometryProxy) in
-                    StackSwipableCardView(self.words.prefix(3),
-                                          cardContent: { (card: WordStoreItem) in
-                        FlipView(isFront: (card.id == words.first?.id) ? self.isFront : true,
+                    StackSwipableCardView(self.filteredWords.prefix(3),
+                                          cardContent: { (card: Word) in
+                        FlipView(isFront: (card.id == filteredWords.first?.id) ? self.isFront : true,
                                  duration: 0.5,
                                  front: {
                             HStack{
@@ -64,12 +74,12 @@ struct WordSwipeView: View {
                             }
                         })
                         .onTapGesture {
-                            if card.id == words.first?.id {
+                            if card.id == filteredWords.first?.id {
                                 self.isFront.toggle()
                             }
                         }
                     },
-                                          onEndedMove: { (card: WordStoreItem, translation: CGSize) in
+                                          onEndedMove: { (card: Word, translation: CGSize) in
                         switch translation.width {
                         case let w where w < -0.3 * proxy.size.width:
                             return .throwLeft
@@ -79,38 +89,23 @@ struct WordSwipeView: View {
                             return .none
                         }
                     },
-                                          onThrowAway: { (card: WordStoreItem, action: CardViewEndedMoveAction) in
+                                          onThrowAway: { (card: Word, action: CardViewEndedMoveAction) in
                         self.isFront = true
+                        let wrd = filteredWords.first!
+                        doneWords.append(wrd)
                         if action == .throwLeft {
                             //覚えていない
-                            self.words.first?.isMemorized = false
-                            MainTab.JSON?.updateWord(word_update: self.words.first!)
+                            wrd.isMemorized = false
                         }
                         else if action == .throwRight {
                             //覚えている
-                            self.words.first?.isMemorized = true
-                            MainTab.JSON?.updateWord(word_update: self.words.first!)
+                            wrd.isMemorized = true
                         }
-                        self.words.removeAll(where: { $0.id == card.id })
+                        wrd.lastLearned = Date()
+                        try! context.save()
                     })
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.all, 16)
-                }
-                .onFirstAppear {
-                    if isAllWords {
-                        words = MainTab.JSON?.getAllWords() ?? []
-                    }
-                    else{
-                        for tag in tags{
-                            words = words + (MainTab.JSON?.getWordsFromTag(tag: tag) ?? [])
-                        }
-                        if(includeNoTags){
-                            words = words + (MainTab.JSON?.getWordsFromTag(tag: nil) ?? [])
-                        }
-                    }
-                    if !includeMemorized{
-                        words = words.filter({ !$0.isMemorized })
-                    }
                 }
             }
             

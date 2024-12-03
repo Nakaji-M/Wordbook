@@ -14,6 +14,7 @@ struct ShareExtensionView: View {
     @State private var selectedTag: Tag? = nil
     @State private var showTagSelectionView = false
     @State var meaningId = false
+    @Environment(\.modelContext) private var context
 
     init(url: String, title: String, meaning: String, keywords: String, description: String) {
         self.url = url
@@ -80,9 +81,9 @@ struct ShareExtensionView: View {
                         .padding(.bottom)
                     
                     Button {
-                        let word_add = WordStoreItem(word: word, meaning: meaning, url: url)
+                        let word_add = Word(word: word, meaning: meaning, url: url)
                         word_add.tag = selectedTag?.id
-                        WordStoreService().inserrtWords(words_add: [word_add])
+                        context.insert(word_add)
                         close()
                     } label: {
                         Text("Save")
