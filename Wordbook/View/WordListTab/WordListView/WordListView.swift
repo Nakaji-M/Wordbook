@@ -42,8 +42,6 @@ struct WordListView: View {
                 return word1.added < word2.added
             case .alphabet:
                 return word1.word < word2.word
-            case .custom:
-                return word1.order < word2.order
             }
         })
         return filteredItems
@@ -89,7 +87,6 @@ struct WordListView: View {
                             Text("追加順(新)").tag(SortOption.latest)
                             Text("追加順(古)").tag(SortOption.oldest)
                             Text("アルファベット順").tag(SortOption.alphabet)
-                            Text("カスタム").tag(SortOption.custom)
                         }
                     }
                 })
@@ -121,15 +118,6 @@ struct WordListView: View {
                                         Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
                                     }
                                 }
-                    }
-                    .onMove { indices, newOffset in
-                        if sortOption == .custom {
-                            //順番を入れ替える
-                            for index in indices {
-                                filteredWords[index].order = index
-                            }
-                            try! context.save()
-                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -165,14 +153,6 @@ struct WordListView: View {
             WordEditSheet(word: $wordViewModel_edit)
                 .presentationDetents([.large])
                 .onDisappear{
-                    if wordViewModel_edit.tag != tag?.id{
-                        //タグが変更されたらorderを更新
-                        for word in words{
-                            if word.order > wordViewModel_edit.order{
-                                word.order -= 1
-                            }
-                        }
-                    }
                     try! context.save()
                 }
         }
@@ -184,15 +164,8 @@ struct WordListView: View {
             Alert( title: Text("削除"), message: Text("本当に削除しますか？"), primaryButton: .destructive(Text("削除")) {
                 alertMessage = "削除中..."
                 showLoadingAlert = true
-                let delete_order = wordViewModel_delete?.order
                 //削除処理
                 context.delete(wordViewModel_delete!)
-                //削除後のorderを更新
-                for word in words{
-                    if word.order > delete_order!{
-                        word.order -= 1
-                    }
-                }
                 try! context.save()
                 showLoadingAlert = false
             }, secondaryButton: .cancel()
@@ -213,22 +186,4 @@ enum SortOption {
     case latest
     case oldest
     case alphabet
-    case custom
-}
-
-func getMaxOrder(tag: UUID?, context: ModelContext) -> Int {
-    var fetchDescriptor = FetchDescriptor<Word>(
-        predicate: #Predicate {
-            $0.tag == tag
-        }
-      )
-    fetchDescriptor.propertiesToFetch = [\.order]
-    var maxorder = -1
-    do {
-        let orders = try context.fetch<Word>(fetchDescriptor)
-        maxorder = orders.map({ $0.order }).max() ?? -1
-    } catch let error {
-        maxorder = -1
-    }
-    return maxorder
 }

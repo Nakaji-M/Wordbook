@@ -16,7 +16,6 @@ class Word: Identifiable{
     var note: String
     var relatedWords: [RelatedWord]
     var url: String
-    var order: Int
     var isMemorized: Bool
     var isFavorite: Bool
     var added: Date
@@ -36,7 +35,6 @@ class Word: Identifiable{
         self.relatedWords = []
         self.added = Date()
         self.lastModified = Date()
-        self.order = 0
     }
 }
 

@@ -57,7 +57,6 @@ struct WordEditSheet: View {
             .navigationBarTitle("単語の編集")
         }
         .onChange(of: selectedTag) {
-            word.order = getMaxOrder(tag: selectedTag?.id, context: context) + 1
             word.tag = selectedTag?.id
         }
         .onAppear {

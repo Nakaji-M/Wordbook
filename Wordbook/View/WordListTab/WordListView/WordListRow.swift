@@ -98,11 +98,7 @@ struct WordListRowView: View {
                                             .frame(alignment: .leading)
                                         Spacer()
                                     }
-                                }
-#if DEBUG
-                                Text("order: \(word.order)")
-#endif
-                                
+                                }                                
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .contentShape(Rectangle())

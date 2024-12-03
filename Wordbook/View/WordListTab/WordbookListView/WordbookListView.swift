@@ -108,15 +108,24 @@ struct WordbookListView: View {
                         showLoadingAlert = true
                         if isAllWords_delete{
                             //全ての単語を削除
-                            MainTab.JSON?.deleteAllWords()
+                            let words = try! context.fetch(FetchDescriptor<Word>())
+                            for word in words{
+                                context.delete(word)
+                            }
+                                
                         }
                         else{
                             if tag_delete != nil{
                                 //削除処理
                                 context.delete(tag_delete!)
                             }
-                            //JSONからも削除
-                            MainTab.JSON?.deleteWordsFromTag(tag_delete: tag_delete)
+                            let words = try! context.fetch(FetchDescriptor<Word>(predicate: #Predicate { word in
+                                word.tag == tag_delete
+                            })
+                            )
+                            for word in words{
+                                context.delete(word)
+                            }
                         }
                         showLoadingAlert = false
                     }, secondaryButton: .cancel()

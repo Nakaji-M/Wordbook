@@ -45,9 +45,6 @@ struct AddWordsFromTextView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     word.tag = selectedTag?.id
-                    //orderの最大値を取得
-                    let maxorder = getMaxOrder(tag: word.tag, context: context)
-                    word.order = maxorder + 1
                     context.insert(word)
                     path = []
                 }) {
