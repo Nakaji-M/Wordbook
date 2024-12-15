@@ -20,6 +20,10 @@
 		024CE1712CCCEC040064201E /* WordListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1702CCCEC040064201E /* WordListRow.swift */; };
 		024CE1732CCCECED0064201E /* WordEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1722CCCECED0064201E /* WordEditSheet.swift */; };
 		024CE1752CCCED270064201E /* AddWordFromListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CE1742CCCED270064201E /* AddWordFromListView.swift */; };
+		026DF3792D0EAE6400EDF98E /* TagStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026DF3782D0EAE6000EDF98E /* TagStoreService.swift */; };
+		026DF37A2D0EAE6400EDF98E /* TagStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026DF3782D0EAE6000EDF98E /* TagStoreService.swift */; };
+		026DF37C2D0EAE8D00EDF98E /* TagStoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026DF37B2D0EAE8C00EDF98E /* TagStoreItem.swift */; };
+		026DF37D2D0EAE8D00EDF98E /* TagStoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026DF37B2D0EAE8C00EDF98E /* TagStoreItem.swift */; };
 		027F28AB2CC56E350048F9A4 /* Img2WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F28AA2CC56E030048F9A4 /* Img2WordList.swift */; };
 		02FF16F92CCB7ECC00C06BA9 /* AddWordsPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF16F82CCB7EC900C06BA9 /* AddWordsPath.swift */; };
 		02FF17012CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF17002CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift */; };
@@ -155,6 +159,8 @@
 		024CE1702CCCEC040064201E /* WordListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListRow.swift; sourceTree = "<group>"; };
 		024CE1722CCCECED0064201E /* WordEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordEditSheet.swift; sourceTree = "<group>"; };
 		024CE1742CCCED270064201E /* AddWordFromListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordFromListView.swift; sourceTree = "<group>"; };
+		026DF3782D0EAE6000EDF98E /* TagStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagStoreService.swift; sourceTree = "<group>"; };
+		026DF37B2D0EAE8C00EDF98E /* TagStoreItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagStoreItem.swift; sourceTree = "<group>"; };
 		027F28AA2CC56E030048F9A4 /* Img2WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Img2WordList.swift; sourceTree = "<group>"; };
 		02FF16F82CCB7EC900C06BA9 /* AddWordsPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordsPath.swift; sourceTree = "<group>"; };
 		02FF17002CCB7F7400C06BA9 /* WebReplaceListSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebReplaceListSettingsView.swift; sourceTree = "<group>"; };
@@ -685,6 +691,8 @@
 		8CE052902C8467E0009A1251 /* TagStoreService */ = {
 			isa = PBXGroup;
 			children = (
+				026DF37B2D0EAE8C00EDF98E /* TagStoreItem.swift */,
+				026DF3782D0EAE6000EDF98E /* TagStoreService.swift */,
 				8CE052912C84687F009A1251 /* SharedModelContainer.swift */,
 				8CE052962C847C4E009A1251 /* Tag.swift */,
 			);
@@ -984,6 +992,8 @@
 				8C8945A52C8723CD0008A79D /* SettingsStoreService.swift in Sources */,
 				8C91A2892C8768D100EFD5B2 /* DictionaryModel.swift in Sources */,
 				8CE052932C846896009A1251 /* SharedModelContainer.swift in Sources */,
+				026DF37D2D0EAE8D00EDF98E /* TagStoreItem.swift in Sources */,
+				026DF37A2D0EAE6400EDF98E /* TagStoreService.swift in Sources */,
 				8C973DC02C841DE1001198F9 /* ExtractWord.swift in Sources */,
 				8CE052952C8469DB009A1251 /* TagSelectionView.swift in Sources */,
 				8C91A2882C8768CD00EFD5B2 /* DictionaryService.swift in Sources */,
@@ -1005,6 +1015,7 @@
 				8C93DCB62C63C2AF00B60239 /* AddWordsView.swift in Sources */,
 				024CE16D2CCB84400064201E /* WordListRow2WordStoreItemConverter.swift in Sources */,
 				8C967DF92C8053E600DDDF05 /* StackSwipableCardView.swift in Sources */,
+				026DF37C2D0EAE8D00EDF98E /* TagStoreItem.swift in Sources */,
 				024CE1732CCCECED0064201E /* WordEditSheet.swift in Sources */,
 				8CA59EBC2C918F2100822895 /* RelatedWordsView.swift in Sources */,
 				8C8B49A22C92FAED0058B08F /* TextTapResultView.swift in Sources */,
@@ -1032,6 +1043,7 @@
 				8C3590F42C68F6C700292565 /* DeviceStat.swift in Sources */,
 				8C967DFE2C80548700DDDF05 /* StackSwipableCardConfiguration.swift in Sources */,
 				8CDF96D92C6460F800D691E7 /* AddWordsFromTextView.swift in Sources */,
+				026DF3792D0EAE6400EDF98E /* TagStoreService.swift in Sources */,
 				8CDF96DE2C648D8400D691E7 /* OCROption.swift in Sources */,
 				8C93DCAC2C63BDDE00B60239 /* MainTabType.swift in Sources */,
 				024CE1752CCCED270064201E /* AddWordFromListView.swift in Sources */,

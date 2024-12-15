@@ -10,6 +10,7 @@ import SwiftUI
 struct MainTab: View {
     @State var tabType: MainTabType = .quiz
     static var JSON: WordStoreService?
+    static var TagJSON: TagStoreService?
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
     @Environment(\.scenePhase) private var scenePhase
@@ -53,16 +54,20 @@ struct MainTab: View {
             alertMessage = "読み込み中"
             showLoadingAlert = true
             MainTab.JSON = WordStoreService()
+            MainTab.TagJSON = TagStoreService()
             showLoadingAlert = false
         }
         .onChange(of: scenePhase) { oldScenePhase, newScenePhase in
             if newScenePhase == .active {
+                alertMessage = "読み込み中"
+                showLoadingAlert = true
                 if let json = MainTab.JSON{
-                    alertMessage = "読み込み中"
-                    showLoadingAlert = true
                     json.loadJSON()
-                    showLoadingAlert = false
                 }
+                if let json = MainTab.TagJSON{
+                    json.loadJSON()
+                }
+                showLoadingAlert = false
             }
         }
 

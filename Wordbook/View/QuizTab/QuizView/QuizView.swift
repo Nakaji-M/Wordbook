@@ -6,18 +6,17 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct QuizView: View {
-    struct PickerSelection: Hashable{
-        var Tags: [Tag]
+    struct PickerSelection{
+        var Tags: [TagStoreItem]
         var isAllWords: Bool
         var includeNoTags: Bool
     }
     
     @State private var pickerSelection = PickerSelection(Tags: [], isAllWords: true, includeNoTags: false)
     @State private var includeMemorized = false
-    @Query(sort: \Tag.name) private var tags: [Tag] = []
+    @State private var tags: [TagStoreItem] = []
     
     var body: some View {
         NavigationStack {
@@ -95,6 +94,9 @@ struct QuizView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(UIColor.listBackground))
             .navigationBarTitle("クイズ")
+            .task{
+                tags = MainTab.TagJSON?.getAllTags() ?? []
+            }
         }
     }
 }

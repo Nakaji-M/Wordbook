@@ -6,18 +6,16 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct WordbookListView: View {
     @State private var path = [WordListPath]()
-    @Query(sort: \Tag.name) var tags: [Tag] = []
-    @State var tag_delete: Tag?
+    @State private var tags: [TagStoreItem] = []
+    @State var tag_delete: TagStoreItem?
     @State var isAllWords_delete = false
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
     @State private var showDeleteAlert = false
     @State private var showAddWordSheet: Bool = false
-    @Environment(\.modelContext) private var context
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -113,7 +111,7 @@ struct WordbookListView: View {
                         else{
                             if tag_delete != nil{
                                 //削除処理
-                                context.delete(tag_delete!)
+                                MainTab.TagJSON?.deleteTag(word_delete: tag_delete!)
                             }
                             //JSONからも削除
                             MainTab.JSON?.deleteWordsFromTag(tag_delete: tag_delete)
@@ -144,6 +142,9 @@ struct WordbookListView: View {
                 case .relatedWord(originalWord: let originalWord_):
                     RelatedWordsView(path: $path, originalWord: originalWord_)
                 }
+            }
+            .task{
+                tags = MainTab.TagJSON?.getAllTags() ?? []
             }
         }
     }

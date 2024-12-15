@@ -12,7 +12,7 @@ struct AddWordsFromTextView: View {
     //入力された英単語
     @State var viewModel = WordStoreItem(word: "", meaning: "", example: "", note: "", isMemorized: false, isFavorite: false)
     //選択されたタグ
-    @State private var selectedTag: Tag?
+    @State private var selectedTag: TagStoreItem?
 
     var body: some View {
         ScrollView{

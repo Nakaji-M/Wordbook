@@ -10,7 +10,7 @@ import Translation
 
 struct WordListView: View {
     var isAllWords: Bool
-    var tag: Tag?
+    var tag: TagStoreItem?
     @Binding var path: [WordListPath]
     @State var words: [WordStoreItem] = []
     @State private var showLoadingAlert = false

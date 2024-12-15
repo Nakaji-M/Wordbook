@@ -6,25 +6,14 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct TagSelectionView: View {
-    @State var tags: [Tag] = []
-    @Binding var selectedTag: Tag?
+    var TagJSON: TagStoreService = TagStoreService()
+    @State private var tags: [TagStoreItem] = []
+    @Binding var selectedTag: TagStoreItem?
     @State private var newName: String = ""
     @State private var showInputModal = false
-    @State private var context: ModelContext?
     @Environment(\.dismiss) private var dismiss
-        
-    func taginit() {
-        Task { @MainActor in
-        // SwiftDataからデータ取得
-            let context = sharedModelContainer.mainContext
-            let tags = (try? context.fetch(FetchDescriptor<Tag>()))?.sorted(by: { $0.name < $1.name }) ?? []
-            self.context = context
-            self.tags = tags
-        }
-    }
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -50,9 +39,9 @@ struct TagSelectionView: View {
             }
             .sheet(isPresented: $showInputModal, onDismiss: {
                 if (self.newName != "") {
-                    let newTag = Tag(name: self.newName)
-                    context?.insert(newTag)
-                    self.tags.insert(newTag, at: tags.firstIndex(where: {$0.name > newTag.name }) ?? tags.endIndex)
+                    let newTag = TagStoreItem(name: self.newName)
+                    tags.insert(newTag, at: tags.firstIndex(where: {$0.name > newTag.name}) ?? 0)
+                    TagJSON.inserrtTags(tags_add: [newTag])
                     self.newName = ""
                 }
             }) {
@@ -67,8 +56,8 @@ struct TagSelectionView: View {
             }
             .padding()
         }
-        .task {
-            await taginit()
+        .task{
+            tags = TagJSON.getAllTags()
         }
         .navigationBarTitle("Tagの選択")
 

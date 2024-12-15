@@ -14,7 +14,7 @@ struct TextTapResultView: View {
     @State var recognitionResult: [WordStoreItem] = []
     @State var rowID: UUID?
     @State var alertMessage: String = ""
-    @State private var selectedTag: Tag?
+    @State private var selectedTag: TagStoreItem?
     @State var isFirstAppear: Bool = true
 
     var body: some View {

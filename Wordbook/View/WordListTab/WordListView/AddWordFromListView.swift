@@ -12,7 +12,7 @@ struct AddWordFromListView: View {
     //入力された英単語
     @State var viewModel = WordStoreItem(word: "", meaning: "", example: "", note: "", isMemorized: false, isFavorite: false)
     //選択されたタグ
-    @State var selectedTag: Tag?
+    @State var selectedTag: TagStoreItem?
     @Environment(\.dismiss) var dismiss
 
     var body: some View {

@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct CommonTagSelectionView: View {
-    @Query(sort: \Tag.name) var tags: [Tag] = []
-    @Binding var selectedTag: Tag?
+    @State private var tags: [TagStoreItem] = []
+    @Binding var selectedTag: TagStoreItem?
     @State private var newName: String = ""
     @State private var showInputModal = false
     @Environment(\.modelContext) private var context
@@ -40,8 +39,9 @@ struct CommonTagSelectionView: View {
             }
             .sheet(isPresented: $showInputModal, onDismiss: {
                 if (self.newName != "") {
-                    let newTag = Tag(name: self.newName)
-                    context.insert(newTag)
+                    let newTag = TagStoreItem(name: self.newName)
+                    tags.insert(newTag, at: tags.firstIndex(where: {$0.name > newTag.name}) ?? 0)
+                    MainTab.TagJSON?.inserrtTags(tags_add: [newTag])
                     self.newName = ""
                 }
             }) {
@@ -55,6 +55,9 @@ struct CommonTagSelectionView: View {
                     .frame(width: 50, height: 50)
             }
             .padding()
+        }
+        .task{
+            tags = MainTab.TagJSON?.getAllTags() ?? []
         }
         .navigationBarTitle("Tagの選択")
 

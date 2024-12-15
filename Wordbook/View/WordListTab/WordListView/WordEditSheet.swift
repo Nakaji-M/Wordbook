@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
-import SwiftData
 
 // 編集画面
 struct WordEditSheet: View {
-    @Query var tags: [Tag] = []
+    @State private var tags: [TagStoreItem] = []
     @Binding var viewModel: WordStoreItem
-    @State var selectedTag: Tag?
+    @State var selectedTag: TagStoreItem?
     @State var showLoadingAlert: Bool = false //実質使用していない
     @State var alertMessage: String = "" //実質使用していない
     @Environment(\.dismiss) var dismiss
@@ -67,9 +66,12 @@ struct WordEditSheet: View {
                 selectedTag = nil
             }
         }
+        .task{
+            tags = MainTab.TagJSON?.getAllTags() ?? []
+        }
     }
     
-    func getTagfromId(id: UUID) -> Tag? {
+    func getTagfromId(id: UUID) -> TagStoreItem? {
         return tags.first(where: { $0.id == id })
     }
 }

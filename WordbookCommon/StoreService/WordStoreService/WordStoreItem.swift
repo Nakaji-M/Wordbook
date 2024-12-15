@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftData
 
 class WordStoreItem: Identifiable, Codable{
     var word: String

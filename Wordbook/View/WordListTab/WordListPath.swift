@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum WordListPath: Hashable, Equatable {
-    case wordList(isAllWords: Bool, tag: Tag?)
+    case wordList(isAllWords: Bool, tag: TagStoreItem?)
     case relatedWord(originalWord: WordStoreItem)
     
     func hash(into hasher: inout Hasher) {

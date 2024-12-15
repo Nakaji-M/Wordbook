@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WordSwipeView: View {
     var isAllWords: Bool
-    var tags: [Tag]
+    var tags: [TagStoreItem]
     var includeMemorized: Bool
     var includeNoTags: Bool
     @State private var words: [WordStoreItem] = []

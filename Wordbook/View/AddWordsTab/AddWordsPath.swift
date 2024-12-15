@@ -9,7 +9,7 @@ import SwiftUI
 
 enum AddWordsPath: Hashable, Equatable {
     case addFromAuto(uiImages: [UIImage], ocrOption: OCROption)
-    case tagSelection(selectedTag: Binding<Tag?>)
+    case tagSelection(selectedTag: Binding<TagStoreItem?>)
     case addFromText
     case addFromTap(uiImage: [UIImage])
     case addFromTapMeanings(tapItem: [TapItem], uiImage: [UIImage])

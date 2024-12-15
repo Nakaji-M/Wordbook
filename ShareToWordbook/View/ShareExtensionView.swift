@@ -11,7 +11,7 @@ struct ShareExtensionView: View {
     @State private var url: String
     @State private var word: String
     @State private var meaning: String
-    @State private var selectedTag: Tag? = nil
+    @State private var selectedTag: TagStoreItem? = nil
     @State private var showTagSelectionView = false
     @State var meaningId = false
 

@@ -58,7 +58,7 @@ class WordStoreService{
         }
     }
     
-    func getWordsFromTag(tag: Tag?) -> [WordStoreItem]{
+    func getWordsFromTag(tag: TagStoreItem?) -> [WordStoreItem]{
         return self.words.filter({$0.tag == tag?.id ?? nil})
     }
     
@@ -80,7 +80,7 @@ class WordStoreService{
         self.words = self.words.filter({$0.id != word_delete.id})
         storeJSON(words: words)
     }
-    func deleteWordsFromTag(tag_delete: Tag?){
+    func deleteWordsFromTag(tag_delete: TagStoreItem?){
         self.words = self.words.filter({$0.tag != tag_delete?.id ?? nil})
         storeJSON(words: words)
     }
