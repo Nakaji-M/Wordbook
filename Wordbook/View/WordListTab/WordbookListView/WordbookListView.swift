@@ -115,6 +115,7 @@ struct WordbookListView: View {
                             }
                             //JSONからも削除
                             MainTab.JSON?.deleteWordsFromTag(tag_delete: tag_delete)
+                            self.tags = MainTab.TagJSON?.getAllTags() ?? []
                         }
                         showLoadingAlert = false
                     }, secondaryButton: .cancel()

@@ -62,10 +62,12 @@ class TagStoreService{
     }
     func updateTag(word_update: TagStoreItem){
         self.tags = self.tags.map({$0.id == word_update.id ? word_update : $0})
+        self.tags.sort(by: {$0.name < $1.name})
         storeJSON(tags: tags)
     }
     func inserrtTags(tags_add: [TagStoreItem]){
         self.tags = self.tags + tags_add
+        self.tags.sort(by: {$0.name < $1.name})
         storeJSON(tags: tags)
     }
     func deleteTag(word_delete: TagStoreItem){
