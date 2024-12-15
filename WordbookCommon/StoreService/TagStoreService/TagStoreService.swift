@@ -21,7 +21,7 @@ class TagStoreService{
             fatalError("フォルダURL取得エラー")
         }
         
-        let fileURL = dirURL.appendingPathComponent("words.json")
+        let fileURL = dirURL.appendingPathComponent("tags.json")
         
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted //JSONデータを整形する
