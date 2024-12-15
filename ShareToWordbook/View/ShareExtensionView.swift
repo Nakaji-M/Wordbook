@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ShareExtensionView: View {
     @State private var url: String
@@ -14,7 +15,6 @@ struct ShareExtensionView: View {
     @State private var selectedTag: Tag? = nil
     @State private var showTagSelectionView = false
     @State var meaningId = false
-    @Environment(\.modelContext) private var context
 
     init(url: String, title: String, meaning: String, keywords: String, description: String) {
         self.url = url
@@ -81,9 +81,13 @@ struct ShareExtensionView: View {
                         .padding(.bottom)
                     
                     Button {
-                        let word_add = Word(word: word, meaning: meaning, url: url)
-                        word_add.tag = selectedTag?.id
-                        context.insert(word_add)
+                        Task { @MainActor in
+                            // SwiftDataからデータ取得
+                            let context = sharedModelContainer.mainContext
+                            let word_add = Word(word: word, meaning: meaning, url: url)
+                            word_add.tag = selectedTag?.id
+                            context.insert(word_add)
+                        }
                         close()
                     } label: {
                         Text("Save")

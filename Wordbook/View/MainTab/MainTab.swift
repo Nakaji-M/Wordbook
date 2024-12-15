@@ -12,7 +12,6 @@ struct MainTab: View {
     @State var tabType: MainTabType = .quiz
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
-    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         TabView(selection: $tabType) {
