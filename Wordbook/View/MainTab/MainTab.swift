@@ -13,7 +13,6 @@ struct MainTab: View {
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
     @Environment(\.scenePhase) private var scenePhase
-    @Environment(\.modelContext) private var context
 
     var body: some View {
         TabView(selection: $tabType) {
