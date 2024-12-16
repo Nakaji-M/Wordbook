@@ -58,16 +58,14 @@ struct WordEditSheet: View {
         .onChange(of: selectedTag) {
             viewModel.tag = selectedTag?.id
         }
-        .onAppear {
+        .task{
+            tags = MainTab.TagJSON?.getAllTags() ?? []
             if let id = viewModel.tag {
                 selectedTag = getTagfromId(id: id)
             }
             else {
                 selectedTag = nil
             }
-        }
-        .task{
-            tags = MainTab.TagJSON?.getAllTags() ?? []
         }
     }
     
