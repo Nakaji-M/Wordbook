@@ -16,10 +16,13 @@ struct WordbookListView: View {
     @State var alertMessage: String = ""
     @State private var showDeleteAlert = false
     @State private var showAddWordSheet: Bool = false
+    @State private var searchMode: Bool = false
+    @State private var searchText: String = ""
 
     var body: some View {
         NavigationStack(path: $path) {
             ZStack(alignment: .bottomTrailing){
+                if searchText == ""{
                 List {
                     Button(action: {
                         path.append(.wordList(isAllWords: true, tag: nil))
@@ -121,6 +124,9 @@ struct WordbookListView: View {
                     }, secondaryButton: .cancel()
                     )
                 }
+                }else{
+                    WordListContentView(isAllWords: true, path: $path, searchText: $searchText)
+                }
                 Button(action: {
                     self.showAddWordSheet = true
                 }) {
@@ -134,6 +140,7 @@ struct WordbookListView: View {
             {
                 AddWordFromListView(onAdd: {_ in}, selectedTag: nil)
             }
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "検索")
             .navigationBarTitle("単語リスト")
             .navigationDestination(for: WordListPath.self) {
                 switch $0 {

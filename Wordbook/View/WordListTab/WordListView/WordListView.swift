@@ -12,6 +12,19 @@ struct WordListView: View {
     var isAllWords: Bool
     var tag: TagStoreItem?
     @Binding var path: [WordListPath]
+    @State private var searchText: String = ""
+
+    var body: some View {
+        WordListContentView(isAllWords: isAllWords, tag: tag, path: $path, searchText: $searchText)
+        .navigationBarTitle(isAllWords ? "全ての単語": (tag?.name ?? "タグ未設定"))
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "検索")
+    }
+}
+
+struct WordListContentView: View {
+    var isAllWords: Bool
+    var tag: TagStoreItem?
+    @Binding var path: [WordListPath]
     @State var words: [WordStoreItem] = []
     @State private var showLoadingAlert = false
     @State var alertMessage: String = ""
@@ -21,7 +34,7 @@ struct WordListView: View {
     @State var wordViewModel_edit: WordStoreItem = WordStoreItem()
     @State var showAllMeaning: Bool = false
     @State var wordsShowOption: WordsShowOption = .all
-    @State private var searchText: String = ""
+    @Binding var searchText: String
     @State private var sortOption: SortOption = .latest
     @State private var showAddWordSheet: Bool = false
     
@@ -144,8 +157,6 @@ struct WordListView: View {
             }, secondaryButton: .cancel()
             )
         }
-        .navigationBarTitle(isAllWords ? "全ての単語": (tag?.name ?? "タグ未設定"))
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "検索")
         .task{
             alertMessage = "読み込み中..."
             showLoadingAlert = true
