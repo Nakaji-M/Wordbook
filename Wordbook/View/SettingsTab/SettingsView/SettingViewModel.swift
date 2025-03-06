@@ -21,9 +21,9 @@ class SettingViewModel: ObservableObject{
     }
     
     func loadLLMStatus() async{
-        llmModelExist = await ModelFileManagement().checkDirectoryExist(modelConfiguration: ModelConfiguration.qwen205b4bit)
+        llmModelExist = await ModelFileManagement().checkDirectoryExist(modelConfiguration: ModelConfiguration.llama3_2_1B_4bit)
         if llmModelExist{
-            llmModelSize = await ModelFileManagement().checkFileSize(modelConfiguration: ModelConfiguration.qwen205b4bit)
+            llmModelSize = await ModelFileManagement().checkFileSize(modelConfiguration: ModelConfiguration.llama3_2_1B_4bit)
         }
     }
     
@@ -33,6 +33,6 @@ class SettingViewModel: ObservableObject{
     }
     
     func deleteLLMModel() throws{
-        try ModelFileManagement().deleteDirectory(modelConfiguration: ModelConfiguration.qwen205b4bit)
+        try ModelFileManagement().deleteDirectory(modelConfiguration: ModelConfiguration.llama3_2_1B_4bit)
     }
 }
